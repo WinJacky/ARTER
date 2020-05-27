@@ -1,0 +1,386 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	
+<META content="PHP-Addressbook" name="Description">
+	
+<META content="" name="Keywords">
+
+	
+<STYLE type="text/css">
+		
+    body {background-image:url('./skins/header-blue.jpg');background-repeat:repeat-x;background-position:top left;}
+    table#maintable th {text-align:center;border:1px solid #ccc;font-size:12px;background:#739fce;color:#fff;}
+	</STYLE>
+	
+<LINK href="style.css" media="all" rel="stylesheet" type="text/css">
+	<!--[if !IE]>-->
+	
+<LINK href="iphone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css">
+	<!--<![endif]-->
+	
+<META content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
+
+
+	
+<LINK href="icons/font.png" rel="icon" type="image/png">
+	
+<TITLE>Address book </TITLE>	
+</HEAD>
+<BODY>
+		
+<DIV id="container">
+			
+<DIV id="top">
+<!--
+[<a title="other languages" href="?more_langs=yes">+</a>] | <a href='?lang=ar'><img title='阿拉伯語' alt='阿拉伯語' src='icons/sa.gif'/></a> | <a href='?lang=de'><img title='德語' alt='德語' src='icons/de.gif'/></a> | <a href='?lang=fr'><img title='法語' alt='法語' src='icons/fr.gif'/></a> | <a href='?lang=it'><img title='意大利語' alt='意大利語' src='icons/it.gif'/></a> | <a href='?lang=th'><img title='泰國' alt='泰國' src='icons/th.gif'/></a> | <a href='?lang=ru'><img title='俄語' alt='俄語' src='icons/ru.gif'/></a> | 
+
+<a href="preferences.php?from=%2Faddr%2Fedit.php">設定</a>
+-->
+			
+</DIV>
+			
+<DIV id="header">
+				
+<H1>
+<A href=".">Address Book</A>
+</H1>
+				
+<A href="."><IMG alt="Addressbook" id="logo" src="title.png" title="Addressbook"></A>
+			
+</DIV>
+			
+<DIV id="nav">
+      			
+<UL>
+
+<LI>
+	
+<A href="./">首頁</A>
+
+</LI>
+
+<LI class="all">
+	
+<A href="edit.php">新增</A>
+
+</LI>
+	
+<LI class="admin">
+		
+<A href="group.php">組別</A>
+	
+</LI>
+	
+<LI class="all">
+		
+<A href="birthdays.php">下次生日</A>
+	
+</LI>
+	
+<LI class="export">
+    	
+<A href="view.php?all&amp;print">全部打印</A>
+  
+</LI>
+	
+<LI class="export">
+      
+<A href="view.php?all&amp;print&amp;phones">打印</A>
+  
+</LI>
+	
+<LI class="export">
+    	
+<A href="export.php">出口</A>
+  
+</LI> 
+	
+<LI class="export">
+    	
+<A href="import.php">进口</A>
+  
+</LI> 
+
+</UL>
+			
+</DIV>
+			
+<DIV id="content">
+
+ 
+<H1>編輯/添加</H1> 
+
+<SCRIPT type="text/javascript">
+&lt;!--
+
+last_proposal = "";
+
+function proposeMail() {
+	
+	if(document.theform.email.value == last_proposal) {
+	
+    new_proposal = "";
+
+	  has_firstname = document.theform.firstname.value != "";
+	  has_lastname  = document.theform.lastname.value != "";
+	
+	  if(has_firstname) {
+	    new_proposal = document.theform.firstname.value.toLowerCase();
+	  }
+	  if(has_firstname &amp;&amp; has_lastname) {
+      new_proposal += ".";
+    }
+    if(has_lastname) {
+      new_proposal += document.theform.lastname.value.toLowerCase();    	
+    }
+    new_proposal += "@" + document.theform.company.value.toLowerCase().replace(" ", "-");
+
+	  document.theform.email.value = new_proposal;
+	  last_proposal = new_proposal;
+	  
+	}
+}
+
+function ucfirst(str) {
+  return str.slice(0,1).toUpperCase() + str.slice(1);
+}
+function ucf_arr(str_arr) {
+  str_res = Array();
+  for (var i = 0; i &lt; str_arr.length; i++) {
+    str_res[i] = ucfirst(str_arr[i]);
+  }
+  return str_res;
+}
+
+function trim(str, chars) {
+	no_left = str.replace(new RegExp("^[" + chars + "]+", "g"), "");
+	return no_left.replace(new RegExp("[" + chars + "]+$", "g"), "");
+}
+
+function proposeNames() {
+ 
+  document.theform.email.value = trim(document.theform.email.value, " \t");
+  who_from =  document.theform.email.value.split("@", 2);
+
+  if(who_from.length &gt;= 2) {
+
+	  who  = who_from[0].split(/[\._]+/,2);
+	  if(who.length == 1)  {
+	    who  = who_from[0].split("_",2);
+	  }
+	  if(document.theform.firstname.value == "") {
+	    document.theform.firstname.value = ucf_arr(who[0].split("-")).join("-");
+	  }
+	  if(who.length &gt; 1 &amp;&amp; document.theform.lastname.value == "") {
+	    document.theform.lastname.value = ucf_arr(who[1].split("-")).join("-");
+	  }
+  }
+}
+
+--&gt;
+</SCRIPT>
+
+  
+<FORM accept-charset="utf-8" action="edit.php" method="post" name="theform">
+
+		
+<INPUT name="id" type="hidden" value="">
+		<LABEL>名:</LABEL>
+		<INPUT name="firstname" onkeyup="proposeMail()" size="35" type="text">
+<BR>
+
+		
+<LABEL>姓氏:</LABEL>
+		<INPUT name="lastname" onkeyup="proposeMail()" size="35" type="text">
+<BR>
+
+		
+<LABEL>公司:</LABEL>
+		<INPUT name="company" onkeyup="proposeMail()" size="35" type="text">
+<BR>
+
+		
+<LABEL>地址:</LABEL>
+		<TEXTAREA cols="35" name="address" rows="5"></TEXTAREA>
+<BR>
+
+		
+<LABEL>電話</LABEL>
+<BR>
+<BR class="clear">
+
+		
+<LABEL>住家電話:</LABEL>
+		<INPUT name="home" size="35" type="text">
+<BR>
+
+		
+<LABEL>移動電話:</LABEL>
+		<INPUT name="mobile" size="35" type="text">
+<BR>
+
+		
+<LABEL>辦公電話:</LABEL>
+		<INPUT name="work" size="35" type="text">
+<BR>
+
+		
+<LABEL>傳真:</LABEL>
+		<INPUT name="fax" size="35" type="text">
+<BR>
+
+		
+<LABEL>&nbsp;</LABEL>
+<BR>
+<BR class="clear">
+
+		
+<LABEL>電子郵件:</LABEL>
+		<INPUT name="email" onkeyup="proposeNames()" size="35" type="text">
+<BR>
+
+		
+<LABEL>電子郵件2:</LABEL>
+		<INPUT name="email2" size="35" type="text">
+<BR>
+
+		
+<LABEL>首頁:</LABEL>
+		<INPUT name="homepage" size="35" type="text">
+<BR>
+
+		
+<LABEL>生日:</LABEL>
+        <SELECT name="bday">
+          <OPTION selected value="0">-</OPTION>
+          <OPTION value="1">1</OPTION>
+          <OPTION value="2">2</OPTION>
+          <OPTION value="3">3</OPTION>
+          <OPTION value="4">4</OPTION>
+          <OPTION value="5">5</OPTION>
+          <OPTION value="6">6</OPTION>
+          <OPTION value="7">7</OPTION>
+          <OPTION value="8">8</OPTION>
+          <OPTION value="9">9</OPTION>
+          <OPTION value="10">10</OPTION>
+          <OPTION value="11">11</OPTION>
+          <OPTION value="12">12</OPTION>
+          <OPTION value="13">13</OPTION>
+          <OPTION value="14">14</OPTION>
+          <OPTION value="15">15</OPTION>
+          <OPTION value="16">16</OPTION>
+          <OPTION value="17">17</OPTION>
+          <OPTION value="18">18</OPTION>
+          <OPTION value="19">19</OPTION>
+          <OPTION value="20">20</OPTION>
+          <OPTION value="21">21</OPTION>
+          <OPTION value="22">22</OPTION>
+          <OPTION value="23">23</OPTION>
+          <OPTION value="24">24</OPTION>
+          <OPTION value="25">25</OPTION>
+          <OPTION value="26">26</OPTION>
+          <OPTION value="27">27</OPTION>
+          <OPTION value="28">28</OPTION>
+          <OPTION value="29">29</OPTION>
+          <OPTION value="30">30</OPTION>
+          <OPTION value="31">31</OPTION>
+        </SELECT>
+        <SELECT name="bmonth">
+          <OPTION selected value="-">-</OPTION>
+          <OPTION value="January">一月</OPTION>
+          <OPTION value="February">二月</OPTION>
+          <OPTION value="March">三月</OPTION>
+          <OPTION value="April">四月</OPTION>
+          <OPTION value="May">五月</OPTION>
+          <OPTION value="June">六月</OPTION>
+          <OPTION value="July">七月</OPTION>
+          <OPTION value="August">八月</OPTION>
+          <OPTION value="September">九月</OPTION>
+          <OPTION value="October">十月</OPTION>
+          <OPTION value="November">十一月</OPTION>
+          <OPTION value="December">十二月</OPTION>
+        </SELECT>
+        <INPUT maxlength="4" name="byear" size="4" type="text">
+<BR>
+
+		
+	
+<LABEL>組:</LABEL>
+				<SELECT name="new_group">
+				          <OPTION value="[none]">[無]</OPTION>
+          <OPTION>Rob</OPTION>
+				</SELECT>
+<BR>
+				
+		
+<BR>
+		
+<LABEL><B>次檔</B></LABEL>
+<BR>
+<BR class="clear">
+
+		
+<LABEL>地址:</LABEL>
+		<TEXTAREA cols="35" name="address2" rows="5"></TEXTAREA>
+<BR>
+
+		
+<LABEL>住家電話:</LABEL>
+		<INPUT name="phone2" size="35" type="text">
+<BR>
+
+		
+<LABEL>附注:</LABEL>
+		<TEXTAREA cols="35" name="notes" rows="5"></TEXTAREA>
+<BR>
+<BR>
+
+		
+<INPUT name="submit" type="submit" value="進入">
+  
+</FORM>
+	
+</DIV>
+	
+<DIV id="footer">
+			
+<UL>
+				
+<LI>
+<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v6.0 - r340</A>
+</LI>
+			
+</UL>
+	
+</DIV>
+
+</DIV>
+	
+ 
+
+
+
+<!-- 
+Copyright Notice:
+This script was written by Rob Minto, and is free to use and distribute under GPL. 
+Any improvements, please email rob(at)widgetmonkey.com. 
+Keep software free. 
+And please leave this copyright notice. Thanks.
+
+Major update 2007-2009 by Olivier Chatelain, feel free to use and distribute under GPL. 
+Any improvements, please email chatelao(at)users.sourceforge.net. 
+
+Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
+please email retrorobot(at)users.sourceforge.net.
+
+Major contribution Mark James ("famfamfam"-icons, cc-by-2.5)
+For more details see: http://www.famfamfam.com/lab/icons/silk/
+
+Major contribution "frequency decoder" ("Unobtrusive Table Sort Script", cc-by-sa-2.5)
+For more details see: http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/
+-->
+</BODY>
+</HTML>

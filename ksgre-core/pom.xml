@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>top.wacwj.ryan</groupId>
+        <artifactId>rtbwarte</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>ksgre-core</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>top.wacwj.ryan</groupId>
+            <artifactId>ksgre-nlp</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>top.wacwj.ryan</groupId>
+            <artifactId>ksgre-feedex</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>top.wacwj.ryan</groupId>-->
+            <!--<artifactId>ksgre-core</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>top.wacwj.ryan</groupId>
+            <artifactId>ksgre-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>

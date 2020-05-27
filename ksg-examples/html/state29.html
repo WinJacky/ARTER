@@ -1,0 +1,472 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	
+<META content="PHP-Addressbook" name="Description">
+	
+<META content="" name="Keywords">
+
+	
+<STYLE type="text/css">
+		
+    body {background-image:url('./skins/header-blue.jpg');background-repeat:repeat-x;background-position:top left;}
+    table#maintable th {text-align:center;border:1px solid #ccc;font-size:12px;background:#739fce;color:#fff;}
+	</STYLE>
+	
+<LINK href="style.css" media="all" rel="stylesheet" type="text/css">
+	<!--[if !IE]>-->
+	
+<LINK href="iphone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css">
+	<!--<![endif]-->
+	
+<META content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
+
+
+	
+<LINK href="icons/font.png" rel="icon" type="image/png">
+	
+<TITLE>地址簿</TITLE>
+	
+</HEAD>
+<BODY>
+		
+<DIV id="container">
+			
+<DIV id="top">
+<!--
+[<a title="other languages" href="?more_langs=yes">+</a>] | <a href='?lang=ar'><img title='阿拉伯語' alt='阿拉伯語' src='icons/sa.gif'/></a> | <a href='?lang=de'><img title='德語' alt='德語' src='icons/de.gif'/></a> | <a href='?lang=fr'><img title='法語' alt='法語' src='icons/fr.gif'/></a> | <a href='?lang=it'><img title='意大利語' alt='意大利語' src='icons/it.gif'/></a> | <a href='?lang=th'><img title='泰國' alt='泰國' src='icons/th.gif'/></a> | <a href='?lang=ru'><img title='俄語' alt='俄語' src='icons/ru.gif'/></a> | 
+
+<a href="preferences.php?from=%2Faddr%2Findex.php">設定</a>
+-->
+			
+</DIV>
+			
+<DIV id="header">
+				
+<H1>
+<A href=".">Address Book</A>
+</H1>
+				
+<A href="."><IMG alt="Addressbook" id="logo" src="title.png" title="Addressbook"></A>
+			
+</DIV>
+			
+<DIV id="nav">
+      			
+<UL>
+
+<LI>
+	
+<A href="./">首頁</A>
+
+</LI>
+
+<LI class="all">
+	
+<A href="edit.php">新增</A>
+
+</LI>
+	
+<LI class="admin">
+		
+<A href="group.php">組別</A>
+	
+</LI>
+	
+<LI class="all">
+		
+<A href="birthdays.php">下次生日</A>
+	
+</LI>
+	
+<LI class="export">
+    	
+<A href="view.php?all&amp;print">全部打印</A>
+  
+</LI>
+	
+<LI class="export">
+      
+<A href="view.php?all&amp;print&amp;phones">打印</A>
+  
+</LI>
+	
+<LI class="export">
+    	
+<A href="export.php">出口</A>
+  
+</LI> 
+	
+<LI class="export">
+    	
+<A href="import.php">进口</A>
+  
+</LI> 
+
+</UL>
+			
+</DIV>
+			
+<DIV id="content">
+
+
+
+<BR>
+<BR>
+
+<DIV id="search-az">
+	
+<FORM accept-charset="utf-8" method="get" name="searchform" onsubmit="return false">
+		
+<INPUT name="searchstring" onkeyup="filterResults(this)" size="45" tabindex="0" title="搜索 任何文字" type="text" value="">
+	
+</FORM>
+
+<SCRIPT type="text/javascript">
+	document.searchform.searchstring.focus();
+</SCRIPT>
+
+</DIV>
+<BR>
+
+<HR>
+
+<LABEL style="width:24em;"><STRONG>搜索結果 數量: <SPAN id="search_count">20</SPAN></STRONG></LABEL>
+
+<FORM id="right" method="get">
+	
+<SELECT name="group" onchange="this.parentNode.submit()">
+				<OPTION value="">[全部]</OPTION>
+		<OPTION value="[none]">[無]</OPTION>
+		<OPTION></OPTION>
+<OPTION></OPTION>
+<OPTION>Rob</OPTION>
+	</SELECT>
+
+</FORM>
+
+<BR>
+<BR class="clear">
+
+
+<FORM accept-charset="utf-8" action="group.php" method="post" name="MainForm">
+	
+<INPUT name="group" type="hidden" value="">
+	
+<TABLE class="sortcompletecallback-applyZebra" id="maintable">
+		
+<TBODY>
+<TR>
+
+<TH></TH><TH class="sortable fd-column-1" style="-moz-user-select: none;"><A class="fdTableSortTrigger" href="#" title="Sort on &ldquo;姓氏&rdquo;">姓氏</A><SPAN></SPAN></TH><TH class="sortable fd-column-2" style="-moz-user-select: none;"><A class="fdTableSortTrigger" href="#" title="Sort on &ldquo;名&rdquo;">名</A><SPAN></SPAN></TH><TH class="sortable fd-column-3" style="-moz-user-select: none;"><A class="fdTableSortTrigger" href="#" title="Sort on &ldquo;電子郵件&rdquo;">電子郵件</A><SPAN></SPAN></TH><TH class="sortable fd-column-4" style="-moz-user-select: none;"><A class="fdTableSortTrigger" href="#" title="Sort on &ldquo;電話&rdquo;">電話</A><SPAN></SPAN></TH><TH></TH><TH></TH><TH></TH><TH></TH><TH></TH>      
+	
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="1" name="selected[]" title="Select ( )" type="checkbox" value="1"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=1"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=1"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=1"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="2" name="selected[]" title="Select ( )" type="checkbox" value="2"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=2"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=2"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=2"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="3" name="selected[]" title="Select ( )" type="checkbox" value="3"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=3"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=3"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=3"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="4" name="selected[]" title="Select ( )" type="checkbox" value="4"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=4"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=4"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=4"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="5" name="selected[]" title="Select ( )" type="checkbox" value="5"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=5"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=5"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=5"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="6" name="selected[]" title="Select ( )" type="checkbox" value="6"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=6"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=6"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=6"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="7" name="selected[]" title="Select ( )" type="checkbox" value="7"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=7"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=7"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=7"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="8" name="selected[]" title="Select ( )" type="checkbox" value="8"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=8"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=8"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=8"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="9" name="selected[]" title="Select ( )" type="checkbox" value="9"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=9"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=9"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=9"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="10" name="selected[]" title="Select ( )" type="checkbox" value="10"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=10"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=10"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=10"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="11" name="selected[]" title="Select ( )" type="checkbox" value="11"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=11"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=11"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=11"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="12" name="selected[]" title="Select ( )" type="checkbox" value="12"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=12"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=12"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=12"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="13" name="selected[]" title="Select ( )" type="checkbox" value="13"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=13"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=13"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=13"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="14" name="selected[]" title="Select ( )" type="checkbox" value="14"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=14"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=14"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=14"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="15" name="selected[]" title="Select ( )" type="checkbox" value="15"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=15"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=15"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=15"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="16" name="selected[]" title="Select ( )" type="checkbox" value="16"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=16"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=16"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=16"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="17" name="selected[]" title="Select ( )" type="checkbox" value="17"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=17"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=17"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=17"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="18" name="selected[]" title="Select ( )" type="checkbox" value="18"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=18"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=18"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=18"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="19" name="selected[]" title="Select ( )" type="checkbox" value="19"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=19"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=19"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=19"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+<TR class="odd" name="entry">
+<TD class="center"><INPUT accept="heli123" alt="Select ( )" id="20" name="selected[]" title="Select ( )" type="checkbox" value="20"></TD><TD></TD><TD></TD><TD><A href="mailto:heli123">heli123</A></TD><TD></TD><TD class="center"><A href="view.php?id=20"><IMG alt="詳細" src="icons/status_online.png" title="詳細"></A></TD><TD class="center"><A href="edit.php?id=20"><IMG alt="編輯" src="icons/pencil.png" title="編輯"></A></TD><TD class="center"><A href="vcard.php?id=20"><IMG alt="vCard" src="icons/vcard.png" title="vCard"></A></TD><TD></TD><TD class="center"><A href="http://www.eli123"><IMG alt="猜到首頁 (www.eli123)" src="icons/house.png" title="猜到首頁 (www.eli123)"></A></TD>
+</TR>
+
+</TBODY>
+</TABLE>&nbsp;<INPUT id="MassCB" onclick="MassSelection()" type="checkbox"> <EM><STRONG>全選</STRONG></EM>
+<BR>
+<BR>
+<DIV class="left">
+<INPUT onclick="MailSelection()" type="button" value="發送電郵">
+</DIV>
+<DIV class="left">
+<INPUT onclick="DeleteSel()" type="button" value="刪除">
+</DIV>
+<DIV></DIV>
+<DIV class="right">
+<INPUT name="add" type="submit" value="增加">-<SELECT name="to_group"><OPTION></OPTION>
+<OPTION></OPTION>
+<OPTION>Rob</OPTION>
+</SELECT>
+</DIV>
+<BR>
+<BR class="clear">
+</FORM>
+<SCRIPT type="text/javascript">
+&lt;!--
+
+//
+// Select All/None items
+//
+function MassSelection() {
+  
+  select_count = document.getElementsByName("selected[]").length;
+  all_checked  = document.getElementById("MassCB").checked;
+  
+	for (i = 0; i &lt; select_count; i++) {
+	  // select only visible items
+	  if( document.getElementsByName("selected[]")[i].parentNode.parentNode.style.display != "none") {
+		  document.getElementsByName("selected[]")[i].checked = all_checked;
+		}
+	}
+}
+
+//
+// Send Mail to selected persons
+//
+function MailSelection() {
+	var addresses = "";
+	var dst_count = 0;
+
+  select_count = document.getElementsByName("selected[]").length;
+	for (i = 0; i &lt; select_count; i++) {
+		selected_i = document.getElementsByName("selected[]")[i];
+		if( selected_i.checked == true) {
+			if( selected_i.accept != "" &amp;&amp; selected_i.accept != null) {
+				if(dst_count &gt; 0) {
+					addresses = addresses + "%3B";
+				}
+				addresses = addresses + selected_i.accept;
+				dst_count++;
+			}
+		}
+	}
+
+	if(dst_count == 0)
+		alert("No address selected.");
+	else
+		location.href = "mailto:"+addresses;
+}
+
+function Doodle() {
+	
+	var participants = "";
+	var dst_count = 0;
+
+  select_count = document.getElementsByName("selected[]").length;
+	for (i = 0; i &lt; select_count; i++) {
+		selected_i = document.getElementsByName("selected[]")[i];
+		if( selected_i.checked == true) {
+			participants += selected_i.id+";";
+			dst_count++;
+		}
+	}
+	alert(participants);
+	if(dst_count == 0)
+		alert("No paticipants selected.");
+	else
+	  location.href = "./doodle.php?part="+participants;
+}
+
+function DeleteSel() {
+	
+	var participants = "";
+	var dst_count = 0;
+
+  select_count = document.getElementsByName("selected[]").length;
+	for (i = 0; i &lt; select_count; i++) {
+		selected_i = document.getElementsByName("selected[]")[i];
+		if( selected_i.checked == true) {
+			participants += selected_i.id+";";
+			dst_count++;
+		}
+	}
+
+	if(dst_count == 0)
+		alert("No paticipants selected.");
+	else
+		if(confirm('Delete '+dst_count+' addresses?')) {
+	    location.href = "./delete.php?part="+participants;
+	  }
+}
+
+function applyZebra() {
+	
+  	// loop over all lines
+  	var maintable = document.getElementById("maintable")
+  	var tbody     = maintable.getElementsByTagName("tbody");
+  	var entries   = tbody[0].children;
+  	var zebraCnt  = 0;
+
+	  // Skip header(0) + selection row(length-1)
+  	for(i = 1; i &lt; entries.length; i++) {
+  		if(entries[i].style.display != "none") {
+      	if((zebraCnt % 2) == 0) {
+      	  entries[i].className = "";
+      	} else {
+      	  entries[i].className = "odd";
+      	}
+     	  zebraCnt++;
+  		}
+    }
+}
+
+//
+// Filter the items in the fields
+//
+function filterResults(field) {
+
+  	var query = field.value;
+  	 	
+  	// split lowercase on white spaces
+  	var words = query.toLowerCase().split(" ");
+
+  	// loop over all lines
+  	var maintable = document.getElementById("maintable")
+  	var tbody     = maintable.getElementsByTagName("tbody");
+  	var entries   = tbody[0].children;
+  	var foundCnt  = 0;
+	
+	  // Skip header(0) + selection row(length-1)
+  	for(i = 1; i &lt; entries.length; i++) {
+  		
+  		// Name + Firstname + Phonenumber + Mailaddress
+  		var content = entries[i].childNodes[0].childNodes[0].accept
+  		            + " " + entries[i].childNodes[1].innerHTML
+  		            + " " + entries[i].childNodes[2].innerHTML;
+  		            
+      // Don't be case sensitive
+  		content = content.toLowerCase();
+
+      // check if all words are present  		            
+      var foundAll = true;
+  		for(j = 0; j &lt; words.length; j++) {
+  			foundAll = foundAll &amp;&amp; (content.search(words[j]) != -1);
+  		}
+  		
+  		// Keep selected entries
+      foundAll = foundAll || entries[i].childNodes[0].childNodes[0].checked;
+  		
+      // ^Hide entry
+      if(foundAll) {
+      	entries[i].style.display = "";
+     	  foundCnt++;  			
+      } else {
+      	entries[i].style.display = "none";
+      }
+  	}  	
+  	document.getElementById("search_count").innerHTML = foundCnt;
+  	
+  	applyZebra();
+}
+
+filterResults(document.getElementsByName("searchstring")[0]);
+
+//--&gt;
+</SCRIPT>
+	
+</DIV>
+	
+<DIV id="footer">
+			
+<UL>
+				
+<LI>
+<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v6.0 - r340</A>
+</LI>
+			
+</UL>
+	
+</DIV>
+
+</DIV>
+	
+ 
+
+
+
+<SCRIPT src="jstablesort/tablesort.min.js" type="text/javascript"></SCRIPT>
+
+<!-- 
+Copyright Notice:
+This script was written by Rob Minto, and is free to use and distribute under GPL. 
+Any improvements, please email rob(at)widgetmonkey.com. 
+Keep software free. 
+And please leave this copyright notice. Thanks.
+
+Major update 2007-2009 by Olivier Chatelain, feel free to use and distribute under GPL. 
+Any improvements, please email chatelao(at)users.sourceforge.net. 
+
+Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
+please email retrorobot(at)users.sourceforge.net.
+
+Major contribution Mark James ("famfamfam"-icons, cc-by-2.5)
+For more details see: http://www.famfamfam.com/lab/icons/silk/
+
+Major contribution "frequency decoder" ("Unobtrusive Table Sort Script", cc-by-sa-2.5)
+For more details see: http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/
+-->
+</BODY>
+</HTML>

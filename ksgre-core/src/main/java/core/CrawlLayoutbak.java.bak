@@ -1,0 +1,257 @@
+package main.java.core;
+
+import main.java.config.GlobalFields;
+import main.java.config.Settings;
+import main.java.dataType.PageState;
+import main.java.utils.UtilsComputerVision;
+import main.java.utils.UtilsParser;
+import main.java.utils.UtilsXPath;
+import org.openqa.jetty.html.Page;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.*;
+
+public class CrawlLayoutbak {
+
+    public String[] excludeTags = Settings.excludeTags;
+
+    public Queue<PageState> pageStates = new LinkedList<PageState>();
+
+    public Queue<String> clickPath = new LinkedList<String>();
+
+    private WebDriver driver;
+
+    private String pageUrl;
+
+    CrawlLayoutbak(WebDriver d, String pageUrl) {
+        this.driver = d;
+        this.pageUrl = pageUrl;
+    }
+
+    public void beginCrawl() {
+        initDirectory(1, 1);
+        PageState indexPageState = new PageState(1, 1);
+        indexPageState.setHiddenElements(getHidElementsOfDOM(this.driver.findElement(By.tagName("body"))));
+        indexPageState.setCandiClickElements(getClickElementsOfDOM(this.driver.findElement(By.tagName("body"))));
+        this.pageStates.offer(indexPageState);
+
+        int index = 1;
+        for(WebElement element: indexPageState.getCandiClickElements()) {
+            index = traverse(element, UtilsXPath.getElementXPath((JavascriptExecutor) this.driver, element),1, index, indexPageState);
+        }
+
+        outputPageState(indexPageState);
+    }
+
+    /**
+     * Get hidden elements under a root element node.
+     * @param rootElement
+     *      The root element to find the hidden elements under it.
+     * @param ps
+     *      The datatype to record a page dom state.
+     */
+    public List<WebElement> getHidElementsOfDOM(WebElement rootElement) {
+
+        List<WebElement> childElements = rootElement.findElements(By.xpath("./*"));
+
+        List<WebElement> hiddenElements = new ArrayList<WebElement>();
+
+        for(WebElement element: childElements) {
+            if(Arrays.asList(this.excludeTags).contains(element.getTagName()))
+                continue;
+            if(!element.isDisplayed()) {
+                hiddenElements.add(element);
+            } else {
+                hiddenElements.addAll(getHidElementsOfDOM(element));
+            }
+        }
+        return hiddenElements;
+    }
+
+    /**
+     * Get clickable elements under a root element node.
+     * @param rootElement
+     *      The root element to find the clickable elements under it.
+     * @param ps
+     *      The datatype to record a page dom state.
+     */
+    public List<WebElement> getClickElementsOfDOM(WebElement rootElement) {
+
+        List<WebElement> childElements = rootElement.findElements(By.xpath("./*"));
+        System.out.println(childElements.size());
+        List<WebElement> clickElements = new ArrayList<WebElement>();
+        for (WebElement element: childElements
+             ) {
+            if(Arrays.asList(this.excludeTags).contains(element.getTagName()))
+                continue;
+            if(element.isDisplayed()) {
+                System.out.println(element.getTagName());
+                switch (element.getTagName()) {
+                    case "a":
+                        System.out.println(element.getAttribute("href"));
+                        String hrefOfA = element.getAttribute("href");
+//                        if(hrefOfA==null || hrefOfA=="" || hrefOfA=="#" || hrefOfA.contains("javascript")) {
+//                            clickElements.add(element);
+//                        }
+                        clickElements.add(element);
+                        break;
+
+                    case "input":
+                        String typeOfInput = element.getAttribute("type");
+                        System.out.println("type");
+                        clickElements.add(element);
+//                        if(typeOfInput=="button") {
+//                            clickElements.add(element);
+//                        }
+                        break;
+
+                    case "button":
+                        String typeOfButton = element.getAttribute("type");
+                        System.out.println("type");
+                        clickElements.add(element);
+//                        if(typeOfButton=="button" || typeOfButton==null || typeOfButton=="") {
+//                            clickElements.add(element);
+//                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                clickElements.addAll(getClickElementsOfDOM(element));
+            }
+
+        }
+
+        return clickElements;
+    }
+
+    public void getHidAndClickOfDOM(WebElement rootElement) {
+
+        List<WebElement> childElements = rootElement.findElements(By.xpath("./*"));
+        List<WebElement> hiddenElements = new ArrayList<WebElement>();
+        List<WebElement> clickElements = new ArrayList<WebElement>();
+
+        for (WebElement element: childElements
+                ) {
+            if(Arrays.asList(this.excludeTags).contains(element.getTagName()))
+                continue;
+            System.out.println(element.getTagName());
+            if(!element.isDisplayed()) {
+                hiddenElements.add(element);
+            }
+            else {
+                switch (element.getTagName()) {
+                    case "a":
+                        String hrefOfA = element.getAttribute("href");
+                        if(hrefOfA==null || hrefOfA=="" || hrefOfA=="#" || hrefOfA.contains("javascript")) {
+                            clickElements.add(element);
+                        }
+                        break;
+
+                    case "input":
+                        String typeOfInput = element.getAttribute("type");
+                        if(typeOfInput=="button") {
+                            clickElements.add(element);
+                        }
+                        break;
+
+                    case "button":
+                        String typeOfButton = element.getAttribute("type");
+                        if(typeOfButton=="button" || typeOfButton==null || typeOfButton=="") {
+                            clickElements.add(element);
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                getHidAndClickOfDOM(element);
+            }
+        }
+    }
+
+    public PageState getPageLayoutInfo(int layoutLevel, int index) {
+
+        String filename = transIntToFileName(layoutLevel, index);
+
+        String screenshotDirectoryPath = GlobalFields.getCurrentSavedDirectoryPath() + Settings.sep + Settings.screenshotDirectoryName;
+        String DOMDirectoryPath = GlobalFields.getCurrentSavedDirectoryPath() + Settings.sep + Settings.DOMDirectoryName;
+
+        UtilsComputerVision.saveScreenShot(driver, screenshotDirectoryPath, filename);
+        UtilsParser.saveHTMLPage(driver, DOMDirectoryPath, filename);
+
+        PageState ps = new PageState();
+
+        getHidAndClickOfDOM(driver.findElement(By.tagName("body")));
+
+        ps.setHashOfDriver(driver.toString());
+
+        return ps;
+    }
+
+    public void initDirectory(int layoutLevel, int index) {
+        String filename = transIntToFileName(layoutLevel, index);
+
+        String screenshotDirectoryPath = GlobalFields.getCurrentSavedDirectoryPath() + Settings.sep + Settings.screenshotDirectoryName;
+        String DOMDirectoryPath = GlobalFields.getCurrentSavedDirectoryPath() + Settings.sep + Settings.DOMDirectoryName;
+
+        UtilsComputerVision.saveScreenShot(driver, screenshotDirectoryPath, filename);
+        UtilsParser.saveHTMLPage(driver, DOMDirectoryPath, filename);
+    }
+
+    public int traverse(WebElement clickableElement, String clickXPath, int lastLayoutLevel, int index, PageState lastPS) {
+        clickableElement.click();
+
+        if(driver.getCurrentUrl() != this.pageUrl) {
+            backToLastState();
+            return index;
+        }
+
+        List<WebElement> hiddenElements = getHidElementsOfDOM(driver.findElement(By.tagName("body")));
+        for (PageState p: this.pageStates
+             ) {
+            if(p.getHiddenElements() == hiddenElements && p != lastPS) {
+                p.addParentPageState(lastPS);
+                lastPS.addChildElement(clickXPath, p);
+                return index;
+            }
+        }
+
+        this.clickPath.offer(clickXPath);
+        PageState ps = new PageState(++lastLayoutLevel, index);
+        ps.setHiddenElements(hiddenElements);
+        ps.setCandiClickElements(getClickElementsOfDOM(clickableElement));
+        this.pageStates.offer(ps);
+
+        ps.addParentPageState(lastPS);
+        lastPS.addChildElement(clickXPath, ps);
+
+        return ++index;
+    }
+
+    public void backToLastState() {
+        this.driver.get(this.pageUrl);
+
+        String xpath;
+        while((xpath=this.clickPath.poll()) != null) {
+            this.driver.findElement(By.xpath(xpath)).click();
+        }
+    }
+
+    public String transIntToFileName(int layoutLevel, int index) {
+        return Integer.toString(layoutLevel) + "_" + Integer.toString(index);
+    }
+
+    public void outputPageState(PageState index) {
+        System.out.println("indexState: " + index.getLayoutLevelIndex());
+        if(index.getChildElements() != null) {
+            for (String clickPath: index.getChildElements().keySet()
+                 ) {
+                System.out.println("stateIndex: " + index.getChildElements().get(clickPath).getLayoutLevelIndex() + " clickpaht: " + clickPath);
+            }
+        }
+    }
+}

@@ -1,0 +1,145 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		
+<META content="PHP-Addressbook Notes" name="Description">
+		
+<META content="" name="Keywords">
+		
+<TITLE>PHP Address Book v5.x</TITLE>
+		
+<LINK href="./style.css" media="screen" rel="stylesheet" type="text/css">
+		
+<LINK href="./icons/font.png" rel="icon" type="image/png">
+		
+<STYLE type="text/css"> &lt;!-- body{background:none;padding:4px 16px;} --&gt; </STYLE>
+	
+</HEAD>
+<BODY>
+
+<H1>PHP-addressbook Version 5.x</H1>
+
+<A href="#1">requirements</A> | <A href="#2">installation</A> | <A href="#3">licence</A> | <A href="#4">disclaimer</A>
+
+
+<H3>
+<A name="1"></A>Download:</H3>
+
+<P>For the most recent version of "PHP-addressbook" see: <B><A href="https://sourceforge.net/project/showfiles.php?group_id=157964">https://sourceforge.net/project/showfiles.php?group_id=157964</A>.</B>
+</P>
+
+
+<H3>
+<A name="1"></A>Requirements:</H3>
+
+<P>You will need a webserver which has installed PHP 4/5, and mySQL version 3.2 upwards.</P>
+
+
+<H3>
+<A name="2"></A>Installation:</H3>
+
+<P>1. Unzip the files and place them on your webserver (or locally, as you will have to make some changes and then upload) in a directory called addressbook or whatever.</P>
+
+<P>2. Open <B>config.php</B> and change the variables to your server specification.</P>
+
+<P>3. You need to create the table addressbook in your mySQL database. (You can alter the table name, but you need to change the entry in config.php, and the table name in addressbook.sql.) Either via telnet, or using a program such as <A href="http://www.anse.de/mysqlfront/">mySQLfront</A>, or <A href="http://phpmyadmin.sourceforge.net">phpMyAdmin</A> enter the information stored in <B>addressbook.sql</B>. You can create a separate database for the addressbook, it`s up to you.</P>
+
+<P>That`s it!</P>
+
+
+<H3>User Features</H3>
+- Address and birthday management.<BR>
+- Address grouping and mailing.<BR>
+- Phonebook printing.<BR>
+- Birthday reminder list.<BR>
+- Czech, English, German and Polish translations.<BR>
+- vCard an csv export capabilities.<BR>
+- Gmail, Yahoo and Hotmail integrations.<BR>
+- Google map integration (beta).
+
+<H3>Technical Features</H3>
+- Full UTF-8 support.<BR>
+- Browser language detection.<BR>
+- Fast AJAX-Search.<BR>
+- Page compression for bandwidth saving.
+
+<H3>Intro:</H3>
+
+<P>This is an address book program for people who have their own web space. At present it is does not have a multiple user function. I wrote it because I wanted a place where I could store all my addresses so I can access them from multiple locations, and its a handy backup if you lose your address book, and there weren`t any freeware programs that suited my needs. IT IS NOT SUITABLE FOR COMMERCIAL USE. If you want to use this program on an intranet, please email <B>rob@widgetmonkey.com</B> . I am working on additions, such as multiple log in. I might also expand it to become a calendar / organiser. We`ll see.</P>
+
+<P>
+<B>Optional extras:</B>
+</P>
+
+<P>You might want to password protect the addressbook - not everyone wants to have their details freely available on the web! It is HIGHLY recommended that you do. Password proctection is best done with .htaccess and .htpassword files. There are tutorials out there to help.</P>
+
+<P>You can move the config.php file to another directory if you want to make it safer - just remember to alter the include( ) statement in dbconnect.php.</P>
+
+<P>Any questions: Submit your feedback at <A href="http://sourceforge.net/projects/php-addressbook/">sourceforge.net</A>
+or send me an e-mail <A href="mailto:chatelao%7B@%7Dusers.sourceforge.net">chatalao{a}users.sourceforge.net</A>
+</P>
+
+
+<H3>
+<A name="3"></A>Licence:</H3>
+
+<P>This addressbook is free for non-commercial use. I would like it if the copyright notice was left. Please feel free to alter the scripts as you see fit. And if you make any improvements, please email me.</P>
+
+<P>For details about the "famfamfam" icons, please look here: <A href="http://www.famfamfam.com/lab/icons/silk/">famfamfam</A>.</P>
+For details about the "Table Sort Script", please look here: <A href="http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/">Table Sort Script</A>.
+
+<H3>
+<A name="4"></A>Disclaimer:</H3>
+
+<P>Any use or modifications of this program is at the user`s risk. Any distribution or malicious use of address details, email addresses or telephone numbers is not the responsibility of the author. There may be several unknown securities-leaks, strong protection of the website and data is no part of this package. This is under the sole reposibility of the user.</P>
+
+
+<H3>
+<A name="4"></A>Donations:</H3>
+
+<P>The software is free, anyone who enjoys it a lot, is welcome to send me some mental support over PayPal. I will use it as wisely as possible.</P>
+
+<A href="http://sourceforge.net/donate/index.php?group_id=157964">
+  <IMG alt="Donate to this Project" src="http://images.sourceforge.net/images/project-support.jpg">
+</A>
+
+
+<DIV style="background:#D70500;width:250px;border:1px solid #840300;padding:4px;">
+
+<FORM action="http://www.hotscripts.com/rate/67789.html" method="post">
+	
+<DIV style="color:#fff;font-weight:700;">
+		If you like the script, please rate it!
+		<INPUT name="external" type="hidden" value="1">
+	
+</DIV>
+	
+<SELECT name="rate" size="1">
+		<OPTION selected value="5">Excellent!</OPTION>
+		<OPTION value="4">Very Good</OPTION>
+		<OPTION value="3">Good</OPTION>
+		<OPTION value="2">Fair</OPTION>
+		<OPTION value="1">Poor</OPTION>
+	</SELECT>
+	<INPUT name="submit" type="submit" value="Cast My Vote!">
+
+</FORM>
+
+</DIV>
+
+
+<H3>
+<A name="3"></A>Just enjoy "PHP address book"!</H3>
+
+<HR>
+
+<CENTER>
+<B><A name="3"></A>Last Update: 16. June 2010 - chatelao</B>
+</CENTER>
+
+
+
+</BODY>
+</HTML>

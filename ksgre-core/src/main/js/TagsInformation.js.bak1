@@ -1,0 +1,95 @@
+class TagsInformation {
+
+    constructor(element) {
+        this._xpath = this.getElementXPath(element);
+        this._tagName = element.nodeName.toLowerCase();
+        this._id = element.id;
+        this._classAttribute = element.className;
+        this._nameAttribute = element.getAttribute('name');
+        this._textualContent = this.getInnerTextOfElement(element);
+        this._tagsInformation = new Array();
+        this._valueAttribute = element.getAttribute('value');
+    }
+
+    getInnerTextOfElement(element) {
+        if(element.childNodes.length > 0) {
+            if(element.childNodes[0].hasOwnProperty("nodeValue"))
+                return element.childNodes[0].nodeValue;
+            else
+                return "";
+        }
+    }
+
+
+    getElementXPath(element) {
+        var paths = [];
+        for(; element.nodeType == 1; element = element.parentNode) {
+            var index = 0;
+            for(var sibling = element.previousSibling; sibling; sibling = sibling.previousSibling) {
+                if(sibling.nodeType == Node.DOCUMENT_TYPE_NODE) {
+                    continue;
+                }
+                if(sibling.nodeName == element.nodeName) {
+                    ++index;
+                }
+            }
+            var tagName = element.nodeName.toLowerCase();
+            var pathIndex = ("[" + (index + 1) + "]");
+            paths.splice(0, 0, tagName + pathIndex);
+        }
+        return paths.length ? "/" + paths.join("/") : null;
+    }
+
+    addTagsInformation(tagsInformation) {
+        this.tagsInformation.push(tagsInformation);
+    }
+
+    set _xpath(xpath) {
+        this.xpath = xpath;
+    }
+    get _xpath() {
+        return this.xpath;
+    }
+    set _tagName(tagName) {
+        this.tagName = tagName;
+    }
+    get _tagName() {
+        return this.tagName;
+    }
+    set _id(id) {
+        this.id = id;
+    }
+    get _id() {
+        return this.id;
+    }
+    set _classAttribute(classAttribute) {
+        this.classAttribute = classAttribute;
+    }
+    get _classAttribute() {
+        return this.classAttribute;
+    }
+    set _nameAttribute(nameAttribute) {
+        this.nameAttribute = nameAttribute;
+    }
+    get _nameAttribute() {
+        return this.nameAttribute;
+    }
+    set _textualContent(textualcontent) {
+        this.textualContent = textualcontent;
+    }
+    get _textualContent() {
+        return this.textualContent;
+    }
+    set _tagsInformation(tagsInformation) {
+        this.tagsInformation = tagsInformation;
+    }
+    get _tagsInformation() {
+        return this.tagsInformation;
+    }
+    set _valueAttribute(valueAttribute) {
+        this.valueAttribute = valueAttribute;
+    }
+    get _valueAttribute() {
+        return this.valueAttribute;
+    }
+}

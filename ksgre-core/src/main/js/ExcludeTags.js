@@ -1,0 +1,1 @@
+var excludeTages = ["script", "style", "meta", "html", "head", "link"];
