@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Change Password
+ */
 public class TC6 {
   private WebDriver driver;
   private Map<String, Object> vars;
@@ -41,14 +44,17 @@ public class TC6 {
     driver.quit();
   }
   @Test
-  public void tC6() {
-    driver.get("http://localhost/ppma/");
-    driver.findElement(By.id("user")).sendKeys("heli123");
-    driver.findElement(By.id("pwd")).sendKeys("heli123");
+  public void tC6() throws InterruptedException {
+    driver.get("http://localhost/Password-Manager-5.0/");
+    driver.findElement(By.id("user")).sendKeys("admin123");
+    driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("chk")).click();
-    driver.findElement(By.linkText("Click to delete")).click();
+    Thread.sleep(100);
+    driver.findElement(By.id("oldpassword")).sendKeys("admin123");
+    driver.findElement(By.id("pwd")).sendKeys("admin123");
+    driver.findElement(By.id("pwd1")).sendKeys("admin123");
+    driver.findElement(By.id("changepw")).click();
     driver.switchTo().alert().accept();
     driver.switchTo().alert().accept();
-    driver.findElement(By.cssSelector(".btn-info")).click();
   }
 }

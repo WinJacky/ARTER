@@ -74,7 +74,7 @@ public class RepaireRunner {
         CrawlSpecification specification = getCrawljaxSpecification(appEnum);
         config.setCrawlSpecification(specification);
         config.setThreadConfiguration(getThreadConfiguration());
-        config.setBrowser(EmbeddedBrowser.BrowserType.firefox);
+        config.setBrowser(EmbeddedBrowser.BrowserType.chrome);
         config.addPlugin(new ScreenShotPlugin());
         config.addPlugin(appConfig.getDomChangedPlugin());
         return config;
@@ -114,18 +114,18 @@ public class RepaireRunner {
     public static void main(String[] args) throws IOException {
         RepaireRunner repaireRunner = new RepaireRunner();
         // 待测用例的类名
-        String testcaseName = "TC1";
+        String testcaseName = "TC2";
         repairedStatNum = 0;
 
         // 1. 获取app配置
-        appEnum = AppEnum.MIAOSHA;
+        appEnum = AppEnum.ADDR;
         appConfig = AppConfigFactory.getInstance(appEnum);
         // 2. 配置app默认配置
         CrawljaxConfiguration configuration = getCrawljaxConfiguration(appEnum);
         // 3. 启动CrawljaxController
         crawljaxController = new CrawljaxController(configuration);
         // 4. 读取Word2Vec模型
-        word2Vec = new Word2Vec("ksgre-core/src/main/resources/Word2VecModel/hanlp-wiki-vec-zh.txt");
+        word2Vec = new Word2Vec("ksgre-core/src/main/resources/Word2VecModel/glove_50d.txt");
         word2Vec.loadModel();
         CrawljaxController.word2Vec = word2Vec;
         // 5. 读取测试用例关键词序列，分词、扩词
@@ -259,15 +259,26 @@ public class RepaireRunner {
             CandidateElement candidateElement = null;
             try {
                 // ignore the driver.get(xx)
-                if (statement.getAction() == "get") {
+                if ("get".equals(statement.getAction())) {
                     initSFG(browser, statement);
                     previousStatement = statement;
                     repairedTest.put(statementNumber, repairedStatement);
                     continue;
                 }
 
+                //系统休眠
+                if("sleep".equals(statement.getAction())){
+                    try {
+                        Thread.sleep(2000);
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                    repairedTest.put(statementNumber, repairedStatement);
+                    continue;
+                }
+
                 // check the alert window content
-                if (statement.getAction() == "closeAlertAndGetItsText" || statement.getAction() == "alert") {
+                if ("closeAlertAndGetItsText".equals(statement.getAction()) || "alert".equals(statement.getAction())) {
                     String value = statement.getValue();
                     try {
                         browser.switchToAlert().accept();
@@ -285,7 +296,7 @@ public class RepaireRunner {
                     }
                 }
 
-                // 移动关当前键词索引
+                // 移动当前关键词索引
                 keyword = keywordList.get(keywordPos);
                 while (keyword.getLineNumber() < statementNumber) {
                     keywordPos++;
@@ -322,7 +333,7 @@ public class RepaireRunner {
                         } else {
                             double semanticSim = UtilsRepaire.checkElementBySemantic(webElementFromDomLocator, statement);
                             // TODO: 2020/1/15 the threshold needs to be redefined
-                            if (semanticSim > 0.8) {
+                            if (semanticSim > 0.7) {
                                 String tarXpath = UtilsXPath.getElementXPath((JavascriptExecutor) browser.getWebDriver(), webElementFromDomLocator);
                                 if (!tarXpath.equalsIgnoreCase(repairedStatement.getXpath())) repairedStatement.setXpath(tarXpath);
                                 repairedTest.put(statementNumber, repairedStatement);
@@ -522,10 +533,15 @@ public class RepaireRunner {
     private CandidateElement repairWithKSG(int keywordPos, Statement statement, List<Eventable> clickPath) {
         log.info("Start to repair the web element...");
 
+        try {
+            Thread.sleep(50);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
         repairedStatNum++;
         CandidateElement element = null;
         try {
-//            c.init();
             PlainElement targetElement = new PlainElement();
             UtilsRepaire.cloneStatementToPlainElement(statement, targetElement);
             crawler.setOnlyFireSpecificEvent(false);

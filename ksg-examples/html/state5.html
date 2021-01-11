@@ -1,386 +1,341 @@
-<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HTML>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-	
-<META content="PHP-Addressbook" name="Description">
-	
-<META content="" name="Keywords">
 
-	
-<STYLE type="text/css">
-		
-    body {background-image:url('./skins/header-blue.jpg');background-repeat:repeat-x;background-position:top left;}
-    table#maintable th {text-align:center;border:1px solid #ccc;font-size:12px;background:#739fce;color:#fff;}
-	</STYLE>
-	
-<LINK href="style.css" media="all" rel="stylesheet" type="text/css">
-	<!--[if !IE]>-->
-	
-<LINK href="iphone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css">
-	<!--<![endif]-->
-	
-<META content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
+<TITLE>South East University</TITLE>
 
+<META content="text/javascript" http-equiv="Content-Script-Type">
 
-	
-<LINK href="icons/font.png" rel="icon" type="image/png">
-	
-<TITLE>Address book </TITLE>	
-</HEAD>
-<BODY>
-		
-<DIV id="container">
-			
-<DIV id="top">
-<!--
-[<a title="other languages" href="?more_langs=yes">+</a>] | <a href='?lang=ar'><img title='阿拉伯語' alt='阿拉伯語' src='icons/sa.gif'/></a> | <a href='?lang=de'><img title='德語' alt='德語' src='icons/de.gif'/></a> | <a href='?lang=fr'><img title='法語' alt='法語' src='icons/fr.gif'/></a> | <a href='?lang=it'><img title='意大利語' alt='意大利語' src='icons/it.gif'/></a> | <a href='?lang=th'><img title='泰國' alt='泰國' src='icons/th.gif'/></a> | <a href='?lang=ru'><img title='俄語' alt='俄語' src='icons/ru.gif'/></a> | 
+<META content="text/css" http-equiv="Content-Style-Type">
 
-<a href="preferences.php?from=%2Faddr%2Fedit.php">設定</a>
--->
-			
-</DIV>
-			
-<DIV id="header">
-				
-<H1>
-<A href=".">Address Book</A>
-</H1>
-				
-<A href="."><IMG alt="Addressbook" id="logo" src="title.png" title="Addressbook"></A>
-			
-</DIV>
-			
-<DIV id="nav">
-      			
-<UL>
+<META content="text/HTML; charset=iso-8859-1" http-equiv="Content-Type">
 
-<LI>
-	
-<A href="./">首頁</A>
+<LINK href="/claroline100/web/css/classic/main.css" media="screen, projection, tv" rel="stylesheet" type="text/css">
+<LINK href="/claroline100/web/css/print.css" media="print" rel="stylesheet" type="text/css">
+<LINK href="/index.php" rel="top" title="">
 
-</LI>
+<LINK href="http://www.claroline.net/documentation.htm" rel="Help">
 
-<LI class="all">
-	
-<A href="edit.php">新增</A>
+<LINK href="http://www.claroline.net/credits.htm" rel="Author">
 
-</LI>
-	
-<LI class="admin">
-		
-<A href="group.php">組別</A>
-	
-</LI>
-	
-<LI class="all">
-		
-<A href="birthdays.php">下次生日</A>
-	
-</LI>
-	
-<LI class="export">
-    	
-<A href="view.php?all&amp;print">全部打印</A>
-  
-</LI>
-	
-<LI class="export">
-      
-<A href="view.php?all&amp;print&amp;phones">打印</A>
-  
-</LI>
-	
-<LI class="export">
-    	
-<A href="export.php">出口</A>
-  
-</LI> 
-	
-<LI class="export">
-    	
-<A href="import.php">进口</A>
-  
-</LI> 
-
-</UL>
-			
-</DIV>
-			
-<DIV id="content">
-
- 
-<H1>編輯/添加</H1> 
+<LINK href="http://www.claroline.net" rel="Copyright">
 
 <SCRIPT type="text/javascript">
-&lt;!--
-
-last_proposal = "";
-
-function proposeMail() {
-	
-	if(document.theform.email.value == last_proposal) {
-	
-    new_proposal = "";
-
-	  has_firstname = document.theform.firstname.value != "";
-	  has_lastname  = document.theform.lastname.value != "";
-	
-	  if(has_firstname) {
-	    new_proposal = document.theform.firstname.value.toLowerCase();
-	  }
-	  if(has_firstname &amp;&amp; has_lastname) {
-      new_proposal += ".";
-    }
-    if(has_lastname) {
-      new_proposal += document.theform.lastname.value.toLowerCase();    	
-    }
-    new_proposal += "@" + document.theform.company.value.toLowerCase().replace(" ", "-");
-
-	  document.theform.email.value = new_proposal;
-	  last_proposal = new_proposal;
-	  
-	}
+    document.cookie="javascriptEnabled=true; path=/claroline100";
+    function claro_session_loss_countdown(sessionLifeTime){
+    var chrono = setTimeout('claro_warn_of_session_loss()', sessionLifeTime * 1000);
 }
 
-function ucfirst(str) {
-  return str.slice(0,1).toUpperCase() + str.slice(1);
+function claro_warn_of_session_loss() {
+    alert('WARNING ! You have just lost your session on the server.\nCopy any text you are currently writing and paste it outside the browser');
 }
-function ucf_arr(str_arr) {
-  str_res = Array();
-  for (var i = 0; i &lt; str_arr.length; i++) {
-    str_res[i] = ucfirst(str_arr[i]);
-  }
-  return str_res;
-}
-
-function trim(str, chars) {
-	no_left = str.replace(new RegExp("^[" + chars + "]+", "g"), "");
-	return no_left.replace(new RegExp("[" + chars + "]+$", "g"), "");
-}
-
-function proposeNames() {
- 
-  document.theform.email.value = trim(document.theform.email.value, " \t");
-  who_from =  document.theform.email.value.split("@", 2);
-
-  if(who_from.length &gt;= 2) {
-
-	  who  = who_from[0].split(/[\._]+/,2);
-	  if(who.length == 1)  {
-	    who  = who_from[0].split("_",2);
-	  }
-	  if(document.theform.firstname.value == "") {
-	    document.theform.firstname.value = ucf_arr(who[0].split("-")).join("-");
-	  }
-	  if(who.length &gt; 1 &amp;&amp; document.theform.lastname.value == "") {
-	    document.theform.lastname.value = ucf_arr(who[1].split("-")).join("-");
-	  }
-  }
-}
-
---&gt;
 </SCRIPT>
+<SCRIPT src="/claroline100/web/js/jquery.js?1243952249" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline100/web/js/claroline.js?1279554437" type="text/javascript"></SCRIPT>
 
-  
-<FORM accept-charset="utf-8" action="edit.php" method="post" name="theform">
+        <SCRIPT type="text/javascript">
+            $(document).ready(function(){
+                $('#SelectorReadStatus').hide();
+                $('#searchStrategyBox').hide();
+                $('#toSimpleSearch').hide();
+                
+                $('#toAdvancedSearch').click(function(){
+                    $('#SelectorReadStatus').show();
+                    $('#searchStrategyBox').show();
+                    
+                    $('#toAdvancedSearch').hide();
+                    $('#toSimpleSearch').show();
+                });
+                
+                $('#toSimpleSearch').click(function(){
+                    $('#SelectorReadStatus').hide();
+                    $('#searchStrategyBox').hide();
+                    
+                    $('#toSimpleSearch').hide();
+                    $('#toAdvancedSearch').show();
+                });
+            });
+        </SCRIPT>
 
-		
-<INPUT name="id" type="hidden" value="">
-		<LABEL>名:</LABEL>
-		<INPUT name="firstname" onkeyup="proposeMail()" size="35" type="text">
-<BR>
+            <SCRIPT type="text/javascript">
+            function deleteMessage ( localPath )
+            {
+                if (confirm("Are you sure to delete"))
+                {
+                    window.location=localPath;
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            </SCRIPT>
+</HEAD>
+<BODY dir="ltr" onload="claro_session_loss_countdown(1440);">
+<!-- $Id: banner.tpl.php 12921 2011-03-03 13:52:34Z abourguignon $ -->
 
-		
-<LABEL>姓氏:</LABEL>
-		<INPUT name="lastname" onkeyup="proposeMail()" size="35" type="text">
-<BR>
 
-		
-<LABEL>公司:</LABEL>
-		<INPUT name="company" onkeyup="proposeMail()" size="35" type="text">
-<BR>
+<!-- claroPage -->
 
-		
-<LABEL>地址:</LABEL>
-		<TEXTAREA cols="35" name="address" rows="5"></TEXTAREA>
-<BR>
+<DIV id="claroPage">
 
-		
-<LABEL>電話</LABEL>
-<BR>
-<BR class="clear">
+<!-- Banner -->
 
-		
-<LABEL>住家電話:</LABEL>
-		<INPUT name="home" size="35" type="text">
-<BR>
+<DIV id="topBanner">
 
-		
-<LABEL>移動電話:</LABEL>
-		<INPUT name="mobile" size="35" type="text">
-<BR>
+<!-- Platform Banner -->
 
-		
-<LABEL>辦公電話:</LABEL>
-		<INPUT name="work" size="35" type="text">
-<BR>
+<DIV id="platformBanner">
+    
+<DIV id="campusBannerLeft">
+        
+<SPAN id="siteName">
+                <A href="/claroline100/index.php" target="_top">South East University</A>
+        </SPAN>
+        
+<!-- campusBannerLeft -->
 
-		
-<LABEL>傳真:</LABEL>
-		<INPUT name="fax" size="35" type="text">
-<BR>
-
-		
-<LABEL>&nbsp;</LABEL>
-<BR>
-<BR class="clear">
-
-		
-<LABEL>電子郵件:</LABEL>
-		<INPUT name="email" onkeyup="proposeNames()" size="35" type="text">
-<BR>
-
-		
-<LABEL>電子郵件2:</LABEL>
-		<INPUT name="email2" size="35" type="text">
-<BR>
-
-		
-<LABEL>首頁:</LABEL>
-		<INPUT name="homepage" size="35" type="text">
-<BR>
-
-		
-<LABEL>生日:</LABEL>
-        <SELECT name="bday">
-          <OPTION selected value="0">-</OPTION>
-          <OPTION value="1">1</OPTION>
-          <OPTION value="2">2</OPTION>
-          <OPTION value="3">3</OPTION>
-          <OPTION value="4">4</OPTION>
-          <OPTION value="5">5</OPTION>
-          <OPTION value="6">6</OPTION>
-          <OPTION value="7">7</OPTION>
-          <OPTION value="8">8</OPTION>
-          <OPTION value="9">9</OPTION>
-          <OPTION value="10">10</OPTION>
-          <OPTION value="11">11</OPTION>
-          <OPTION value="12">12</OPTION>
-          <OPTION value="13">13</OPTION>
-          <OPTION value="14">14</OPTION>
-          <OPTION value="15">15</OPTION>
-          <OPTION value="16">16</OPTION>
-          <OPTION value="17">17</OPTION>
-          <OPTION value="18">18</OPTION>
-          <OPTION value="19">19</OPTION>
-          <OPTION value="20">20</OPTION>
-          <OPTION value="21">21</OPTION>
-          <OPTION value="22">22</OPTION>
-          <OPTION value="23">23</OPTION>
-          <OPTION value="24">24</OPTION>
-          <OPTION value="25">25</OPTION>
-          <OPTION value="26">26</OPTION>
-          <OPTION value="27">27</OPTION>
-          <OPTION value="28">28</OPTION>
-          <OPTION value="29">29</OPTION>
-          <OPTION value="30">30</OPTION>
-          <OPTION value="31">31</OPTION>
-        </SELECT>
-        <SELECT name="bmonth">
-          <OPTION selected value="-">-</OPTION>
-          <OPTION value="January">一月</OPTION>
-          <OPTION value="February">二月</OPTION>
-          <OPTION value="March">三月</OPTION>
-          <OPTION value="April">四月</OPTION>
-          <OPTION value="May">五月</OPTION>
-          <OPTION value="June">六月</OPTION>
-          <OPTION value="July">七月</OPTION>
-          <OPTION value="August">八月</OPTION>
-          <OPTION value="September">九月</OPTION>
-          <OPTION value="October">十月</OPTION>
-          <OPTION value="November">十一月</OPTION>
-          <OPTION value="December">十二月</OPTION>
-        </SELECT>
-        <INPUT maxlength="4" name="byear" size="4" type="text">
-<BR>
-
-		
-	
-<LABEL>組:</LABEL>
-				<SELECT name="new_group">
-				          <OPTION value="[none]">[無]</OPTION>
-          <OPTION>Rob</OPTION>
-				</SELECT>
-<BR>
-				
-		
-<BR>
-		
-<LABEL><B>次檔</B></LABEL>
-<BR>
-<BR class="clear">
-
-		
-<LABEL>地址:</LABEL>
-		<TEXTAREA cols="35" name="address2" rows="5"></TEXTAREA>
-<BR>
-
-		
-<LABEL>住家電話:</LABEL>
-		<INPUT name="phone2" size="35" type="text">
-<BR>
-
-		
-<LABEL>附注:</LABEL>
-		<TEXTAREA cols="35" name="notes" rows="5"></TEXTAREA>
-<BR>
-<BR>
-
-		
-<INPUT name="submit" type="submit" value="進入">
-  
-</FORM>
-	
+<!-- End of campusBannerLeft -->
+    
 </DIV>
-	
-<DIV id="footer">
-			
-<UL>
-				
-<LI>
-<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v6.0 - r340</A>
+    
+<DIV id="campusBannerRight">
+        
+<SPAN id="institution">
+                <A href="http://www.seu.com/" target="_top">SEU</A>
+                </SPAN>
+        
+<!-- campusBannerRight -->
+
+<!-- End of campusBannerRight -->
+    
+</DIV>
+    
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- End of Platform Banner -->
+
+<!-- User Banner -->
+
+<DIV id="userBanner">
+    
+<DIV id="userBannerLeft">
+        
+<SPAN id="userName">
+        Feisher Jacky :
+        </SPAN>
+        
+
+<SPAN>
+<A href="/claroline100/claroline/desktop/index.php" target="_top">My desktop</A>
+ | 
+<A href="/claroline100/claroline/auth/profile.php" target="_top">My User Account</A>
+ | 
+<A href="/claroline100/claroline/messaging" target="_top">My messages</A>
+ | 
+<A href="/claroline100/claroline/admin/" target="_top">Platform administration</A>
+</SPAN>
+
+        
+        
+<!-- userBannerLeft -->
+
+<!-- End of userBannerLeft -->
+    
+</DIV>
+    
+<DIV id="userBannerRight">
+        
+
+
+<SPAN>
+<A href="/claroline100/index.php?logout=true" target="_top">Logout</A>
+</SPAN>
+
+        
+<!-- userBannerRight -->
+
+<!-- End of userBannerRight -->
+    
+</DIV>
+
+    
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- End of User Banner -->
+
+
+<!-- BreadcrumbLine  -->
+
+<DIV id="breadcrumbLine">
+
+<HR>
+
+<DIV class="breadcrumbTrails">
+
+<UL class="breadCrumbs">
+
+<LI class="breadCrumbsNode firstBreadCrumbsNode">
+<A href="/claroline100/index.php" target="_top"><IMG alt="home" src="/claroline100/web/img/home.png?1232379976">&nbsp;South East University</A>&nbsp;&gt;&nbsp;</LI>
+
+<LI class="breadCrumbsNode lastBreadCrumbsNode">
+<A href="/claroline100/claroline/messaging/messagebox.php?box=inbox" target="_top">My messages</A>
 </LI>
-			
+
 </UL>
-	
+
+</DIV>
+
+<DIV id="toolViewOption">
+
+</DIV>
+
+<DIV class="spacer"></DIV>
+
+<HR>
+
+</DIV>
+<!-- End of BreadcrumbLine  -->
+
+
+</DIV>
+<!-- End of Banner -->
+<!-- $Id: body.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
+
+
+<!-- - - - - - - - - - - Claroline Body - - - - - - - - - -->
+
+<DIV id="claroBody">
+
+<!-- Page content -->
+
+
+<H3 class="claroToolTitle">My messages</H3>
+
+
+<DIV>
+
+<UL id="navlist">
+
+<LI>
+<A class="current" href="/claroline100/claroline/messaging/messagebox.php?box=inbox" id="inbox">Inbox(0)</A>
+</LI>
+
+<LI>
+<A href="/claroline100/claroline/messaging/messagebox.php?box=outbox" id="outbox">Outbox</A>
+</LI>
+
+<LI>
+<A href="/claroline100/claroline/messaging/messagebox.php?box=trashbox" id="trashbox">Trashbox</A>
+</LI>
+
+</UL>
+
+</DIV>
+
+<DIV class="claroDialogBox ">
+
+<DIV class="claroDialogMsg msgForm">
+<FORM action="/claroline100/claroline/messaging/messagebox.php?box=inbox" method="post">
+
+<INPUT class="inputSearch" name="search" type="text" value=""> 
+    <SELECT id="SelectorReadStatus" name="SelectorReadStatus" size="1" style="display: none;">        <OPTION selected value="all">All (Read or not)</OPTION>        <OPTION value="read">Only read</OPTION>        <OPTION value="unread">Only not read</OPTION>    </SELECT> <INPUT type="submit" value="Search">
+<SPAN id="toAdvancedSearch">[<A href="#">Advanced</A>]</SPAN><SPAN id="toSimpleSearch" style="display: none;">[<A href="#">Simple</A>]</SPAN>
+<BR>
+
+<SPAN id="searchStrategyBox" style="display: none;">
+<INPUT id="searchStrategy" name="searchStrategy" type="checkbox" value="Match the exact expression"><LABEL for="searchStrategy">Exact expression</LABEL>
+</SPAN>
+
+</FORM>
+
+</DIV>
+</DIV>
+
+
+<P class="spacer"></P>
+
+
+<TABLE class="claroTable emphaseLine" width="100%">
+
+
+<TBODY>
+<TR class="headerX"> 
+
+<TH>Subject</TH>
+<TH><A href="/claroline100/claroline/messaging/messagebox.php?box=inbox&amp;SelectorReadStatus=all&amp;fieldOrder=sender&amp;order=asc">Sender</A></TH>
+<TH><A href="/claroline100/claroline/messaging/messagebox.php?box=inbox&amp;SelectorReadStatus=all&amp;fieldOrder=date&amp;order=asc">Date</A></TH>
+<TH class="im_list_action">Delete</TH>
+
+</TR>
+
+
+<TR class="unreadMessage">
+
+<TD>
+<A href="/claroline100/claroline/messaging/messagebox.php?box=inbox&amp;SelectorReadStatus=all&amp;cmd=exMarkRead&amp;messageId=1"><IMG alt="Unread" src="/claroline100/web/img/mail_close.png?1232379976"></A>&nbsp;<A href="readmessage.php?messageId=1&amp;userId=1&amp;type=received">Examination Inform</A></TD>
+<TD>
+<A href="sendmessage.php?cmd=rqMessageToUser&amp;userId=1">Feisher Jacky</A>&nbsp;<IMG alt="" src="/claroline100/web/img/platformadmin.png?1232379976"></TD>
+<TD>October 20, 2020 at 06:48 PM</TD>
+<TD class="im_list_action"><A href="/claroline100/claroline/messaging/messagebox.php?box=inbox&amp;SelectorReadStatus=all&amp;cmd=rqDeleteMessage&amp;messageId=1" onclick="return deleteMessage('/claroline100/claroline/messaging/messagebox.php?box=inbox&amp;SelectorReadStatus=all&amp;cmd=exDeleteMessage&amp;messageId=1')"><IMG alt="" src="/claroline100/web/img/user-trash-full.gif?1232379976"></A></TD>
+
+</TR>
+
+
+</TBODY>
+</TABLE>
+<!-- End of Page Content -->
+
+
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- - - - - - - - - - - End of Claroline Body  - - - - - - - - - - -->
+<!-- $Id: footer.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
+
+
+
+<DIV id="campusFooter">
+    
+<HR>
+    
+<DIV id="campusFooterLeft">
+        
+<!-- campusFooterLeft -->
+
+<!-- End of campusFooterLeft -->
+            
+</DIV>
+    
+<DIV id="campusFooterRight">
+        
+<!-- campusFooterRight -->
+
+<!-- End of campusFooterRight -->
+        
+<DIV id="platformManager">Administrator for South East University : <A href="mailto:123@qq.com?subject=[South%20East%20University]">Feisher Jacky</A>
+<BR>
+Phone : 1234567890</DIV>    
+</DIV>
+    
+<DIV id="campusFooterCenter">
+        
+<!-- campusFooterCenter -->
+
+<!-- End of campusFooterCenter -->
+        
+<DIV id="poweredBy">Powered by <A href="http://www.claroline.net" target="_blank">Claroline</A> &copy; 2001 - 2011</DIV>    
 </DIV>
 
 </DIV>
-	
- 
+<!-- end of claroPage -->
+
+</DIV>
 
 
 
-<!-- 
-Copyright Notice:
-This script was written by Rob Minto, and is free to use and distribute under GPL. 
-Any improvements, please email rob(at)widgetmonkey.com. 
-Keep software free. 
-And please leave this copyright notice. Thanks.
-
-Major update 2007-2009 by Olivier Chatelain, feel free to use and distribute under GPL. 
-Any improvements, please email chatelao(at)users.sourceforge.net. 
-
-Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
-please email retrorobot(at)users.sourceforge.net.
-
-Major contribution Mark James ("famfamfam"-icons, cc-by-2.5)
-For more details see: http://www.famfamfam.com/lab/icons/silk/
-
-Major contribution "frequency decoder" ("Unobtrusive Table Sort Script", cc-by-sa-2.5)
-For more details see: http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/
--->
 </BODY>
 </HTML>

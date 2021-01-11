@@ -817,8 +817,8 @@ public final class Helper {
 	// 筛选数字
 	public static boolean filterSegment(String s) {
 		try {
-			Matcher numericMathcer = NUMERIC_PATTERN.matcher(s);
-			if (numericMathcer.matches()) {
+			Matcher numericMatcher = NUMERIC_PATTERN.matcher(s);
+			if (numericMatcher.matches()) {
 				return true;
 			}
 			if (s.getBytes("GB18030").length == 1) {

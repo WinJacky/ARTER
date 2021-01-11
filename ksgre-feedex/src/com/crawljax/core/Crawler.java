@@ -1088,6 +1088,10 @@ public class Crawler implements Runnable {
 		}
 	}
 
+	/**
+	 * 算法3.4 SearchForElement
+	 *
+	 */
 	public CandidateElement guidedCrawlForTargetElement(PlainElement targetElement, int keywordPos, List<Eventable> clickPath) throws CrawljaxException {
 		this.setKeywordPos(keywordPos);
 		controller.getSession().clearAlreadyCheckedStates();
@@ -1280,7 +1284,7 @@ public class Crawler implements Runnable {
 			controller.getSession().addToAlreadyCheckedStates(stateVertix);
 			// 根据元素标签或者属性查找
 			Set<WebElement> result = new HashSet<>();
-			List<WebElement> tempResult = null;
+			List<WebElement> tempResult;
 			// 根据tag查找
 			tempResult = browser.getWebElements(new Identification(Identification.How.tag, targetElement.getTagName()));
 			if (tempResult != null) result.addAll(tempResult);
@@ -1311,7 +1315,7 @@ public class Crawler implements Runnable {
 //			List<TagElement> tagElements = new ArrayList<>();
 //			tagElements.add(new TagElement(targetElement.getTagName()));
 //			List<CandidateElement> result = stateVertix.searchForTargetElements(candidateExtractor, tagElements, configurationReader.getExcludeTagElements(),
-//					configurationReader.getCrawlSpecificationReader().getClickOnce());
+//			configurationReader.getCrawlSpecificationReader().getClickOnce());
 			// 检查相似度
 			double maxSimScore = 0.0;
 			WebElement mostSimElement = null;
@@ -1323,9 +1327,14 @@ public class Crawler implements Runnable {
 				double sim2 = SimHelper.getSimilarityOfSemantic(ele, targetElement, browser);
 				double beta = 0.4;
 				double score = sim1 * beta + sim2 * (1-beta);
+
 				if (score>=0.4 && score>maxSimScore && ele.isDisplayed()) {
 					maxSimScore = score;
 					mostSimElement = ele;
+
+					System.out.println("Similarity of structure: "+sim1);
+					System.out.println("Similarity of semantics: "+sim2);
+					System.out.println("Comprehensive similarity: "+maxSimScore);
 				}
 			}
 			if (mostSimElement != null) {

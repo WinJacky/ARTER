@@ -25,6 +25,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Delete Group
+ */
 public class TC5 {
 
     private WebDriver driver;
@@ -49,11 +52,9 @@ public class TC5 {
 
     @Test
     public void tC5() {
-        driver.get("http://localhost/addr/");;
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/a[3]/img[1]")).click();
-        driver.findElement(By.linkText("groups")).click();
-        driver.findElement(By.name("edit")).click();
-        driver.findElement(By.name("group_name")).sendKeys("T1");
-        driver.findElement(By.name("update")).click();
+        driver.get("http://localhost/addressbookv3.0/");;
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/ul[1]/li[3]/a[1]")).click();
+        driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.name("delete")).click();
     }
 }

@@ -31,6 +31,7 @@ public class TC1 {
   @Before
   public void setUp() {
     driver = new FirefoxDriver();
+    driver.manage().window().maximize();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
@@ -41,7 +42,6 @@ public class TC1 {
   @Test
   public void test() {
     driver.get("http://localhost:8080/EShop/mer.do?method=browseIndexMer");
-    driver.manage().window().setSize(new Dimension(550, 692));
     driver.findElement(By.name("loginName")).click();
     driver.findElement(By.name("loginName")).sendKeys("heli");
     driver.findElement(By.name("loginPwd")).click();

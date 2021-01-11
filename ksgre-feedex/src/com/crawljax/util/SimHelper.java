@@ -36,6 +36,8 @@ public class SimHelper {
         if (StringUtils.isNotBlank(temp)) set.addAll(WordsSplit.getWords(Helper.removeNewLines(temp.trim())));
         temp = element.getAttribute("title");
         if (StringUtils.isNotBlank(temp)) set.addAll(WordsSplit.getWords(Helper.removeNewLines(temp.trim())));
+        temp = element.getText();
+        if (StringUtils.isNotBlank(temp)) set.addAll(WordsSplit.getWords(Helper.removeNewLines(temp.trim())));
 
         Set<String> set1 = new HashSet<>();
         temp = targetElement.getText();
@@ -126,6 +128,10 @@ public class SimHelper {
 
     private static double computeSimilarity(Set<String> set, Set<String> set1) {
         // TODO: 2020/1/15 相似度计算规则要重新定义
+        if (set.size() == 0){
+            return 0.0;
+        }
+
         double sumScore = 0.0;
         for (String s1: set) {
             double maxScore = 0.0;

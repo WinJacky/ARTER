@@ -1,174 +1,299 @@
-<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HTML>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-	
-<META content="PHP-Addressbook" name="Description">
-	
-<META content="" name="Keywords">
 
-	
-<STYLE type="text/css">
-		
-    body {background-image:url('./skins/header-blue.jpg');background-repeat:repeat-x;background-position:top left;}
-    table#maintable th {text-align:center;border:1px solid #ccc;font-size:12px;background:#739fce;color:#fff;}
-	</STYLE>
-	
-<LINK href="style.css" media="all" rel="stylesheet" type="text/css">
-	<!--[if !IE]>-->
-	
-<LINK href="iphone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css">
-	<!--<![endif]-->
-	
-<META content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
+<TITLE>South East University</TITLE>
 
+<META content="text/javascript" http-equiv="Content-Script-Type">
 
-	
-<LINK href="icons/font.png" rel="icon" type="image/png">
-	
-<TITLE>Groups | Address Book</TITLE>	
+<META content="text/css" http-equiv="Content-Style-Type">
+
+<META content="text/HTML; charset=iso-8859-1" http-equiv="Content-Type">
+
+<LINK href="/claroline100/web/css/classic/main.css" media="screen, projection, tv" rel="stylesheet" type="text/css">
+<LINK href="/claroline100/web/css/print.css" media="print" rel="stylesheet" type="text/css">
+<LINK href="/index.php" rel="top" title="">
+
+<LINK href="http://www.claroline.net/documentation.htm" rel="Help">
+
+<LINK href="http://www.claroline.net/credits.htm" rel="Author">
+
+<LINK href="http://www.claroline.net" rel="Copyright">
+
+<SCRIPT type="text/javascript">
+    document.cookie="javascriptEnabled=true; path=/claroline100";
+    </SCRIPT>
+<SCRIPT src="/claroline100/web/js/jquery.js?1243952249" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline100/web/js/claroline.js?1279554437" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline100/web/js/claroline.ui.js?1299149015" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline100/web/js/courseList.js?1299149015" type="text/javascript"></SCRIPT>
 </HEAD>
-<BODY>
-		
-<DIV id="container">
-			
-<DIV id="top">
-<!--
-[<a title="other languages" href="?more_langs=yes">+</a>] | <a href='?lang=ar'><img title='阿拉伯語' alt='阿拉伯語' src='icons/sa.gif'/></a> | <a href='?lang=de'><img title='德語' alt='德語' src='icons/de.gif'/></a> | <a href='?lang=fr'><img title='法語' alt='法語' src='icons/fr.gif'/></a> | <a href='?lang=it'><img title='意大利語' alt='意大利語' src='icons/it.gif'/></a> | <a href='?lang=th'><img title='泰國' alt='泰國' src='icons/th.gif'/></a> | <a href='?lang=ru'><img title='俄語' alt='俄語' src='icons/ru.gif'/></a> | 
+<BODY dir="ltr">
+<!-- $Id: banner.tpl.php 12921 2011-03-03 13:52:34Z abourguignon $ -->
 
-<a href="preferences.php?from=%2Faddr%2Fgroup.php">設定</a>
--->
-			
+
+<!-- claroPage -->
+
+<DIV id="claroPage">
+
+<!-- Banner -->
+
+<DIV id="topBanner">
+
+<!-- Platform Banner -->
+
+<DIV id="platformBanner">
+    
+<DIV id="campusBannerLeft">
+        
+<SPAN id="siteName">
+                <A href="/claroline100/index.php" target="_top">South East University</A>
+        </SPAN>
+        
+<!-- campusBannerLeft -->
+
+<!-- End of campusBannerLeft -->
+    
 </DIV>
-			
-<DIV id="header">
-				
-<H1>
-<A href=".">Address Book</A>
-</H1>
-				
-<A href="."><IMG alt="Addressbook" id="logo" src="title.png" title="Addressbook"></A>
-			
+    
+<DIV id="campusBannerRight">
+        
+<SPAN id="institution">
+                <A href="http://www.seu.com/" target="_top">SEU</A>
+                </SPAN>
+        
+<!-- campusBannerRight -->
+
+<!-- End of campusBannerRight -->
+    
 </DIV>
-			
-<DIV id="nav">
-      			
-<UL>
+    
+<DIV class="spacer"></DIV>
 
-<LI>
-	
-<A href="./">首頁</A>
-
-</LI>
-
-<LI class="all">
-	
-<A href="edit.php">新增</A>
-
-</LI>
-	
-<LI class="admin">
-		
-<A href="group.php">組別</A>
-	
-</LI>
-	
-<LI class="all">
-		
-<A href="birthdays.php">下次生日</A>
-	
-</LI>
-	
-<LI class="export">
-    	
-<A href="view.php?all&amp;print">全部打印</A>
-  
-</LI>
-	
-<LI class="export">
-      
-<A href="view.php?all&amp;print&amp;phones">打印</A>
-  
-</LI>
-	
-<LI class="export">
-    	
-<A href="export.php">出口</A>
-  
-</LI> 
-	
-<LI class="export">
-    	
-<A href="import.php">进口</A>
-  
-</LI> 
-
-</UL>
-			
 </DIV>
-			
-<DIV id="content">
+<!-- End of Platform Banner -->
 
 
-<H1>組別</H1>
-<FORM action="/addr/group.php" method="post">
-  
-<INPUT name="new" type="submit" value="新組別">
-	<INPUT name="delete" type="submit" value="刪除組別">
-	<INPUT name="edit" type="submit" value="組別編輯">
 
+<!-- BreadcrumbLine  -->
+
+<DIV id="breadcrumbLine">
 
 <HR>
 
+<DIV class="breadcrumbTrails">
 
-<INPUT name="selected[]" title="Select (Rob)" type="checkbox" value="1">Rob<BR>
+<UL class="breadCrumbs">
+
+<LI class="breadCrumbsNode lastBreadCrumbsNode">
+<A href="/claroline100/index.php" target="_top"><IMG alt="home" src="/claroline100/web/img/home.png?1232379976">&nbsp;South East University</A>
+</LI>
+
+</UL>
+
+</DIV>
+
+<DIV id="toolViewOption">
+
+<A href="/claroline100/claroline/auth/login.php?sourceUrl=aHR0cDovL2xvY2FsaG9zdC9jbGFyb2xpbmUxMDAvaW5kZXgucGhwP2xvZ291dD10cnVl" target="_top">Login</A>
+</DIV>
+
+<DIV class="spacer"></DIV>
+
+<HR>
+
+</DIV>
+<!-- End of BreadcrumbLine  -->
+
+
+</DIV>
+<!-- End of Banner -->
+<!-- $Id: body.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
+
+
+<!-- - - - - - - - - - - Claroline Body - - - - - - - - - -->
+
+<DIV id="claroBody">
+
+<!-- Page content -->
+<!-- $Id: platform_index.tpl.php 12916 2011-03-03 10:43:35Z abourguignon $ -->
+
+
+
+<DIV id="rightSidebar">
+    
+    <!-- $Id: loginzone.tpl.php 12875 2011-02-15 17:22:36Z abourguignon $ -->
+
+
+
+<DIV id="loginBox">
+
+<DIV class="header">Authentication</DIV>
+
+
+
+
+<SCRIPT type="text/javascript">
+<!--
+$(document).ready( function(){
+    $("#login").focus();
+});
+//-->
+</SCRIPT>
+
+<FORM action="/claroline100/claroline/auth/login.php" class="claroLoginForm" method="post">
+
+<FIELDSET style="border: 0; margin: 10px 0 15px 0; padding: 5px;">
+
+<LABEL for="login">User name</LABEL>
 <BR>
-  
-<INPUT name="new" type="submit" value="新組別">
-	<INPUT name="delete" type="submit" value="刪除組別">
-	<INPUT name="edit" type="submit" value="組別編輯">
+
+<INPUT id="login" name="login" size="12" tabindex="1" type="text">
+<BR>
+
+<BR>
+
+<LABEL for="password">Password</LABEL>
+<BR>
+
+<INPUT id="password" name="password" size="12" tabindex="2" type="password">
+<BR>
+
+<BR>
+
+<INPUT name="submitAuth" tabindex="3" type="submit" value="Enter">
+
+</FIELDSET>
 
 </FORM>
-	
+
+
+<P style="padding: 5px;">
+<!-- "Lost Password" -->
+
+<A href="/claroline100/claroline/auth/lostPassword.php">Lost password</A>
+<BR>
+
+<!-- "Create user Account" -->
+
+<A href="/claroline100/claroline/auth/inscription.php">Create user account</A>
+<BR>
+
+</P>
+
+
+
+</DIV>    
+    
+<!-- campusHomePageRightMenu -->
+
+<!-- End of campusHomePageRightMenu -->
+    
+        
+
 </DIV>
-	
-<DIV id="footer">
-			
+
+
+<DIV id="leftContent">
+    
+    
+<DIV style="text-align: center">
+    
+<IMG alt="Claroline logo" border="0" src="/claroline100/web/img/logo.png?1232379976">
+    <P>
+<STRONG>Claroline Open Source e-Learning</STRONG>
+</P>
+    
+</DIV>
+<!-- campusHomePageTop -->
+
+<!-- End of campusHomePageTop -->
+<!-- $Id: platform_courses.tpl.php 12892 2011-02-21 17:39:46Z abourguignon $ -->
+
+    
+<H3>Root category</H3>
+
+    
+    
+<H4 class="claroTitle claroTitle4">Sub categories</H4>    
+    
 <UL>
-				
+            
 <LI>
-<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v6.0 - r340</A>
-</LI>
-			
+        
+                    Sciences                
+        </LI>
+            
+<LI>
+        
+                    Economics                
+        </LI>
+            
+<LI>
+        
+                    Humanities                
+        </LI>
+        
 </UL>
-	
+    
+
+    
+
+<!-- campusHomePageBottom -->
+
+<!-- End of campusHomePageBottom -->
+    
+
+</DIV>
+<!-- End of Page Content -->
+
+
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- - - - - - - - - - - End of Claroline Body  - - - - - - - - - - -->
+<!-- $Id: footer.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
+
+
+
+<DIV id="campusFooter">
+    
+<HR>
+    
+<DIV id="campusFooterLeft">
+        
+<!-- campusFooterLeft -->
+
+<!-- End of campusFooterLeft -->
+            
+</DIV>
+    
+<DIV id="campusFooterRight">
+        
+<!-- campusFooterRight -->
+
+<!-- End of campusFooterRight -->
+        
+<DIV id="platformManager">Administrator for South East University : <A href="mailto:123@qq.com?subject=[South%20East%20University]">Feisher Jacky</A>
+<BR>
+Phone : 1234567890</DIV>    
+</DIV>
+    
+<DIV id="campusFooterCenter">
+        
+<!-- campusFooterCenter -->
+
+<!-- End of campusFooterCenter -->
+        
+<DIV id="poweredBy">Powered by <A href="http://www.claroline.net" target="_blank">Claroline</A> &copy; 2001 - 2011</DIV>    
 </DIV>
 
 </DIV>
-	
- 
+<!-- end of claroPage -->
+
+</DIV>
 
 
 
-<!-- 
-Copyright Notice:
-This script was written by Rob Minto, and is free to use and distribute under GPL. 
-Any improvements, please email rob(at)widgetmonkey.com. 
-Keep software free. 
-And please leave this copyright notice. Thanks.
-
-Major update 2007-2009 by Olivier Chatelain, feel free to use and distribute under GPL. 
-Any improvements, please email chatelao(at)users.sourceforge.net. 
-
-Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
-please email retrorobot(at)users.sourceforge.net.
-
-Major contribution Mark James ("famfamfam"-icons, cc-by-2.5)
-For more details see: http://www.famfamfam.com/lab/icons/silk/
-
-Major contribution "frequency decoder" ("Unobtrusive Table Sort Script", cc-by-sa-2.5)
-For more details see: http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/
--->
 </BODY>
 </HTML>

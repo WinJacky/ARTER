@@ -148,6 +148,13 @@ public class ParseTest {
                         }
                         tc.addStatementAtPosition(dg.getLine(), dg);
                     }
+                    else if (st.toString().contains("Thread.sleep(")){
+                        ThreadSleep threadSleep = new ThreadSleep();
+                        threadSleep.setAction("sleep");
+                        threadSleep.setLine(st.getBeginLine());
+
+                        tc.addStatementAtPosition(threadSleep.getLine(), threadSleep);
+                    }
                     else if (st.toString().contains("driver.findElement(") && !st.toString().contains("assert")
                             && !st.toString().contains("new Select")) {
                         EnhancedWebElement ewe = new EnhancedWebElement();

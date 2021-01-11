@@ -12,5 +12,12 @@
     <artifactId>ksgre-nlp</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>me.midday</groupId>
+            <artifactId>JFoolNLTK</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

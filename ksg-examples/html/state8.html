@@ -1,55 +1,40 @@
 <HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</HEAD>
+<BODY>
+<BR>
+
+<B>Deprecated</B>:  Function split() is deprecated in <B>E:\phpstudy\WWW\addressbookv4.0\include\dbconnect.php</B> on line <B>80</B>
+<BR>
+
+
+
 	
 <META content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	
 <META content="PHP-Addressbook" name="Description">
 	
 <META content="" name="Keywords">
-
 	
-<STYLE type="text/css">
-		
-    body {background-image:url('./skins/header-blue.jpg');background-repeat:repeat-x;background-position:top left;}
-    table#maintable th {text-align:center;border:1px solid #ccc;font-size:12px;background:#739fce;color:#fff;}
-	</STYLE>
-	
-<LINK href="style.css" media="all" rel="stylesheet" type="text/css">
-	<!--[if !IE]>-->
-	
-<LINK href="iphone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css">
-	<!--<![endif]-->
-	
-<META content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
-
-
+<LINK href="style.css" media="screen" rel="stylesheet" type="text/css">
 	
 <LINK href="icons/font.png" rel="icon" type="image/png">
 	
-<TITLE>Groups | Address Book</TITLE>	
-</HEAD>
-<BODY>
+<TITLE>Address book </TITLE>	
+	
 		
 <DIV id="container">
 			
 <DIV id="top">
-<!--
-[<a title="other languages" href="?more_langs=yes">+</a>] | <a href='?lang=ar'><img title='阿拉伯語' alt='阿拉伯語' src='icons/sa.gif'/></a> | <a href='?lang=de'><img title='德語' alt='德語' src='icons/de.gif'/></a> | <a href='?lang=fr'><img title='法語' alt='法語' src='icons/fr.gif'/></a> | <a href='?lang=it'><img title='意大利語' alt='意大利語' src='icons/it.gif'/></a> | <a href='?lang=th'><img title='泰國' alt='泰國' src='icons/th.gif'/></a> | <a href='?lang=ru'><img title='俄語' alt='俄語' src='icons/ru.gif'/></a> | 
+[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="W:" src="icons/sa.gif" title="W:"></A> | <A href="?lang=zh"><IMG alt="Tiếng Ph&aacute;p" src="icons/cn.gif" title="Tiếng Ph&aacute;p"></A> | <A href="?lang=en"><IMG alt="Bowser c&agrave;i đặt (tự động)" src="icons/uk.gif" title="Bowser c&agrave;i đặt (tự động)"></A> | <A href="?lang=es"><IMG alt="Tiếng Hin-ddi" src="icons/es.gif" title="Tiếng Hin-ddi"></A> | <A href="?lang=fr"><IMG alt="Tiếng T&acirc;y Ban Nha" src="icons/fr.gif" title="Tiếng T&acirc;y Ban Nha"></A> | <A href="?lang=ru"><IMG alt="Trung Quốc" src="icons/ru.gif" title="Trung Quốc"></A> | 
 
-<a href="preferences.php?from=%2Faddr%2Fgroup.php">設定</a>
--->
+<A href="preferences.php?from=%2Faddressbookv4.0%2Fedit.php">Đo&aacute;n trang chủ</A>
 			
 </DIV>
 			
 <DIV id="header">
-				
-<H1>
-<A href=".">Address Book</A>
-</H1>
-				
-<A href="."><IMG alt="Addressbook" id="logo" src="title.png" title="Addressbook"></A>
-			
+<A href="."><IMG alt="Addressbook" src="title.png" title="Addressbook"></A>
 </DIV>
 			
 <DIV id="nav">
@@ -58,49 +43,46 @@
 
 <LI>
 	
-<A href="./">首頁</A>
+<IMG alt="home" src="icons/font.png">
+	<A href="./">t&igrave;m kiếm</A>
 
 </LI>
 
-<LI class="all">
+<LI>
 	
-<A href="edit.php">新增</A>
+<IMG alt="add new" src="icons/add.png"><A href="edit.php">sau ng&agrave;y sinh nhật</A>
 
 </LI>
 	
-<LI class="admin">
+<LI>
+<IMG alt="groups" src="icons/group.png"><A href="group.php">csv xuất khẩu</A>
+</LI>
+	
+<LI>
 		
-<A href="group.php">組別</A>
+<IMG alt="next birthdays" src="icons/date.png">
+		<A href="birthdays.php">gia đ&igrave;nh</A>
 	
 </LI>
-	
-<LI class="all">
-		
-<A href="birthdays.php">下次生日</A>
-	
-</LI>
-	
-<LI class="export">
+    
+<LI>
     	
-<A href="view.php?all&amp;print">全部打印</A>
+<IMG alt="print all" src="icons/printer.png">
+    	<A href="view.php?all&amp;print">th&ecirc;m mới</A>
   
 </LI>
-	
-<LI class="export">
+    
+<LI>
       
-<A href="view.php?all&amp;print&amp;phones">打印</A>
+<IMG alt="print phones" src="icons/book_open.png">
+      <A href="view.php?all&amp;print&amp;phones">in tất cả c&aacute;c</A>
   
 </LI>
-	
-<LI class="export">
-    	
-<A href="export.php">出口</A>
-  
-</LI> 
-	
-<LI class="export">
-    	
-<A href="import.php">进口</A>
+    
+<LI>
+      
+<IMG alt="export csv" src="icons/page_excel.png">
+    	<A href="csv.php">in điện thoại</A>
   
 </LI> 
 
@@ -111,10 +93,149 @@
 <DIV id="content">
 
 
-<H1>組別</H1>
-<DIV class="msgbox">
-<I>No users selected.<BR>Please use the checkbox to select a user.</I>
-</DIV>	
+ 
+<H1>In</H1> 
+  
+<FORM accept-charset="utf-8" action="edit.php" method="post">
+
+		
+<INPUT name="id" type="hidden" value="">
+		<LABEL>Sở th&iacute;ch:</LABEL>
+		<INPUT name="firstname" size="35" type="text">
+<BR>
+
+		
+<LABEL>T&ecirc;n:</LABEL>
+		<INPUT name="lastname" size="35" type="text">
+<BR>
+
+		
+<LABEL>Họ:</LABEL>
+		<TEXTAREA cols="35" name="address" rows="5"></TEXTAREA>
+<BR>
+
+		
+<LABEL>Địa chỉ</LABEL>
+<BR>
+<BR class="clear">
+
+		
+<LABEL>Home:</LABEL>
+		<INPUT name="home" size="35" type="text">
+<BR>
+
+		
+<LABEL>Gia đ&igrave;nh:</LABEL>
+		<INPUT name="mobile" size="35" type="text">
+<BR>
+
+		
+<LABEL>Điện thoại di động:</LABEL>
+		<INPUT name="work" size="35" type="text">
+<BR>
+
+		
+<LABEL>&nbsp;</LABEL>
+<BR>
+<BR class="clear">
+
+		
+<LABEL>C&ocirc;ng việc:</LABEL>
+		<INPUT name="email" size="35" type="text">
+<BR>
+
+		
+<LABEL>C&ocirc;ng việc2:</LABEL>
+		<INPUT name="email2" size="35" type="text">
+<BR>
+
+		
+<LABEL>Thứ hai điện thoại:</LABEL>
+        <SELECT name="bday">
+          <OPTION selected value="0">-</OPTION>
+          <OPTION value="1">1</OPTION>
+          <OPTION value="2">2</OPTION>
+          <OPTION value="3">3</OPTION>
+          <OPTION value="4">4</OPTION>
+          <OPTION value="5">5</OPTION>
+          <OPTION value="6">6</OPTION>
+          <OPTION value="7">7</OPTION>
+          <OPTION value="8">8</OPTION>
+          <OPTION value="9">9</OPTION>
+          <OPTION value="10">10</OPTION>
+          <OPTION value="11">11</OPTION>
+          <OPTION value="12">12</OPTION>
+          <OPTION value="13">13</OPTION>
+          <OPTION value="14">14</OPTION>
+          <OPTION value="15">15</OPTION>
+          <OPTION value="16">16</OPTION>
+          <OPTION value="17">17</OPTION>
+          <OPTION value="18">18</OPTION>
+          <OPTION value="19">19</OPTION>
+          <OPTION value="20">20</OPTION>
+          <OPTION value="21">21</OPTION>
+          <OPTION value="22">22</OPTION>
+          <OPTION value="23">23</OPTION>
+          <OPTION value="24">24</OPTION>
+          <OPTION value="25">25</OPTION>
+          <OPTION value="26">26</OPTION>
+          <OPTION value="27">27</OPTION>
+          <OPTION value="28">28</OPTION>
+          <OPTION value="29">29</OPTION>
+          <OPTION value="30">30</OPTION>
+          <OPTION value="31">31</OPTION>
+        </SELECT>
+        <SELECT name="bmonth">
+          <OPTION selected value="-">-</OPTION>
+          <OPTION value="January">Ba Lan</OPTION>
+          <OPTION value="February">Th&aacute;ng một</OPTION>
+          <OPTION value="March">Th&aacute;ng hai</OPTION>
+          <OPTION value="April">Th&aacute;ng ba</OPTION>
+          <OPTION value="May">Th&aacute;ng tư</OPTION>
+          <OPTION value="June">Th&aacute;ng năm</OPTION>
+          <OPTION value="July">Th&aacute;ng s&aacute;u</OPTION>
+          <OPTION value="August">Th&aacute;ng bảy</OPTION>
+          <OPTION value="September">Th&aacute;ng t&aacute;m</OPTION>
+          <OPTION value="October">Th&aacute;ng ch&iacute;n</OPTION>
+          <OPTION value="November">Th&aacute;ng mười</OPTION>
+          <OPTION value="December">Th&aacute;ng mười một</OPTION>
+        </SELECT>
+        <INPUT maxlength="4" name="byear" size="4" type="text">
+<BR>
+
+		
+	
+<LABEL>GROUP:</LABEL>
+				<SELECT name="new_group">
+				          <OPTION value="[none]">[tất cả]</OPTION>
+          <OPTION>Rob</OPTION>
+				</SELECT>
+<BR>
+				
+		
+<BR>
+		
+<LABEL><B>Th&agrave;nh vi&ecirc;n của</B></LABEL>
+<BR>
+<BR class="clear">
+
+		
+<LABEL>Họ:</LABEL>
+		<TEXTAREA cols="35" name="address2" rows="5"></TEXTAREA>
+<BR>
+
+		
+<LABEL>Điện thoại:</LABEL>
+		<INPUT name="phone2" size="35" type="text">
+<BR>
+<BR>
+<BR>
+
+		
+<INPUT name="submit" type="submit" value="Kh&ocirc;ng hợp lệ">
+  
+</FORM>
+	
 </DIV>
 	
 <DIV id="footer">
@@ -122,7 +243,7 @@
 <UL>
 				
 <LI>
-<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v6.0 - r340</A>
+<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v4.0</A>
 </LI>
 			
 </UL>
@@ -133,8 +254,6 @@
 	
  
 
-
-
 <!-- 
 Copyright Notice:
 This script was written by Rob Minto, and is free to use and distribute under GPL. 
@@ -142,17 +261,15 @@ Any improvements, please email rob(at)widgetmonkey.com.
 Keep software free. 
 And please leave this copyright notice. Thanks.
 
-Major update 2007-2009 by Olivier Chatelain, feel free to use and distribute under GPL. 
+Major update 2007 by Olivier Chatelain, feel free to use and distribute under GPL. 
 Any improvements, please email chatelao(at)users.sourceforge.net. 
 
 Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
 please email retrorobot(at)users.sourceforge.net.
 
-Major contribution Mark James ("famfamfam"-icons, cc-by-2.5)
+Major contribution Mark James ("famfamfam"-icons)
 For more details see: http://www.famfamfam.com/lab/icons/silk/
-
-Major contribution "frequency decoder" ("Unobtrusive Table Sort Script", cc-by-sa-2.5)
-For more details see: http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/
 -->
+
 </BODY>
 </HTML>

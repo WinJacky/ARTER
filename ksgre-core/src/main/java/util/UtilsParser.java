@@ -125,11 +125,13 @@ public class UtilsParser {
     public static SeleniumLocator extractSeleniumLocatorFromWebElement(WebElement webElement) {
 
         String res = webElement.toString();
+
         res = res.substring(res.indexOf("-> ") + 3, res.length());
         res = res.substring(0, res.length() - 1);
         String strategy = res.split(":")[0].trim();
         String value = res.split(":")[1].trim();
         value = value.replaceAll("\"", "").trim();
+
         return new SeleniumLocator(strategy, value);
     }
 
@@ -349,6 +351,6 @@ public class UtilsParser {
     }
 
     public static String getPackageName(String newclazz) {
-        return "main.resources.repaired.MIAOSHA";
+        return "main.resources.repaired.ADDR";
     }
 }

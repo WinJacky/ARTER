@@ -117,8 +117,7 @@ public class UtilsRepaire {
         // 提取元素关键信息
         // 此处元素关键信息和关键词相比较
         Set<String> set = new HashSet<>();
-        String temp = null;
-        temp = element.getText();
+        String temp = element.getText();
         if (StringUtils.isNotBlank(temp)) set.addAll(WordsSplit.getWords(Helper.removeNewLines(temp.trim())));
         temp = element.getAttribute("id");
         if (StringUtils.isNotBlank(temp)) set.addAll(WordsSplit.getWords(Helper.removeNewLines(temp.trim())));
@@ -141,7 +140,7 @@ public class UtilsRepaire {
         temp = statement.getTitleAttribute();
         if (StringUtils.isNotBlank(temp)) set1.addAll(WordsSplit.getWords(Helper.removeNewLines(temp.trim())));
 
-        return computeSimilarity(set, set1);
+        return Math.max(computeSimilarity(set,set1), computeSimilarity(set1,set));
     }
 
     private static double computeSimilarity(Set<String> set, Set<String> set1) {

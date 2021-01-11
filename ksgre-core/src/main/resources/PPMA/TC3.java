@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Click to see and hide password
+ */
 public class TC3 {
   private WebDriver driver;
   private Map<String, Object> vars;
@@ -42,14 +45,14 @@ public class TC3 {
   }
   @Test
   public void tC3() throws InterruptedException {
-    driver.get("http://localhost/ppma/");
-    driver.findElement(By.id("user")).sendKeys("heli123");
-    driver.findElement(By.id("pwd")).sendKeys("heli123");
+    driver.get("http://localhost/Password-Manager-5.12/");
+    driver.findElement(By.id("user")).clear();
+    driver.findElement(By.id("user")).sendKeys("admin123");
+    driver.findElement(By.id("pwd")).clear();
+    driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("chk")).click();
-    driver.findElement(By.id("newiteminput")).sendKeys("Google");
-    driver.findElement(By.id("newiteminputpw")).sendKeys("Google123");
-    driver.findElement(By.id("newbtn")).click();
-    driver.switchTo().alert().accept();
-    driver.findElement(By.cssSelector(".btn-info")).click();
+    Thread.sleep(100);
+    driver.findElement(By.linkText("Click to see")).click();
+    driver.findElement(By.cssSelector("span.glyphicon.glyphicon-eye-close")).click();
   }
 }

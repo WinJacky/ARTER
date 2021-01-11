@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Click to change
+ */
 public class TC4 {
   private WebDriver driver;
   private Map<String, Object> vars;
@@ -41,12 +44,14 @@ public class TC4 {
     driver.quit();
   }
   @Test
-  public void tC4() {
-    driver.get("http://localhost/ppma/");
-    driver.findElement(By.id("user")).sendKeys("heli123");
-    driver.findElement(By.id("pwd")).sendKeys("heli123");
+  public void tC4() throws InterruptedException {
+    driver.get("http://localhost/Password-Manager-5.0/");
+    driver.findElement(By.id("user")).sendKeys("admin123");
+    driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("chk")).click();
-    driver.findElement(By.linkText("Click to see")).click();
-    driver.findElement(By.cssSelector(".btn-info")).click();
+    Thread.sleep(100);
+    driver.findElement(By.linkText("Click to change")).click();
+    driver.switchTo().alert().accept();
+    driver.switchTo().alert().accept();
   }
 }

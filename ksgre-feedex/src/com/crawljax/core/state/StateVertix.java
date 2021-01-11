@@ -663,7 +663,7 @@ public class StateVertix {
 				}
 			}
 		}
-		currentState.setKeyContent(new ArrayList<String>(res));
+		currentState.setKeyContent(new ArrayList<>(res));
  	}
 
 	/**

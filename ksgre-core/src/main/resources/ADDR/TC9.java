@@ -44,7 +44,13 @@ public class TC9 {
   public void tC9() {
     driver.get("http://localhost/addr/");
     driver.findElement(By.cssSelector("a:nth-child(3) > img")).click();
-    driver.findElement(By.id("MassCB")).click();
-    driver.findElement(By.linkText("groups")).click();
+    driver.findElement(By.cssSelector(".center:nth-child(6) img")).click();
+    driver.findElement(By.name("modifiy")).click();
+    driver.findElement(By.name("bday")).click();
+    driver.findElement(By.xpath("//option[. = '9']")).click();
+    driver.findElement(By.name("bmonth")).click();
+    driver.findElement(By.xpath("//option[. = 'April']")).click();
+    driver.findElement(By.name("byear")).sendKeys("1987");
+    driver.findElement(By.name("update")).click();
   }
 }

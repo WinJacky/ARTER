@@ -34,6 +34,7 @@ public class WebDriverBrowserBuilder implements EmbeddedBrowserBuilder {
 		// Determine the requested browser type
 		switch (configuration.getBrowser()) {
 			case firefox:
+				System.setProperty("webdriver.firefox.driver","D:\\DevelopmentTool\\IDEA\\MavenWorkspace\\ARTER\\ksgre-core\\src\\main\\resources\\BrowserDriver\\geckodriver.exe");
 				if (configuration.getProxyConfiguration() != null) {
 					FirefoxProfile profile = new FirefoxProfile();
 
@@ -62,6 +63,7 @@ public class WebDriverBrowserBuilder implements EmbeddedBrowserBuilder {
 //				                .getCrawlSpecificationReader().getWaitAfterReloadUrl());
 
 			case chrome:
+				System.setProperty("webdriver.chrome.driver","D:\\DevelopmentTool\\IDEA\\MavenWorkspace\\ARTER\\ksgre-core\\src\\main\\resources\\BrowserDriver\\chromedriver.exe");
 				return WebDriverBackedEmbeddedBrowser.withDriver(new ChromeDriver(),
 				        configuration.getFilterAttributeNames(), configuration
 				                .getCrawlSpecificationReader().getWaitAfterEvent(), configuration

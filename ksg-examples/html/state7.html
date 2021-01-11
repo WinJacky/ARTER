@@ -1,145 +1,181 @@
 <HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		
-<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-		
-<META content="PHP-Addressbook Notes" name="Description">
-		
-<META content="" name="Keywords">
-		
-<TITLE>PHP Address Book v5.x</TITLE>
-		
-<LINK href="./style.css" media="screen" rel="stylesheet" type="text/css">
-		
-<LINK href="./icons/font.png" rel="icon" type="image/png">
-		
-<STYLE type="text/css"> &lt;!-- body{background:none;padding:4px 16px;} --&gt; </STYLE>
-	
 </HEAD>
 <BODY>
+<BR>
 
-<H1>PHP-addressbook Version 5.x</H1>
-
-<A href="#1">requirements</A> | <A href="#2">installation</A> | <A href="#3">licence</A> | <A href="#4">disclaimer</A>
-
-
-<H3>
-<A name="1"></A>Download:</H3>
-
-<P>For the most recent version of "PHP-addressbook" see: <B><A href="https://sourceforge.net/project/showfiles.php?group_id=157964">https://sourceforge.net/project/showfiles.php?group_id=157964</A>.</B>
-</P>
+<B>Deprecated</B>:  Function split() is deprecated in <B>E:\phpstudy\WWW\addressbookv4.0\include\dbconnect.php</B> on line <B>80</B>
+<BR>
 
 
-<H3>
-<A name="1"></A>Requirements:</H3>
 
-<P>You will need a webserver which has installed PHP 4/5, and mySQL version 3.2 upwards.</P>
-
-
-<H3>
-<A name="2"></A>Installation:</H3>
-
-<P>1. Unzip the files and place them on your webserver (or locally, as you will have to make some changes and then upload) in a directory called addressbook or whatever.</P>
-
-<P>2. Open <B>config.php</B> and change the variables to your server specification.</P>
-
-<P>3. You need to create the table addressbook in your mySQL database. (You can alter the table name, but you need to change the entry in config.php, and the table name in addressbook.sql.) Either via telnet, or using a program such as <A href="http://www.anse.de/mysqlfront/">mySQLfront</A>, or <A href="http://phpmyadmin.sourceforge.net">phpMyAdmin</A> enter the information stored in <B>addressbook.sql</B>. You can create a separate database for the addressbook, it`s up to you.</P>
-
-<P>That`s it!</P>
-
-
-<H3>User Features</H3>
-- Address and birthday management.<BR>
-- Address grouping and mailing.<BR>
-- Phonebook printing.<BR>
-- Birthday reminder list.<BR>
-- Czech, English, German and Polish translations.<BR>
-- vCard an csv export capabilities.<BR>
-- Gmail, Yahoo and Hotmail integrations.<BR>
-- Google map integration (beta).
-
-<H3>Technical Features</H3>
-- Full UTF-8 support.<BR>
-- Browser language detection.<BR>
-- Fast AJAX-Search.<BR>
-- Page compression for bandwidth saving.
-
-<H3>Intro:</H3>
-
-<P>This is an address book program for people who have their own web space. At present it is does not have a multiple user function. I wrote it because I wanted a place where I could store all my addresses so I can access them from multiple locations, and its a handy backup if you lose your address book, and there weren`t any freeware programs that suited my needs. IT IS NOT SUITABLE FOR COMMERCIAL USE. If you want to use this program on an intranet, please email <B>rob@widgetmonkey.com</B> . I am working on additions, such as multiple log in. I might also expand it to become a calendar / organiser. We`ll see.</P>
-
-<P>
-<B>Optional extras:</B>
-</P>
-
-<P>You might want to password protect the addressbook - not everyone wants to have their details freely available on the web! It is HIGHLY recommended that you do. Password proctection is best done with .htaccess and .htpassword files. There are tutorials out there to help.</P>
-
-<P>You can move the config.php file to another directory if you want to make it safer - just remember to alter the include( ) statement in dbconnect.php.</P>
-
-<P>Any questions: Submit your feedback at <A href="http://sourceforge.net/projects/php-addressbook/">sourceforge.net</A>
-or send me an e-mail <A href="mailto:chatelao%7B@%7Dusers.sourceforge.net">chatalao{a}users.sourceforge.net</A>
-</P>
-
-
-<H3>
-<A name="3"></A>Licence:</H3>
-
-<P>This addressbook is free for non-commercial use. I would like it if the copyright notice was left. Please feel free to alter the scripts as you see fit. And if you make any improvements, please email me.</P>
-
-<P>For details about the "famfamfam" icons, please look here: <A href="http://www.famfamfam.com/lab/icons/silk/">famfamfam</A>.</P>
-For details about the "Table Sort Script", please look here: <A href="http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/">Table Sort Script</A>.
-
-<H3>
-<A name="4"></A>Disclaimer:</H3>
-
-<P>Any use or modifications of this program is at the user`s risk. Any distribution or malicious use of address details, email addresses or telephone numbers is not the responsibility of the author. There may be several unknown securities-leaks, strong protection of the website and data is no part of this package. This is under the sole reposibility of the user.</P>
-
-
-<H3>
-<A name="4"></A>Donations:</H3>
-
-<P>The software is free, anyone who enjoys it a lot, is welcome to send me some mental support over PayPal. I will use it as wisely as possible.</P>
-
-<A href="http://sourceforge.net/donate/index.php?group_id=157964">
-  <IMG alt="Donate to this Project" src="http://images.sourceforge.net/images/project-support.jpg">
-</A>
-
-
-<DIV style="background:#D70500;width:250px;border:1px solid #840300;padding:4px;">
-
-<FORM action="http://www.hotscripts.com/rate/67789.html" method="post">
 	
-<DIV style="color:#fff;font-weight:700;">
-		If you like the script, please rate it!
-		<INPUT name="external" type="hidden" value="1">
+<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	
+<META content="PHP-Addressbook" name="Description">
+	
+<META content="" name="Keywords">
+	
+<LINK href="style.css" media="screen" rel="stylesheet" type="text/css">
+	
+<LINK href="icons/font.png" rel="icon" type="image/png">
+	
+<TITLE>Preferences | Th&aacute;ng mười hai</TITLE>
+	
+	
+		
+<DIV id="container">
+			
+<DIV id="top">
+[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="W:" src="icons/sa.gif" title="W:"></A> | <A href="?lang=zh"><IMG alt="Tiếng Ph&aacute;p" src="icons/cn.gif" title="Tiếng Ph&aacute;p"></A> | <A href="?lang=en"><IMG alt="Bowser c&agrave;i đặt (tự động)" src="icons/uk.gif" title="Bowser c&agrave;i đặt (tự động)"></A> | <A href="?lang=es"><IMG alt="Tiếng Hin-ddi" src="icons/es.gif" title="Tiếng Hin-ddi"></A> | <A href="?lang=fr"><IMG alt="Tiếng T&acirc;y Ban Nha" src="icons/fr.gif" title="Tiếng T&acirc;y Ban Nha"></A> | <A href="?lang=ru"><IMG alt="Trung Quốc" src="icons/ru.gif" title="Trung Quốc"></A> | 
+
+<A href="preferences.php?from=%2Faddressbookv4.0%2Fpreferences.php%3Ffrom%3D%252Faddressbookv4.0%252Findex.php%253Fmore_langs%253Dyes">Đo&aacute;n trang chủ</A>
+			
 </DIV>
-	
-<SELECT name="rate" size="1">
-		<OPTION selected value="5">Excellent!</OPTION>
-		<OPTION value="4">Very Good</OPTION>
-		<OPTION value="3">Good</OPTION>
-		<OPTION value="2">Fair</OPTION>
-		<OPTION value="1">Poor</OPTION>
-	</SELECT>
-	<INPUT name="submit" type="submit" value="Cast My Vote!">
+			
+<DIV id="header">
+<A href="."><IMG alt="Addressbook" src="title.png" title="Addressbook"></A>
+</DIV>
+			
+<DIV id="nav">
+      			
+<UL>
 
+<LI>
+	
+<IMG alt="home" src="icons/font.png">
+	<A href="./">t&igrave;m kiếm</A>
+
+</LI>
+
+<LI>
+	
+<IMG alt="add new" src="icons/add.png"><A href="edit.php">sau ng&agrave;y sinh nhật</A>
+
+</LI>
+	
+<LI>
+<IMG alt="groups" src="icons/group.png"><A href="group.php">csv xuất khẩu</A>
+</LI>
+	
+<LI>
+		
+<IMG alt="next birthdays" src="icons/date.png">
+		<A href="birthdays.php">gia đ&igrave;nh</A>
+	
+</LI>
+    
+<LI>
+    	
+<IMG alt="print all" src="icons/printer.png">
+    	<A href="view.php?all&amp;print">th&ecirc;m mới</A>
+  
+</LI>
+    
+<LI>
+      
+<IMG alt="print phones" src="icons/book_open.png">
+      <A href="view.php?all&amp;print&amp;phones">in tất cả c&aacute;c</A>
+  
+</LI>
+    
+<LI>
+      
+<IMG alt="export csv" src="icons/page_excel.png">
+    	<A href="csv.php">in điện thoại</A>
+  
+</LI> 
+
+</UL>
+			
+</DIV>
+			
+<DIV id="content">
+
+
+
+	
+<H1>Đo&aacute;n trang chủ</H1> 
+		
+<FORM action="/addressbookv4.0/index.php?more_langs=yes" method="post">
+				<!--  	
+					<label> :</label>
+					<select name="language" onchange="">
+						<option value='auto'>Ngôn ngữ</option>
+<option value='ar'>W:</option>
+<option value='bg'>Bg</option>
+<option value='ca'>Ca</option>
+<option value='cs'>Tiếng Anh</option>
+<option value='da'>Da</option>
+<option value='de'>Czech</option>
+<option value='el'>Tiếng Bồ Đào Nha</option>
+<option value='en'>Bowser cài đặt (tự động)</option>
+<option value='es'>Tiếng Hin-ddi</option>
+<option value='fi'>Fi</option>
+<option value='fr'>Tiếng Tây Ban Nha</option>
+<option value='he'>Ả-rập</option>
+<option value='hi'>Vietnamese</option>
+<option value='it'>It</option>
+<option value='jp'>Jp</option>
+<option value='ko'>Nga</option>
+<option value='nl'>Nl</option>
+<option value='pl'>Tiếng Đức</option>
+<option value='pt'>Hàn Quốc</option>
+<option value='ru'>Trung Quốc</option>
+<option value='sv'>Sv</option>
+<option value='th'>Th</option>
+<option value='tr'>Tr</option>
+<option value='vi'>Vi</option>
+<option value='zh'>Tiếng Pháp</option>
+					</select><br /><br />
+				-->
+				
+<LABEL>Từ bỏ:</LABEL>
+				<SELECT name="mailer">
+					<OPTION value="Standard (mailto:)">Standard (mailto:)</OPTION>
+<OPTION value="gmail">Gmail</OPTION>
+<OPTION value="yahoo">Yahoo</OPTION>
+<OPTION value="hotmail">Hotmail</OPTION>
+				</SELECT>
+				<INPUT name="update" type="submit" value="Sinh nhật">
+		
 </FORM>
-
+	
+</DIV>
+	
+<DIV id="footer">
+			
+<UL>
+				
+<LI>
+<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v4.0</A>
+</LI>
+			
+</UL>
+	
 </DIV>
 
+</DIV>
+	
+ 
 
-<H3>
-<A name="3"></A>Just enjoy "PHP address book"!</H3>
+<!-- 
+Copyright Notice:
+This script was written by Rob Minto, and is free to use and distribute under GPL. 
+Any improvements, please email rob(at)widgetmonkey.com. 
+Keep software free. 
+And please leave this copyright notice. Thanks.
 
-<HR>
+Major update 2007 by Olivier Chatelain, feel free to use and distribute under GPL. 
+Any improvements, please email chatelao(at)users.sourceforge.net. 
 
-<CENTER>
-<B><A name="3"></A>Last Update: 16. June 2010 - chatelao</B>
-</CENTER>
+Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
+please email retrorobot(at)users.sourceforge.net.
 
-
+Major contribution Mark James ("famfamfam"-icons)
+For more details see: http://www.famfamfam.com/lab/icons/silk/
+-->
 
 </BODY>
 </HTML>

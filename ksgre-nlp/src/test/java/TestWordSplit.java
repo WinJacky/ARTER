@@ -7,10 +7,10 @@ import java.util.List;
 
 public class TestWordSplit {
     public static void main(String[] args) {
-        String object = "loginname";
+        String object = "login name";
         List<Term> list = WordsSplit.Segment(object);
         for (Term term : list) {
-            System.out.printf(term.getName() + " ");
+            System.out.println(term.getName());
         }
     }
 }

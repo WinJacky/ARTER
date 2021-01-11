@@ -2,13 +2,45 @@ package main.java.config;
 
 public enum AppEnum {
 
-    PHPSHE("PHPSHE", "main.resources.PHPSHE", "http://localhost/phpshe/"),
+    //Password-Manager-5.12
+    //Password-Manager-5.13
+    //Password-Manager-6.0
+    //Password-Manager-8.0
+    //Password-Manager-9.0
+    //Password-Manager-9.08
+    //Password-Manager-9.09
+    PPMA("PPMA", "main.resources.PPMA", "http://localhost/Password-Manager-9.09/"),
 
-    PPMA("PPMA", "main.resources.PPMA", "http://localhost/ppma/"),
+    //addressbookv2.0
+    //addressbookv3.0
+    //addressbookv4.0
+    //addressbookv5.0
+    //addressbookv6.0
+    //addressbookv7.0
+    ADDR("ADDR","main.resources.ADDR","http://localhost/ADDR/addressbookv4.0/"),
+
+    //NucleusCMS-Nucleus-3-41/nucleus
+    //NucleusCMS-Nucleus-3-50/nucleus
+    //NucleusCMS-Nucleus-3-51/nucleus
+    //NucleusCMS-Nucleus-3-60/nucleus
+    //NucleusCMS-Nucleus-3-62/nucleus
+    //NucleusCMS-Nucleus-3-64/nucleus
+    //NucleusCMS-Nucleus-3-65/nucleus
+    //NucleusCMS-Nucleus-3-66/nucleus
+    //NucleusCMS-Nucleus-3-70/nucleus
+    Nucleus("Nucleus","main.resources.Nucleus","http://localhost/NucleusCMS-Nucleus-3-70/nucleus/"),
+
+    //phpshe-free_v1.5
+    //phpshe-free_v1.6
+    //phpshe-free_v1.7
+    PHPSHE("PHPSHE", "main.resources.PHPSHE", "http://localhost/phpshe-free_v1.6/"),
+
+    //claroline90
+    //claroline100
+    //claroline110
+    Claroline("Claroline","main.resources.Claroline","http://localhost/claroline100/"),
 
     ESHOP("EShop","main.resources.EShop","http://localhost:8080/EShop/"),
-
-    ADDR("ADDR","main.resources.ADDR","http://localhost/addr/"),
 
     MIAOSHA("MIAOSHA", "main.resources.MIAOSHA", "http://localhost:8080/miaosha/login");
 

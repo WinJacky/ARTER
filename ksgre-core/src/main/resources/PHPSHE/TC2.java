@@ -13,6 +13,9 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This test case is meant to Login
+ */
 public class TC2 {
 
     private WebDriver driver;

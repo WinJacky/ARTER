@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Click to delete
+ */
 public class TC5 {
   private WebDriver driver;
   private Map<String, Object> vars;
@@ -41,14 +44,13 @@ public class TC5 {
     driver.quit();
   }
   @Test
-  public void tC5() {
-    driver.get("http://localhost/ppma/");
-    driver.findElement(By.id("user")).sendKeys("heli123");
-    driver.findElement(By.id("pwd")).sendKeys("heli123");
+  public void tC5() throws InterruptedException {
+    driver.get("http://localhost/Password-Manager-5.0/");
+    driver.findElement(By.id("user")).sendKeys("admin123");
+    driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("chk")).click();
-    driver.findElement(By.linkText("Click to change")).click();
+    driver.findElement(By.linkText("Click to delete")).click();
     driver.switchTo().alert().accept();
     driver.switchTo().alert().accept();
-    driver.findElement(By.cssSelector(".btn-info")).click();
   }
 }

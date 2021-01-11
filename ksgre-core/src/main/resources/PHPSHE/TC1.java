@@ -10,6 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This test case is meant to Register for Free
+ */
 public class TC1 {
 
     private WebDriver driver;

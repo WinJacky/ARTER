@@ -25,6 +25,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Add User To Group
+ */
 public class TC6 {
 
     private WebDriver driver;
@@ -49,9 +52,8 @@ public class TC6 {
 
     @Test
     public void tC6() {
-        driver.get("http://localhost/addr/");;
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/a[3]/img[1]")).click();
-        driver.findElement(By.name("searchstring")).sendKeys("Yue");
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[4]/div[1]/form[1]/input[1]")).click();
+        driver.get("http://localhost/addressbookv3.0/");;
+        driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.name("add")).click();
     }
 }

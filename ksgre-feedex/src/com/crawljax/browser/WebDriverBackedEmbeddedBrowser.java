@@ -515,9 +515,14 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
 	/**
 	 * @return The current browser url.
 	 */
+	@Override
 	public String getCurrentUrl() {
 		try {
 			return browser.getCurrentUrl();
+		} catch (UnhandledAlertException e){
+			browser.switchTo().alert().accept();
+			return browser.getCurrentUrl();
+//			throw new UnhandledAlertException(e.getAlertText());
 		} catch (WebDriverException e) {
 			throw wrapWebDriverExceptionIfConnectionException(e);
 		}

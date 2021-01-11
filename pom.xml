@@ -15,7 +15,7 @@
     <modules>
         <module>ksgre-core</module>
         <module>ksgre-feedex</module>
-        <module>ksg-common</module>
+        <module>ksgre-common</module>
     </modules>
 
     <properties>

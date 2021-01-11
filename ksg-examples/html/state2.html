@@ -1,73 +1,147 @@
-<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-<META charset="UTF-8">
-    
-<TITLE>商品列表</TITLE>
-    
+	
 <META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <!-- jquery -->
-    
-<SCRIPT src="/miaosha/js/jquery.min.js" type="text/javascript"></SCRIPT>
-    <!-- bootstrap -->
-    
-<LINK href="/miaosha/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    
-<SCRIPT src="/miaosha/bootstrap/js/bootstrap.min.js" type="text/javascript"></SCRIPT>
-    <!-- jquery-validator -->
-    <SCRIPT src="/miaosha/jquery-validation/jquery.validate.min.js" type="text/javascript"></SCRIPT>
-    <SCRIPT src="/miaosha/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></SCRIPT>
-    <!-- layer -->
-    <SCRIPT src="/miaosha/layer/layer.js" type="text/javascript"></SCRIPT>
-<LINK href="http://localhost:8080/miaosha/layer/skin/default/layer.css?v=3.0.3303" id="layuicss-skinlayercss" rel="stylesheet">
-    <!-- md5.js -->
-    
-<SCRIPT src="/miaosha/js/md5.min.js" type="text/javascript"></SCRIPT>
-    <!-- common.js -->
-    <SCRIPT src="/miaosha/js/common.js" type="text/javascript"></SCRIPT>
-
+	
+<META content="PHP-Addressbook" name="Description">
+	
+<META content="" name="Keywords">
+	
+<LINK href="style.css" media="screen" rel="stylesheet" type="text/css">
+	
+<LINK href="icons/font.png" rel="icon" type="image/png">
+	
+<TITLE>Groups | Address Book</TITLE>	
 </HEAD>
 <BODY>
+		
+<DIV id="container">
+			
+<DIV id="top">
+[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="Arabic" src="icons/sa.gif" title="Arabic"></A> | <A href="?lang=zh"><IMG alt="Chinese" src="icons/cn.gif" title="Chinese"></A> | <A href="?lang=es"><IMG alt="Spanish" src="icons/es.gif" title="Spanish"></A> | <A href="?lang=fr"><IMG alt="French" src="icons/fr.gif" title="French"></A> | <A href="?lang=ru"><IMG alt="Russian" src="icons/ru.gif" title="Russian"></A> | 
 
-<DIV class="panel panel-default">
-    
-<DIV class="panel-heading">秒杀商品列表</DIV>
-    
-<TABLE class="table" id="goodslist">
-        
-<TBODY>
-<TR>
-<TD>商品名称</TD><TD>商品图片</TD><TD>商品原价</TD><TD>秒杀价</TD><TD>库存数量</TD><TD>详情</TD>
-</TR>
-        
-<TR>
-            
-<TD>iphoneX</TD>
-            <TD><IMG height="100" src="/miaosha/img/iphonex.png" width="100"></TD>
-            <TD>8765.0</TD>
-            <TD>0.01</TD>
-            <TD>8</TD>
-            <TD><A href="/miaosha/goods/to_detail/1">详情</A></TD>
-        
-</TR>
-        
-<TR>
-            
-<TD>华为Mate9</TD>
-            <TD><IMG height="100" src="/miaosha/img/meta10.png" width="100"></TD>
-            <TD>3212.0</TD>
-            <TD>0.01</TD>
-            <TD>9</TD>
-            <TD><A href="/miaosha/goods/to_detail/2">详情</A></TD>
-        
-</TR>
-    
-</TBODY>
-</TABLE>
+<A href="preferences.php?from=%2FADDR%2Faddressbookv4.0%2Fgroup.php">Preferences</A>
+			
+</DIV>
+			
+<DIV id="header">
+<A href="."><IMG alt="Addressbook" src="title.png" title="Addressbook"></A>
+</DIV>
+			
+<DIV id="nav">
+      			
+<UL>
 
+<LI>
+	
+<IMG alt="home" src="icons/font.png">
+	<A href="./">home</A>
+
+</LI>
+
+<LI>
+	
+<IMG alt="add new" src="icons/add.png"><A href="edit.php">add new</A>
+
+</LI>
+	
+<LI>
+<IMG alt="groups" src="icons/group.png"><A href="group.php">groups</A>
+</LI>
+	
+<LI>
+		
+<IMG alt="next birthdays" src="icons/date.png">
+		<A href="birthdays.php">next birthdays</A>
+	
+</LI>
+    
+<LI>
+    	
+<IMG alt="print all" src="icons/printer.png">
+    	<A href="view.php?all&amp;print">print all</A>
+  
+</LI>
+    
+<LI>
+      
+<IMG alt="print phones" src="icons/book_open.png">
+      <A href="view.php?all&amp;print&amp;phones">print phones</A>
+  
+</LI>
+    
+<LI>
+      
+<IMG alt="export csv" src="icons/page_excel.png">
+    	<A href="csv.php">export csv</A>
+  
+</LI> 
+
+</UL>
+			
+</DIV>
+			
+<DIV id="content">
+
+
+
+<H1>Groups</H1>  
+<FORM accept-charset="utf-8" action="/ADDR/addressbookv4.0/group.php" method="post">
+    
+<LABEL>Group name:</LABEL>
+	<INPUT name="group_name" size="35" type="text">
+<BR>
+
+    
+<LABEL>Group header (Logo):</LABEL>
+	<TEXTAREA cols="40" name="group_header" rows="10"></TEXTAREA>
+<BR>
+
+    
+<LABEL>Group footer (Comment):</LABEL>
+	<TEXTAREA cols="40" name="group_footer" rows="10"></TEXTAREA>
+<BR>
+<BR>
+    
+<INPUT name="submit" type="submit" value="Enter information">
+  
+</FORM>
+	
+</DIV>
+	
+<DIV id="footer">
+			
+<UL>
+				
+<LI>
+<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v4.0</A>
+</LI>
+			
+</UL>
+	
 </DIV>
 
+</DIV>
+	
+ 
+
+<!-- 
+Copyright Notice:
+This script was written by Rob Minto, and is free to use and distribute under GPL. 
+Any improvements, please email rob(at)widgetmonkey.com. 
+Keep software free. 
+And please leave this copyright notice. Thanks.
+
+Major update 2007 by Olivier Chatelain, feel free to use and distribute under GPL. 
+Any improvements, please email chatelao(at)users.sourceforge.net. 
+
+Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
+please email retrorobot(at)users.sourceforge.net.
+
+Major contribution Mark James ("famfamfam"-icons)
+For more details see: http://www.famfamfam.com/lab/icons/silk/
+-->
 
 </BODY>
 </HTML>

@@ -25,6 +25,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case(version 2) is meant to Update User Info
+ */
 public class TC8 {
 
     private WebDriver driver;
@@ -48,12 +51,12 @@ public class TC8 {
     }
 
     @Test
-    public void tC8() {
-        driver.get("http://localhost/addr/");;
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/a[3]/img[1]")).click();
-        driver.findElement(By.linkText("groups")).click();
-        driver.findElement(By.name("selected[]")).click();
-        driver.findElement(By.name("edit")).click();
+    public void tC8() throws InterruptedException {
+        driver.get("http://localhost/addressbookv3.0/");;
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[4]/form[2]/table[1]/tbody[1]/tr[2]/td[7]/a[1]/img[1]")).click();
+        Thread.sleep(500);;
+        driver.findElement(By.name("firstname")).clear();
+        driver.findElement(By.name("firstname")).sendKeys("Jacky");
         driver.findElement(By.name("update")).click();
     }
 }

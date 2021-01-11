@@ -7,52 +7,26 @@
 <META content="PHP-Addressbook" name="Description">
 	
 <META content="" name="Keywords">
-
 	
-<STYLE type="text/css">
-		
-    body {background-image:url('./skins/header-blue.jpg');background-repeat:repeat-x;background-position:top left;}
-    table#maintable th {text-align:center;border:1px solid #ccc;font-size:12px;background:#739fce;color:#fff;}
-    table#birthdays th {color:#fff;background:#739fce;margin:25px;border:1px solid #ccc;}
-	</STYLE>
-	
-<LINK href="style.css" media="all" rel="stylesheet" type="text/css">
-	<!--[if !IE]>-->
-	
-<LINK href="iphone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css">
-	<!--<![endif]-->
-	
-<META content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
-
-
+<LINK href="style.css" media="screen" rel="stylesheet" type="text/css">
 	
 <LINK href="icons/font.png" rel="icon" type="image/png">
-		
-<META content="3;url=." http-equiv="REFRESH">
-
-<TITLE>Address book </TITLE>	
+	
+<TITLE>Groups | Address Book</TITLE>	
 </HEAD>
 <BODY>
 		
 <DIV id="container">
 			
 <DIV id="top">
-			
-[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="Arabic" src="icons/sa.gif" title="Arabic"></A> | <A href="?lang=de"><IMG alt="German" src="icons/de.gif" title="German"></A> | <A href="?lang=fr"><IMG alt="French" src="icons/fr.gif" title="French"></A> | <A href="?lang=it"><IMG alt="Italian" src="icons/it.gif" title="Italian"></A> | <A href="?lang=th"><IMG alt="Thai" src="icons/th.gif" title="Thai"></A> | <A href="?lang=ru"><IMG alt="Russian" src="icons/ru.gif" title="Russian"></A> | 
+[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="Arabic" src="icons/sa.gif" title="Arabic"></A> | <A href="?lang=zh"><IMG alt="Chinese" src="icons/cn.gif" title="Chinese"></A> | <A href="?lang=es"><IMG alt="Spanish" src="icons/es.gif" title="Spanish"></A> | <A href="?lang=fr"><IMG alt="French" src="icons/fr.gif" title="French"></A> | <A href="?lang=ru"><IMG alt="Russian" src="icons/ru.gif" title="Russian"></A> | 
 
-<A href="preferences.php?from=%2Faddr%2Fedit.php">Preferences</A>
-
+<A href="preferences.php?from=%2FADDR%2Faddressbookv4.0%2Fgroup.php">Preferences</A>
 			
 </DIV>
 			
 <DIV id="header">
-				
-<H1>
-<A href=".">Address Book</A>
-</H1>
-				
-<A href="."><IMG alt="Addressbook" id="logo" src="title.png" title="Addressbook"></A>
-			
+<A href="."><IMG alt="Addressbook" src="title.png" title="Addressbook"></A>
 </DIV>
 			
 <DIV id="nav">
@@ -61,49 +35,46 @@
 
 <LI>
 	
-<A href="./">home</A>
+<IMG alt="home" src="icons/font.png">
+	<A href="./">home</A>
 
 </LI>
 
-<LI class="all">
+<LI>
 	
-<A href="edit.php">add new</A>
+<IMG alt="add new" src="icons/add.png"><A href="edit.php">add new</A>
 
 </LI>
 	
-<LI class="admin">
+<LI>
+<IMG alt="groups" src="icons/group.png"><A href="group.php">groups</A>
+</LI>
+	
+<LI>
 		
-<A href="group.php">groups</A>
+<IMG alt="next birthdays" src="icons/date.png">
+		<A href="birthdays.php">next birthdays</A>
 	
 </LI>
-	
-<LI class="all">
-		
-<A href="birthdays.php">next birthdays</A>
-	
-</LI>
-	
-<LI class="export">
+    
+<LI>
     	
-<A href="view.php?all&amp;print">print all</A>
+<IMG alt="print all" src="icons/printer.png">
+    	<A href="view.php?all&amp;print">print all</A>
   
 </LI>
-	
-<LI class="export">
+    
+<LI>
       
-<A href="view.php?all&amp;print&amp;phones">print phones</A>
+<IMG alt="print phones" src="icons/book_open.png">
+      <A href="view.php?all&amp;print&amp;phones">print phones</A>
   
 </LI>
-	
-<LI class="export">
-    	
-<A href="export.php">export</A>
-  
-</LI> 
-	
-<LI class="export">
-    	
-<A href="import.php">import</A>
+    
+<LI>
+      
+<IMG alt="export csv" src="icons/page_excel.png">
+    	<A href="csv.php">export csv</A>
   
 </LI> 
 
@@ -113,12 +84,11 @@
 			
 <DIV id="content">
 
- 
-<H1>Edit / add address book entry</H1> 
-
+South East University
+<H1>Groups</H1>
 <BR>
-<DIV class="msgbox">Information entered into address book.<BR>
-<I><A href="edit.php">add next</A> or return to <A href="index.php">home page</A>.</I>
+<DIV class="msgbox">A new group has been entered into the address book.<BR>
+<I>return to the <A href="group.php">group page</A></I>
 </DIV>	
 </DIV>
 	
@@ -127,7 +97,7 @@
 <UL>
 				
 <LI>
-<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v6.1 - r346</A>
+<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v4.0</A>
 </LI>
 			
 </UL>
@@ -138,8 +108,6 @@
 	
  
 
-
-
 <!-- 
 Copyright Notice:
 This script was written by Rob Minto, and is free to use and distribute under GPL. 
@@ -147,17 +115,15 @@ Any improvements, please email rob(at)widgetmonkey.com.
 Keep software free. 
 And please leave this copyright notice. Thanks.
 
-Major update 2007-2009 by Olivier Chatelain, feel free to use and distribute under GPL. 
+Major update 2007 by Olivier Chatelain, feel free to use and distribute under GPL. 
 Any improvements, please email chatelao(at)users.sourceforge.net. 
 
 Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
 please email retrorobot(at)users.sourceforge.net.
 
-Major contribution Mark James ("famfamfam"-icons, cc-by-2.5)
+Major contribution Mark James ("famfamfam"-icons)
 For more details see: http://www.famfamfam.com/lab/icons/silk/
-
-Major contribution "frequency decoder" ("Unobtrusive Table Sort Script", cc-by-sa-2.5)
-For more details see: http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited/
 -->
+
 </BODY>
 </HTML>

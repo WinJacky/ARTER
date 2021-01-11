@@ -49,15 +49,7 @@ public class TC3 {
 
     @Test
     public void tC3() {
-        driver.get("http://localhost/addr/");;
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/a[3]/img[1]")).click();
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[4]/form[2]/table[1]/tbody[1]/tr[2]/td[6]/a[1]/img[1]")).click();
-        driver.findElement(By.name("modifiy")).click();
-        driver.findElement(By.name("bday")).click();
-        driver.findElement(By.xpath("//option[. = '9']")).click();
-        driver.findElement(By.name("bmonth")).click();
-        driver.findElement(By.xpath("//option[. = 'April']")).click();
-        driver.findElement(By.name("byear")).sendKeys("1987");
-        driver.findElement(By.name("update")).click();
+        driver.get("http://localhost/addressbookv2.0/");;
+        driver.findElement(By.linkText("next birthdays")).click();
     }
 }

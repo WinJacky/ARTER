@@ -97,7 +97,12 @@ public class UtilsFile {
 
         String currProjPath = System.getProperty("user.dir");
 
-        String JSCode = UtilsFile.readFileToString(currProjPath + Settings.JSDirPath + "/GetEleAppendInfo.js");
+        String filePath = currProjPath + Settings.JSDirPath + "/GetEleAppendInfo.js";
+        if(filePath.contains("\\ksgre-core/ksgre-core")){
+            filePath = filePath.replace("\\ksgre-core/ksgre-core","/ksgre-core");
+        }
+
+        String JSCode = UtilsFile.readFileToString(filePath);
 
         return JSCode;
 

@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This test case is meant to Find Next Birthdays
+ */
 public class TC3 {
   private WebDriver driver;
   private Map<String, Object> vars;
@@ -42,15 +45,7 @@ public class TC3 {
   }
   @Test
   public void tC3() {
-    driver.get("http://localhost/addr/");
-    driver.findElement(By.cssSelector("a:nth-child(3) > img")).click();
-    driver.findElement(By.cssSelector(".center:nth-child(6) img")).click();
-    driver.findElement(By.name("modifiy")).click();
-    driver.findElement(By.name("bday")).click();
-    driver.findElement(By.xpath("//option[. = '9']")).click();
-    driver.findElement(By.name("bmonth")).click();
-    driver.findElement(By.xpath("//option[. = 'April']")).click();
-    driver.findElement(By.name("byear")).sendKeys("1987");
-    driver.findElement(By.name("update")).click();
+    driver.get("http://localhost/addressbookv2.0/");
+    driver.findElement(By.linkText("next birthdays")).click();
   }
 }
