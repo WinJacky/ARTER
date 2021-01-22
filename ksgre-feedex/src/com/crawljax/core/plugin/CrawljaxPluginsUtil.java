@@ -372,17 +372,17 @@ public final class CrawljaxPluginsUtil {
 	 *        
 	 */
 	public static boolean runDomChangeNotifierPlugin(final StateVertix stateBefore, final Eventable e, final StateVertix stateAfter) {
-		LOGGER.info("Checking for DomChangeNotifierPlugin...");
+//		LOGGER.info("Checking for DomChangeNotifierPlugin...");
 		Plugin latest = null;
 		for (Plugin plugin : CrawljaxPluginsUtil.PLUGINS) {
 			if (plugin instanceof DomChangeNotifierPlugin) {
-				LOGGER.info("Found plugin " + plugin.getClass().getName());
+//				LOGGER.info("Found plugin " + plugin.getClass().getName());
 				latest = plugin;
 			}			
 		}
 		
 		if (latest != null){
-			LOGGER.info("Calling plugin " + latest.getClass().getName());
+//			LOGGER.info("Calling plugin " + latest.getClass().getName());
 
 			return ((DomChangeNotifierPlugin) latest).isDomChanged(stateBefore.getDom(), e ,stateAfter.getDom());
 

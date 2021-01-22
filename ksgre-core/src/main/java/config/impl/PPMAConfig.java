@@ -10,7 +10,7 @@ public class PPMAConfig extends AbstractAppConfig {
 
     @Override
     public void setClick(CrawlSpecification crawler) {
-        crawler.addCrawlCondition("PPMA", new UrlCondition("http://localhost/Password-Manager"));
+        crawler.addCrawlCondition("PPMA", new UrlCondition("http://localhost/PPMA/Password-Manager"));
         crawler.click("a");
         crawler.click("input").withAttribute("type", "button");
         crawler.click("input").withAttribute("type", "submit");

@@ -59,11 +59,9 @@ public class CrawlConditionChecker {
 				}
 				if (conditionsSucceed) {
 					Condition condition = crawlCondition.getCondition();
-					// LOGGER.info("Checking Crawl Condition "
-					// + crawlCondition.getClass().getSimpleName() + ": "
-					// + crawlCondition.getDescription());
+//					LOGGER.info("Checking Crawl Condition " + crawlCondition.getClass().getSimpleName() + ": " + crawlCondition.getDescription());
 					if (!condition.check(browser)) {
-						LOGGER.info("CrawlCondition failed: " + crawlCondition.getDescription());
+						LOGGER.info("CrawlCondition failed: " + crawlCondition.getClass().getSimpleName() + ": " + crawlCondition.getDescription());
 						failedCrawlConditions.add(crawlCondition);
 						return false;
 					}

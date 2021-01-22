@@ -7,7 +7,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.w3c.dom.NodeList;
 
 /**
- * Abstract class for Condition. This class and derivatives are Thread safe. The setAfftectedNodes
+ * Abstract class for Condition. This class and derivatives are Thread safe. The setAffectedNodes
  * and getAffectedNodes are garded by using the ThreadLocal system.
  * 
  * @author dannyroest@gmail.com (Danny Roest)

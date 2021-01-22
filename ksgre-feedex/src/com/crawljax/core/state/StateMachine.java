@@ -105,7 +105,7 @@ public class StateMachine {
 			this.previousState = this.currentState;
 			currentState = nextState;
 
-			LOGGER.info("StateMachine's Pointer changed to: " + currentState);
+//			LOGGER.info("StateMachine's Pointer changed to: " + currentState);
 
 			return true;
 		} else {
@@ -176,7 +176,7 @@ public class StateMachine {
 			if (efficientCrawling)
 				stateFlowGraph.updateEventProductivity(eventable, null);
 		} else {
-			LOGGER.info("State " + newState.getName() + " added to the StateMachine.");
+//			LOGGER.info("State " + newState.getName() + " added to the StateMachine.");
 			
 			// Amin: updating event productivity ratio for new state
 			if (efficientCrawling)

@@ -9,7 +9,7 @@ public enum AppEnum {
     //Password-Manager-9.0
     //Password-Manager-9.08
     //Password-Manager-9.09
-    PPMA("PPMA", "main.resources.PPMA", "http://localhost/Password-Manager-9.09/"),
+    PPMA("PPMA", "main.resources.PPMA", "http://localhost/PPMA/Password-Manager-5.13/"),
 
     //addressbookv2.0
     //addressbookv3.0

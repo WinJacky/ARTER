@@ -26,8 +26,8 @@ public class DriverGet extends Statement {
     @Override
     public String toString() {
         if (getAction().equals("get")) {
-            return "driver." + getAction() + "(\"" + getValue() + "\");";
+            return "driver." + getAction() + "(\"" + getValue() + "\")";
         }
-        return "driver." + getAction() + "(" + getValue() + ");";
+        return "driver." + getAction() + "(" + getValue() + ")";
     }
 }

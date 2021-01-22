@@ -53,11 +53,11 @@ public class TC2 {
 
     @Test
     public void tC2() throws InterruptedException {
-        driver.get("http://localhost/ADDR/addressbookv3.0/");;
+        driver.get("http://localhost/ADDR/addressbookv4.0/");
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/ul[1]/li[3]/a[1]")).click();
-        Thread.sleep(500);;
+        Thread.sleep(500);
         driver.findElement(By.name("new")).click();
-        Thread.sleep(500);;
+        Thread.sleep(500);
         driver.findElement(By.name("group_name")).clear();
         driver.findElement(By.name("group_name")).sendKeys("School");
         driver.findElement(By.name("group_header")).clear();

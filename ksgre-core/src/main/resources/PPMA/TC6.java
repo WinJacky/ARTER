@@ -45,11 +45,13 @@ public class TC6 {
   }
   @Test
   public void tC6() throws InterruptedException {
-    driver.get("http://localhost/Password-Manager-5.0/");
+    driver.get("http://localhost/PPMA/Password-Manager-9.0/");
     driver.findElement(By.id("user")).sendKeys("admin123");
     driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("chk")).click();
-    Thread.sleep(100);
+    Thread.sleep(500);
+    driver.findElement(By.linkText("Settings")).click();
+    driver.findElement(By.linkText("Change Password")).click();
     driver.findElement(By.id("oldpassword")).sendKeys("admin123");
     driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("pwd1")).sendKeys("admin123");

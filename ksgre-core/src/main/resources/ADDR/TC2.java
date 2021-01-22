@@ -47,7 +47,7 @@ public class TC2 {
   @Test
   public void tC2() throws InterruptedException {
     driver.get("http://localhost/ADDR/addressbookv3.0/");
-      driver.findElement(By.linkText("manage groups")).click();
+    driver.findElement(By.linkText("manage groups")).click();
     Thread.sleep(500);
     driver.findElement(By.name("new")).click();
     Thread.sleep(500);

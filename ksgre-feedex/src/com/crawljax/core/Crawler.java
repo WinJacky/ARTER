@@ -1328,13 +1328,13 @@ public class Crawler implements Runnable {
 				double beta = 0.4;
 				double score = sim1 * beta + sim2 * (1-beta);
 
-				if (score>=0.4 && score>maxSimScore && ele.isDisplayed()) {
+				if (score>=0.5 && score>maxSimScore && ele.isDisplayed()) {
 					maxSimScore = score;
 					mostSimElement = ele;
 
-					System.out.println("Similarity of structure: "+sim1);
-					System.out.println("Similarity of semantics: "+sim2);
-					System.out.println("Comprehensive similarity: "+maxSimScore);
+//					System.out.println("Similarity of structure: "+sim1);
+//					System.out.println("Similarity of semantics: "+sim2);
+//					System.out.println("Comprehensive similarity: "+maxSimScore);
 				}
 			}
 			if (mostSimElement != null) {

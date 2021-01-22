@@ -13,8 +13,8 @@ public class VisualExecutionTracer {
         /* enable the AspectJ module. */
         Settings.aspectActive = true;
 
-        Settings tracerSetting = new Settings(AppEnum.ADDR);
+        Settings tracerSetting = new Settings(AppEnum.PPMA);
 
-        TracerRunner.runTest(tracerSetting.testSuite, "TC2");
+        TracerRunner.runTest(tracerSetting.testSuite, "TC6");
     }
 }

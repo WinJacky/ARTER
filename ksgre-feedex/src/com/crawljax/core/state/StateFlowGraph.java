@@ -155,8 +155,8 @@ public class StateFlowGraph {
 					        makeStateName(totalNumberOfStates, stateVertix.isGuidedCrawling());
 					if (!stateVertix.getName().equals("index")
 					        && !stateVertix.getName().equals(correctedName)) {
-						LOGGER.info("Correcting state name from  " + stateVertix.getName()
-						        + " to " + correctedName);
+//						LOGGER.info("Correcting state name from  " + stateVertix.getName()
+//						        + " to " + correctedName);
 						stateVertix.setName(correctedName);
 					}
 				}
@@ -165,7 +165,7 @@ public class StateFlowGraph {
 
 			// Amin: Add the new state to the list of unexpanded states
 			notFullExpandedStates.add(stateVertix);
-			LOGGER.info("State " + stateVertix + " added to the notFullExpandedStates list!");
+//			LOGGER.info("State " + stateVertix + " added to the notFullExpandedStates list!");
 			
 			// Amin: calculate pair-wise DOM diversity with respect to all states in the SFG
 			if (diverseCrawling){

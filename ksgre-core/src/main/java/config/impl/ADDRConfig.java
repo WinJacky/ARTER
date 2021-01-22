@@ -10,7 +10,7 @@ public class ADDRConfig extends AbstractAppConfig {
 
     @Override
     public void setClick(CrawlSpecification crawler) {
-        crawler.addCrawlCondition("ADDR", new UrlCondition("http://localhost/addr"));
+        crawler.addCrawlCondition("ADDR", new UrlCondition("http://localhost/ADDR"));
         crawler.click("a");
         crawler.click("input").withAttribute("type", "button");
         crawler.click("input").withAttribute("type", "submit");

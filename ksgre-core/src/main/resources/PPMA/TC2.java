@@ -45,7 +45,7 @@ public class TC2 {
   }
   @Test
   public void tC2() throws InterruptedException {
-    driver.get("http://localhost/Password-Manager-5.0/");
+    driver.get("http://localhost/PPMA/Password-Manager-5.0/");
     driver.findElement(By.id("user")).sendKeys("admin123");
     driver.findElement(By.id("pwd")).sendKeys("admin123");
     driver.findElement(By.id("chk")).click();
