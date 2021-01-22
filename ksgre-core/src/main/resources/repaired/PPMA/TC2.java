@@ -57,5 +57,29 @@ public class TC2 {
         driver.findElement(By.id("pwd")).sendKeys("admin123");
         driver.findElement(By.id("chk")).click();
         Thread.sleep(500);
+        driver.findElement(By.id("srch-term")).sendKeys("null");
+        driver.findElement(By.id("newiteminput")).sendKeys("Google");
+        driver.findElement(By.id("newiteminputuser")).sendKeys("null");
+        driver.findElement(By.id("newiteminputpw")).sendKeys("Google123");
+        driver.findElement(By.id("newiteminputurl")).sendKeys("null");
+        driver.findElement(By.id("newiteminputtags")).sendKeys("null");
+        driver.findElement(By.id("edititeminput")).sendKeys("null");
+        driver.findElement(By.id("edititeminputuser")).sendKeys("null");
+        driver.findElement(By.id("edititeminputpw")).sendKeys("null");
+        driver.findElement(By.id("edititeminputurl")).sendKeys("null");
+        driver.findElement(By.id("edititeminputtags")).sendKeys("null");
+        driver.findElement(By.id("pinxx")).sendKeys("null");
+        driver.findElement(By.id("importTypeBackup")).sendKeys("null");
+        driver.findElement(By.id("importTypeCSV")).sendKeys("null");
+        driver.findElement(By.id("oldpassword")).sendKeys("null");
+        driver.findElement(By.id("pwd")).sendKeys("heli123");
+        driver.findElement(By.id("pwd1")).sendKeys("heli123");
+        driver.findElement(By.id("newiteminputcomment")).sendKeys("null");
+        driver.findElement(By.id("edititeminputcomment")).sendKeys("null");
+        driver.findElement(By.id("importc")).sendKeys("null");
+        driver.findElement(By.xpath("/HTML[1]/BODY[1]/NAV[1]/DIV[1]/DIV[2]/UL[1]/LI[2]/A[1]")).click();
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/form[1]/div[1]/input[1]")).sendKeys("Google");
+        driver.findElement(By.id("newiteminputpw")).sendKeys("Google123");
+        driver.findElement(By.id("newbtn")).click();
     }
 }

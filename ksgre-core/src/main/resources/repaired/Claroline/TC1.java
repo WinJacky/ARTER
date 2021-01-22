@@ -38,16 +38,15 @@ public class TC1 {
 
     @Test
     public void tC1() {
-        driver.get("http://localhost/claroline90/");;
+        driver.get("http://localhost/claroline100/");
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("login");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("submitAuth")).click();
-        driver.findElement(By.linkText("My User Account")).click();
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/p[1]/a[2]")).click();
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/ul[1]/li[2]/a[1]")).click();
         driver.findElement(By.id("officialCode")).clear();
         driver.findElement(By.id("officialCode")).sendKeys("123456");
         driver.findElement(By.id("applyChange")).click();
-        driver.findElement(By.linkText("Logout")).click();
     }
 }

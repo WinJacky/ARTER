@@ -1,150 +1,218 @@
-<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HTML lang="en">
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<META charset="utf-8">
+    
+<TITLE>Password Manager</TITLE>
+    
+<META content="width=device-width, initial-scale=1.0" name="viewport">
+    
+<META content="Password Manager" name="description">
+    
+<META content="Jeffery" name="author">
 	
-<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<LINK href="css/bootstrap.min.css" rel="stylesheet">
 	
-<META content="PHP-Addressbook" name="Description">
-	
-<META content="" name="Keywords">
-	
-<LINK href="style.css" media="screen" rel="stylesheet" type="text/css">
-	
-<LINK href="icons/font.png" rel="icon" type="image/png">
-	
-<TITLE>Groups | Address Book</TITLE>	
+<LINK href="css/style.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Fav and touch icons -->
+    
+<LINK href="favicon.ico" rel="shortcut icon">
+    
+<SCRIPT src="js/jquery.min.js" type="text/javascript"></SCRIPT>
+	<SCRIPT src="js/bootstrap.min.js" type="text/javascript"></SCRIPT>
+    
+<STYLE>
+    .footer {
+        color: #777;
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 70px;
+        border-top: 1px solid #e5e5e5;
+        background-color: #f5f5f5;
+        }
+    </STYLE>
+
 </HEAD>
-<BODY>
-		
-<DIV id="container">
-			
-<DIV id="top">
-[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="Arabic" src="icons/sa.gif" title="Arabic"></A> | <A href="?lang=zh"><IMG alt="Chinese" src="icons/cn.gif" title="Chinese"></A> | <A href="?lang=es"><IMG alt="Spanish" src="icons/es.gif" title="Spanish"></A> | <A href="?lang=fr"><IMG alt="French" src="icons/fr.gif" title="French"></A> | <A href="?lang=ru"><IMG alt="Russian" src="icons/ru.gif" title="Russian"></A> | 
-
-<A href="preferences.php?from=%2FADDR%2Faddressbookv4.0%2Fgroup.php">Preferences</A>
-			
-</DIV>
-			
-<DIV id="header">
-<A href="."><IMG alt="Addressbook" src="title.png" title="Addressbook"></A>
-</DIV>
-			
-<DIV id="nav">
-      			
-<UL>
-
-<LI>
-	
-<IMG alt="home" src="icons/font.png">
-	<A href="./">home</A>
-
-</LI>
-
-<LI>
-	
-<IMG alt="add new" src="icons/add.png"><A href="edit.php">add new</A>
-
-</LI>
-	
-<LI>
-<IMG alt="groups" src="icons/group.png"><A href="group.php">groups</A>
-</LI>
-	
-<LI>
-		
-<IMG alt="next birthdays" src="icons/date.png">
-		<A href="birthdays.php">next birthdays</A>
-	
-</LI>
+<BODY style="color: rgb(102, 102, 102);">
+<SCRIPT src="aes.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="sha512.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="pbkdf2.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="password.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="setlocalstorage.js" type="text/javascript"></SCRIPT>
+<SCRIPT type="text/javascript">
+if(typeof(Storage) == "undefined") {
+        window.location.href="./sorry_for_old_browser_update_hint.html";
+    }
+</SCRIPT>
     
-<LI>
-    	
-<IMG alt="print all" src="icons/printer.png">
-    	<A href="view.php?all&amp;print">print all</A>
-  
-</LI>
-    
-<LI>
-      
-<IMG alt="print phones" src="icons/book_open.png">
-      <A href="view.php?all&amp;print&amp;phones">print phones</A>
-  
-</LI>
-    
-<LI>
-      
-<IMG alt="export csv" src="icons/page_excel.png">
-    	<A href="csv.php">export csv</A>
-  
-</LI> 
-
-</UL>
-			
+<DIV class="container theme-showcase" style="margin-top:-30px;">
+        
+<DIV class="page-header">
+            
+<H1>Password Manager</H1>
+        
 </DIV>
-			
-<DIV id="content">
-
-
-
-<H1>Groups</H1>
-<FORM action="/ADDR/addressbookv4.0/group.php" method="post">
-
-<INPUT name="new" type="submit" value="New group">
-
-</FORM>
-
-<HR>
-
-<FORM action="/ADDR/addressbookv4.0/group.php" method="post">
-
-
-<INPUT name="selected[]" title="Select (School)" type="checkbox" value="3">School<BR>
-<INPUT name="selected[]" title="Select (School)" type="checkbox" value="4">School<BR>
-<INPUT name="selected[]" title="Select (School)" type="checkbox" value="5">School<BR>
-<INPUT name="selected[]" title="Select (School)" type="checkbox" value="6">School<BR>
-<INPUT name="selected[]" title="Select (School)" type="checkbox" value="7">School<BR>
-<INPUT name="selected[]" title="Select (School)" type="checkbox" value="2">School<BR>
+        
+<P>Please Sign in:<BR>
+</P>
+        
+<FORM>
+            
+<P>User Name: <INPUT id="user" name="user" type="text">
+</P>
 <BR>
-	
-<INPUT name="delete" type="submit" value="Delete group(s)">
-	<INPUT name="edit" type="submit" value="Edit group">
-
+            
+<P>Password: <INPUT id="pwd" name="pwd" type="password">
+</P>
+<BR>
+        
+<INPUT class="btn btn-md btn-success" disabled id="chk" type="button" value="Wait">
 </FORM>
-	
+        
+<SPAN class="errorhint" id="nouser" style="display:none; color:Red">We don't have this user on file<BR>
+</SPAN>
+        <SPAN class="errorhint" id="pwderr" style="display:none; color:Red">Wrong Password<BR>
+</SPAN>
+        <SPAN class="errorhint" id="othererror" style="display:none; color:Red">Oops, our server run into some problems. Please refresh this page and try again.<BR>
+</SPAN>
+        
+<HR>
+        
+<BUTTON class="btn btn-sm btn-default" onclick="window.location.href='signup.php';" type="button">Sign Up</BUTTON>&nbsp; <BUTTON class="btn btn-sm btn-warning" onclick="window.location.href='recovery.php';" type="button">Password Recovery</BUTTON>
+    
+<HR>
+    
+<DIV>Version 8.0 (<A href="https://github.com/zeruniverse/Password-Manager/releases">DOWNLOAD</A>)</DIV>
+    
+<DIV class="modal" id="usepin" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" onclick="delpinstore()" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Use PIN to login</H4>
+                
 </DIV>
-	
-<DIV id="footer">
-			
-<UL>
-				
-<LI>
-<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v4.0</A>
-</LI>
-			
-</UL>
-	
+                
+<DIV class="modal-body">
+                    
+<FORM>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="pin">PIN:</LABEL>
+                            <INPUT class="form-control" id="pin" type="password">
+                        
+</DIV>
+                    
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<P id="pinerrorhint" style="display:none">PIN ERROR, try again.</P>
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" onclick="delpinstore()" type="button">Use username/password</BUTTON>
+                    <BUTTON class="btn btn-primary" id="pinlogin" type="button">Login</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
 </DIV>
 
-</DIV>
-	
- 
+<SCRIPT type="text/javascript">
+var JSsalt='iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key';
+var PWSalt='ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]';
+$(function(){
+    if(getcookie('device')!="")
+    {
+        if(1==0) $("#usepin").modal("show");
+        else{
+            delpinstore();
+        }
+    }
+    $("#pinlogin").click(function(){
+        var pin;
+        $("#pinerrorhint").hide();
+        $("#pinlogin").attr("disabled", true);
+		$("#pinlogin").html("Wait");
+        pin=$("#pin").val();
+        $.post("getpinpk.php",{user:getcookie('username'),device:getcookie('device'),sig:String(CryptoJS.SHA512(pin+localStorage.pinsalt))},function(msg){
+            if(msg == '0') {$("#usepin").modal("hide");delpinstore();return;}
+            if(msg == '1') {$("#pin").val('');$("#pinerrorhint").show();$("#pinlogin").attr("disabled", false);$("#pinlogin").html("Login"); return;}
+            pwdsk=decryptchar(localStorage.en_login_sec,pin+msg);
+            confkey=decryptchar(localStorage.en_login_conf,pin+msg)
+            $.post("check.php",{pwd:String(CryptoJS.SHA512(pbkdf2_enc(pwdsk,JSsalt,500)+"2021012201163397880")),  user: getcookie('username')},function(msg){
+                if(msg!=9) {$("#usepin").modal("hide");delpinstore();return;}
+                setpwdstore(pwdsk,confkey,'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]');                
+                window.location.href="./password.php";
+            });
+        });
+    });
+    $("#chk").click(function(){ 
+        $("#chk").attr("disabled", true);
+		$("#chk").attr("value", "Wait");
+        function process(){
+        var user = $("#user").val(); 
+		var pwd = $("#pwd").val();
+        
+        var secretkey='';
+        var confkey='';
+		var login_sig=String(pbkdf2_enc(reducedinfo(pwd,'RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-'),JSsalt,500));
+        secretkey=login_sig;
+        login_sig=pbkdf2_enc(login_sig,JSsalt,500);
+        $.post("check.php",{pwd:String(CryptoJS.SHA512(login_sig+"2021012201163397880")),  user: user},function(msg){ 
+        $(".errorhint").hide();
+		if(msg==0){
+			 	$("#nouser").show();
+				$("#chk").attr("value", "Login");
+				$("#chk").attr("disabled", false);
+		}else
+		if(msg==1){
+			 	$("#pwderr").show();
+				$("#chk").attr("value", "Login");
+				$("#chk").attr("disabled", false);
+		}else
+		if(msg==4){
+			 	$("#othererror").show();
+				$("#chk").attr("value", "Login");
+				$("#chk").attr("disabled", false);
+		}else{
+                confkey=pbkdf2_enc(String(CryptoJS.SHA512(pwd+secretkey)),JSsalt,500);
+                setCookie("username",user);
+                setpwdstore(secretkey,confkey,'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]');                
+                window.location.href="./password.php";
+		}
+        });
+        }
+        setTimeout(process,50);
+    }); 
+}); 
+</SCRIPT>
 
-<!-- 
-Copyright Notice:
-This script was written by Rob Minto, and is free to use and distribute under GPL. 
-Any improvements, please email rob(at)widgetmonkey.com. 
-Keep software free. 
-And please leave this copyright notice. Thanks.
+<FOOTER class="footer ">
 
-Major update 2007 by Olivier Chatelain, feel free to use and distribute under GPL. 
-Any improvements, please email chatelao(at)users.sourceforge.net. 
+<P>&copy;2015 Jeffery<BR>
+<BR>ALL RIGHTS RESERVED</P>
 
-Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
-please email retrorobot(at)users.sourceforge.net.
+</FOOTER>
 
-Major contribution Mark James ("famfamfam"-icons)
-For more details see: http://www.famfamfam.com/lab/icons/silk/
--->
 
 </BODY>
 </HTML>

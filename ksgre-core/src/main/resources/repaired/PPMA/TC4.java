@@ -52,11 +52,11 @@ public class TC4 {
 
     @Test
     public void tC4() throws InterruptedException {
-        driver.get("http://localhost/Password-Manager-5.0/");;
+        driver.get("http://localhost/Password-Manager-5.0/");
         driver.findElement(By.id("user")).sendKeys("admin123");
         driver.findElement(By.id("pwd")).sendKeys("admin123");
         driver.findElement(By.id("chk")).click();
-        Thread.sleep(500);;
+        Thread.sleep(500);
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[3]/span[1]/a[1]")).click();
     }
 }

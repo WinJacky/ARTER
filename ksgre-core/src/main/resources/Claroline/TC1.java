@@ -33,7 +33,7 @@ public class TC1 {
   }
   @Test
   public void tC1() {
-    driver.get("http://localhost/claroline90/");
+    driver.get("http://localhost/claroline100/");
     driver.findElement(By.id("login")).clear();
     driver.findElement(By.id("login")).sendKeys("login");
     driver.findElement(By.id("password")).clear();

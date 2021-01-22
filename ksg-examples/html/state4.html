@@ -10,32 +10,31 @@
 
 <META content="text/HTML; charset=iso-8859-1" http-equiv="Content-Type">
 
-<LINK href="/claroline100/web/css/classic/main.css" media="screen, projection, tv" rel="stylesheet" type="text/css">
-<LINK href="/claroline100/web/css/print.css" media="print" rel="stylesheet" type="text/css">
+<META content="Claroline 1.11.0 - http://claroline.net" name="generator">
+
+<LINK href="/claroline110/web/css/classic/main.css?1337668864" media="screen, projection, tv" rel="stylesheet" type="text/css">
+<LINK href="/claroline110/web/css/print.css?1301589033" media="print" rel="stylesheet" type="text/css">
 <LINK href="/index.php" rel="top" title="">
 
 <LINK href="http://www.claroline.net/documentation.htm" rel="Help">
 
-<LINK href="http://www.claroline.net/credits.htm" rel="Author">
+<LINK href="/claroline110/CREDITS.txt" rel="Author">
 
 <LINK href="http://www.claroline.net" rel="Copyright">
 
+<LINK href="/claroline110/claroline/../favicon.ico" rel="shortcut icon">
+
 <SCRIPT type="text/javascript">
-    document.cookie="javascriptEnabled=true; path=/claroline100";
-    function claro_session_loss_countdown(sessionLifeTime){
-    var chrono = setTimeout('claro_warn_of_session_loss()', sessionLifeTime * 1000);
-}
-
-function claro_warn_of_session_loss() {
-    alert('WARNING ! You have just lost your session on the server.\nCopy any text you are currently writing and paste it outside the browser');
-}
-</SCRIPT>
-<SCRIPT src="/claroline100/web/js/jquery.js?1243952249" type="text/javascript"></SCRIPT>
-<SCRIPT src="/claroline100/web/js/claroline.js?1279554437" type="text/javascript"></SCRIPT>
+    document.cookie="javascriptEnabled=true; path=/claroline110";
+    </SCRIPT>
+<SCRIPT src="/claroline110/web/js/jquery.js?1311781341" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/jquery.qtip.js?1329310394" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/jquery.cookie.js?1309158222" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/claroline.js?1341234352" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/claroline.ui.js?1329309931" type="text/javascript"></SCRIPT>
 </HEAD>
-<BODY dir="ltr" onload="claro_session_loss_countdown(1440);">
-<!-- $Id: banner.tpl.php 12921 2011-03-03 13:52:34Z abourguignon $ -->
-
+<BODY dir="ltr">
+<!-- $Id: banner.tpl.php 13151 2011-05-11 12:09:47Z abourguignon $ -->
 
 <!-- claroPage -->
 
@@ -52,8 +51,10 @@ function claro_warn_of_session_loss() {
 <DIV id="campusBannerLeft">
         
 <SPAN id="siteName">
-                <A href="/claroline100/index.php" target="_top">South East University</A>
+            <A href="/claroline110/index.php" target="_top">
+                        South East University                        </A>
         </SPAN>
+        
         
 <!-- campusBannerLeft -->
 
@@ -64,8 +65,12 @@ function claro_warn_of_session_loss() {
 <DIV id="campusBannerRight">
         
 <SPAN id="institution">
-                <A href="http://www.seu.com/" target="_top">SEU</A>
-                </SPAN>
+                        <A href="http://www.seu.com/" target="_top">
+                        
+                        SEU                        
+                        </A>
+                    </SPAN>
+        
         
 <!-- campusBannerRight -->
 
@@ -78,84 +83,53 @@ function claro_warn_of_session_loss() {
 </DIV>
 <!-- End of Platform Banner -->
 
-<!-- User Banner -->
 
 <DIV id="userBanner">
     
-<DIV id="userBannerLeft">
-        
-<SPAN id="userName">
-        Feisher Jacky :
-        </SPAN>
-        
-
-<SPAN>
-<A href="/claroline100/claroline/desktop/index.php" target="_top">My desktop</A>
- | 
-<A href="/claroline100/claroline/auth/profile.php" target="_top">My User Account</A>
- | 
-<A href="/claroline100/claroline/messaging" target="_top">My messages</A>
- | 
-<A href="/claroline100/claroline/admin/" target="_top">Platform administration</A>
-</SPAN>
-
-        
-        
-<!-- userBannerLeft -->
-
-<!-- End of userBannerLeft -->
-    
-</DIV>
-    
 <DIV id="userBannerRight">
         
-
-
-<SPAN>
-<A href="/claroline100/index.php?logout=true" target="_top">Logout</A>
-</SPAN>
-
+<UL class="menu">
+            
+<LI>
+<SPAN><A href="/claroline110/claroline/auth/login.php?sourceUrl=aHR0cDovL2xvY2FsaG9zdC9jbGFyb2xpbmUxMTAvY2xhcm9saW5lL2F1dGgvbG9naW4ucGhwP3NvdXJjZVVybD1hSFIwY0RvdkwyeHZZMkZzYUc5emRDOWpiR0Z5YjJ4cGJtVXhNVEF2WTJ4aGNtOXNhVzVsTDJGMWRHZ3ZhVzV6WTNKcGNIUnBiMjR1Y0dodw%3D%3D" target="_top">Login</A></SPAN>
+</LI>
         
-<!-- userBannerRight -->
-
-<!-- End of userBannerRight -->
+</UL>
     
 </DIV>
-
+    
     
 <DIV class="spacer"></DIV>
 
 </DIV>
 <!-- End of User Banner -->
 
-
 <!-- BreadcrumbLine  -->
 
 <DIV id="breadcrumbLine">
-
+    
 <HR>
-
+    
 <DIV class="breadcrumbTrails">
-
+        
 <UL class="breadCrumbs">
 
-<LI class="breadCrumbsNode firstBreadCrumbsNode">
-<A href="/claroline100/index.php" target="_top"><IMG alt="home" src="/claroline100/web/img/home.png?1232379976">&nbsp;South East University</A>&nbsp;&gt;&nbsp;</LI>
-
 <LI class="breadCrumbsNode lastBreadCrumbsNode">
-<A href="/claroline100/claroline/admin/" target="_top">Administration</A>
+<A href="/claroline110/index.php" target="_top"><IMG alt="home" src="/claroline110/web/img/home.png?1232379976">&nbsp;South East University</A>
 </LI>
 
 </UL>
-
+    
 </DIV>
-
+    
+    
 <DIV id="toolViewOption">
-
+            
 </DIV>
-
+    
+    
 <DIV class="spacer"></DIV>
-
+    
 <HR>
 
 </DIV>
@@ -163,38 +137,69 @@ function claro_warn_of_session_loss() {
 
 
 </DIV>
-<!-- End of Banner -->
-<!-- $Id: body.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
+<!-- End of topBanner -->
+<!-- $Id: body.tpl.php 13540 2011-09-06 14:06:26Z zefredz $ -->
 
 
 <!-- - - - - - - - - - - Claroline Body - - - - - - - - - -->
 
 <DIV id="claroBody">
+    
+    
+                
 
 <!-- Page content -->
+<!-- $Id: auth_form.tpl.php 13234 2011-05-26 16:58:52Z abourguignon $ -->
 
 
-<H3 class="claroToolTitle">Compose a message</H3>
 
-
-<DIV class="claroDialogBox boxInfo">
-
-<DIV class="claroDialogMsg msgInfo">Message sent<BR>
+<DIV style="width: 180px; margin: 0 auto;">
+    
+<FORM action="/claroline110/claroline/auth/login.php" class="claroLoginForm" method="post">
+        
+<FIELDSET>
+          
+<LEGEND>Authentication Required</LEGEND>
+            <INPUT name="sourceUrl" type="hidden" value="aHR0cDovL2xvY2FsaG9zdC9jbGFyb2xpbmUxMTAvY2xhcm9saW5lL2F1dGgvaW5zY3JpcHRpb24ucGhw">
+            <INPUT name="sourceCid" type="hidden" value="">
+            <INPUT name="sourceGid" type="hidden" value="">
+            
+                        
+            <LABEL for="login">Username</LABEL>
 <BR>
-<A href="messagebox.php?box=inbox">Back to inbox</A>
+            
+<INPUT id="login" name="login" size="15" tabindex="1" type="text" value="">
+<BR>
+            
+<BR>
+            
+<LABEL for="password">Password</LABEL>
+<BR>
+            
+<INPUT autocomplete="off" id="password" name="password" size="15" tabindex="2" type="password">
+<BR>
+            
+<BR>
+            
+<INPUT type="submit" value="Ok">&nbsp;
+            <A href="/claroline110/claroline/"><INPUT onclick="document.location='/claroline110/claroline/';return false" type="button" value="Cancel"></A>
+        
+</FIELDSET>
+    
+</FORM>
+    
+    
 </DIV>
-</DIV>
-
-
-<P class="spacer"></P>
-
 <!-- End of Page Content -->
 
 
+    
+    
 <DIV class="spacer"></DIV>
 
 </DIV>
 <!-- - - - - - - - - - - End of Claroline Body  - - - - - - - - - - -->
+
 <!-- $Id: footer.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
 
 
@@ -228,7 +233,7 @@ Phone : 1234567890</DIV>
 
 <!-- End of campusFooterCenter -->
         
-<DIV id="poweredBy">Powered by <A href="http://www.claroline.net" target="_blank">Claroline</A> &copy; 2001 - 2011</DIV>    
+<SPAN class="poweredBy">Powered by <A href="http://www.claroline.net" target="_blank">Claroline</A> &copy; 2001 - 2012</SPAN>    
 </DIV>
 
 </DIV>

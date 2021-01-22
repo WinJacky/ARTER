@@ -1,129 +1,374 @@
-<HTML xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<HTML>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-<META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-	
-<META content="PHP-Addressbook" name="Description">
-	
-<META content="" name="Keywords">
-	
-<LINK href="style.css" media="screen" rel="stylesheet" type="text/css">
-	
-<LINK href="icons/font.png" rel="icon" type="image/png">
-	
-<TITLE>Groups | Address Book</TITLE>	
+
+<TITLE>South East University</TITLE>
+
+<META content="text/javascript" http-equiv="Content-Script-Type">
+
+<META content="text/css" http-equiv="Content-Style-Type">
+
+<META content="text/HTML; charset=iso-8859-1" http-equiv="Content-Type">
+
+<META content="Claroline 1.11.0 - http://claroline.net" name="generator">
+
+<LINK href="/claroline110/web/css/classic/main.css?1337668864" media="screen, projection, tv" rel="stylesheet" type="text/css">
+<LINK href="/claroline110/web/css/print.css?1301589033" media="print" rel="stylesheet" type="text/css">
+<LINK href="/index.php" rel="top" title="">
+
+<LINK href="http://www.claroline.net/documentation.htm" rel="Help">
+
+<LINK href="/claroline110/CREDITS.txt" rel="Author">
+
+<LINK href="http://www.claroline.net" rel="Copyright">
+
+<LINK href="/claroline110/claroline/../favicon.ico" rel="shortcut icon">
+
+<SCRIPT type="text/javascript">
+    document.cookie="javascriptEnabled=true; path=/claroline110";
+    </SCRIPT>
+<SCRIPT src="/claroline110/web/js/jquery.js?1311781341" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/jquery.qtip.js?1329310394" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/jquery.cookie.js?1309158222" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/claroline.js?1341234352" type="text/javascript"></SCRIPT>
+<SCRIPT src="/claroline110/web/js/claroline.ui.js?1329309931" type="text/javascript"></SCRIPT>
 </HEAD>
-<BODY>
-		
-<DIV id="container">
-			
-<DIV id="top">
-[<A href="?more_langs=yes" title="other languages">+</A>] | <A href="?lang=ar"><IMG alt="Arabic" src="icons/sa.gif" title="Arabic"></A> | <A href="?lang=zh"><IMG alt="Chinese" src="icons/cn.gif" title="Chinese"></A> | <A href="?lang=es"><IMG alt="Spanish" src="icons/es.gif" title="Spanish"></A> | <A href="?lang=fr"><IMG alt="French" src="icons/fr.gif" title="French"></A> | <A href="?lang=ru"><IMG alt="Russian" src="icons/ru.gif" title="Russian"></A> | 
+<BODY dir="ltr">
+<!-- $Id: banner.tpl.php 13151 2011-05-11 12:09:47Z abourguignon $ -->
 
-<A href="preferences.php?from=%2FADDR%2Faddressbookv4.0%2Fgroup.php">Preferences</A>
-			
+<!-- claroPage -->
+
+<DIV id="claroPage">
+
+<!-- Banner -->
+
+<DIV id="topBanner">
+
+<!-- Platform Banner -->
+
+<DIV id="platformBanner">
+    
+<DIV id="campusBannerLeft">
+        
+<SPAN id="siteName">
+            <A href="/claroline110/index.php" target="_top">
+                        South East University                        </A>
+        </SPAN>
+        
+        
+<!-- campusBannerLeft -->
+
+<!-- End of campusBannerLeft -->
+    
 </DIV>
-			
-<DIV id="header">
-<A href="."><IMG alt="Addressbook" src="title.png" title="Addressbook"></A>
+    
+<DIV id="campusBannerRight">
+        
+<SPAN id="institution">
+                        <A href="http://www.seu.com/" target="_top">
+                        
+                        SEU                        
+                        </A>
+                    </SPAN>
+        
+        
+<!-- campusBannerRight -->
+
+<!-- End of campusBannerRight -->
+    
 </DIV>
-			
-<DIV id="nav">
-      			
-<UL>
-
-<LI>
-	
-<IMG alt="home" src="icons/font.png">
-	<A href="./">home</A>
-
-</LI>
-
-<LI>
-	
-<IMG alt="add new" src="icons/add.png"><A href="edit.php">add new</A>
-
-</LI>
-	
-<LI>
-<IMG alt="groups" src="icons/group.png"><A href="group.php">groups</A>
-</LI>
-	
-<LI>
-		
-<IMG alt="next birthdays" src="icons/date.png">
-		<A href="birthdays.php">next birthdays</A>
-	
-</LI>
     
-<LI>
-    	
-<IMG alt="print all" src="icons/printer.png">
-    	<A href="view.php?all&amp;print">print all</A>
-  
-</LI>
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- End of Platform Banner -->
+
+
+<DIV id="userBanner">
     
+<DIV id="userBannerRight">
+        
+<UL class="menu">
+            
 <LI>
-      
-<IMG alt="print phones" src="icons/book_open.png">
-      <A href="view.php?all&amp;print&amp;phones">print phones</A>
-  
+<SPAN><A href="/claroline110/claroline/auth/login.php?sourceUrl=aHR0cDovL2xvY2FsaG9zdC9jbGFyb2xpbmUxMTAvaW5kZXgucGhw" target="_top">Login</A></SPAN>
 </LI>
+        
+</UL>
     
-<LI>
-      
-<IMG alt="export csv" src="icons/page_excel.png">
-    	<A href="csv.php">export csv</A>
-  
-</LI> 
+</DIV>
+    
+    
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- End of User Banner -->
+
+<!-- BreadcrumbLine  -->
+
+<DIV id="breadcrumbLine">
+    
+<HR>
+    
+<DIV class="breadcrumbTrails">
+        
+<UL class="breadCrumbs">
+
+<LI class="breadCrumbsNode lastBreadCrumbsNode">
+<A href="/claroline110/index.php" target="_top"><IMG alt="home" src="/claroline110/web/img/home.png?1232379976">&nbsp;South East University</A>
+</LI>
 
 </UL>
-			
+    
 </DIV>
-			
-<DIV id="content">
+    
+    
+<DIV id="toolViewOption">
+            
+</DIV>
+    
+    
+<DIV class="spacer"></DIV>
+    
+<HR>
 
-South East University
-<H1>Groups</H1>
+</DIV>
+<!-- End of BreadcrumbLine  -->
+
+
+</DIV>
+<!-- End of topBanner -->
+<!-- $Id: body.tpl.php 13540 2011-09-06 14:06:26Z zefredz $ -->
+
+
+<!-- - - - - - - - - - - Claroline Body - - - - - - - - - -->
+
+<DIV id="claroBody">
+    
+    
+                
+
+<!-- Page content -->
+<!-- $Id: platform_index.tpl.php 13830 2011-11-17 14:16:16Z abourguignon $ -->
+
+
+<DIV id="rightSidebar">
+    
+                    
+        <!-- $Id: loginzone.tpl.php 13359 2011-07-25 16:07:29Z abourguignon $ -->
+
+
+
+<DIV id="loginBox">
+
+<H3 class="blockHeader">Authentication</H3>
+
+
+
+
+<SCRIPT type="text/javascript">
+<!--
+$(document).ready( function(){
+    $("#login").focus();
+});
+//-->
+</SCRIPT>
+
+<FORM action="/claroline110/claroline/auth/login.php" class="claroLoginForm" method="post">
+    
+<FIELDSET style="border: 0; margin: 10px 0 15px 0; padding: 5px;">
+        
+<LABEL for="login">Username</LABEL>
 <BR>
-<DIV class="msgbox">A new group has been entered into the address book.<BR>
-<I>return to the <A href="group.php">group page</A></I>
-</DIV>	
+        
+<INPUT class="inputLogin" id="login" name="login" size="12" tabindex="1" type="text">
+<BR>
+        
+<BR>
+        
+<LABEL for="password">Password</LABEL>
+<BR>
+        
+<INPUT class="inputPassword" id="password" name="password" size="12" tabindex="2" type="password">
+<BR>
+        
+<BR>
+        
+<BUTTON tabindex="3" type="submit">Enter</BUTTON>
+    
+</FIELDSET>
+
+</FORM>
+
+
+<P style="padding: 5px;">
+<!-- "Lost Password" -->
+
+<A href="/claroline110/claroline/auth/lostPassword.php">Lost password</A>
+<BR>
+
+<!-- "Create user Account" -->
+
+<A href="/claroline110/claroline/auth/inscription.php">Create user account</A>
+<BR>
+
+</P>
+
+
+
+</DIV>        
+    
+<!-- campusHomePageRightMenu -->
+
+<!-- End of campusHomePageRightMenu -->
+    
+        
+
 </DIV>
-	
-<DIV id="footer">
-			
+
+
+<DIV id="leftContent">
+    
+    
+<DIV style="text-align: center">
+    
+<IMG alt="Claroline logo" border="0" src="/claroline110/web/img/logo.png?1232379976">
+    <P>
+<STRONG>Claroline Open Source e-Learning</STRONG>
+</P>
+    
+</DIV>
+<!-- campusHomePageTop -->
+
+<!-- End of campusHomePageTop -->
+    
+                        <!-- $Id: categorybrowser.tpl.php 13920 2012-01-06 18:31:59Z abourguignon $ -->
+
+<!-- CURRENT CATEGORY (default: root category) -->
+
+<H3>Root category</H3>
+
+
+
+
+<!-- SUB CATEGORIES (with link to go deeper when possible) -->
+
+
+<H4>Sub categories</H4>
+
+
 <UL>
-				
-<LI>
-<A href="http://sourceforge.net/projects/php-addressbook/">php-addressbook</A> <A href="notes.htm">v4.0</A>
-</LI>
-			
+
+        
+<LI>Sciences</LI>
+    
+        
+
+        
+<LI>Economics</LI>
+    
+        
+
+        
+<LI>Humanities</LI>
+    
+        
+
 </UL>
-	
+
+
+
+
+<!-- COURSES (belonging to the current category) -->
+
+<H4>Courses in this category</H4>
+
+<!-- $Id: course_tree.tpl.php 13997 2012-02-06 10:53:25Z zefredz $ -->
+
+
+
+
+
+<P>
+    There is no course to display in this category</P>
+
+
+
+                
+        <!-- $Id: course_search_box.tpl.php 13830 2011-11-17 14:16:16Z abourguignon $ -->
+
+
+<H3>
+<LABEL for="keyword">Search from keyword</LABEL>
+</H3>
+
+<FORM action="/claroline110/index.php" method="post">
+    
+<INPUT class="inputSearch" id="coursesearchbox_keyword" name="coursesearchbox_keyword" type="text">
+    <BUTTON type="submit">Search</BUTTON>
+
+</FORM>
+
+        
+    
+<!-- campusHomePageBottom -->
+
+<!-- End of campusHomePageBottom -->
+    
+
+</DIV>
+<!-- End of Page Content -->
+
+
+    
+    
+<DIV class="spacer"></DIV>
+
+</DIV>
+<!-- - - - - - - - - - - End of Claroline Body  - - - - - - - - - - -->
+
+<!-- $Id: footer.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
+
+
+
+<DIV id="campusFooter">
+    
+<HR>
+    
+<DIV id="campusFooterLeft">
+        
+<!-- campusFooterLeft -->
+
+<!-- End of campusFooterLeft -->
+            
+</DIV>
+    
+<DIV id="campusFooterRight">
+        
+<!-- campusFooterRight -->
+
+<!-- End of campusFooterRight -->
+        
+<DIV id="platformManager">Administrator for South East University : <A href="mailto:123@qq.com?subject=[South%20East%20University]">Feisher Jacky</A>
+<BR>
+Phone : 1234567890</DIV>    
+</DIV>
+    
+<DIV id="campusFooterCenter">
+        
+<!-- campusFooterCenter -->
+
+<!-- End of campusFooterCenter -->
+        
+<SPAN class="poweredBy">Powered by <A href="http://www.claroline.net" target="_blank">Claroline</A> &copy; 2001 - 2012</SPAN>    
 </DIV>
 
 </DIV>
-	
- 
+<!-- end of claroPage -->
 
-<!-- 
-Copyright Notice:
-This script was written by Rob Minto, and is free to use and distribute under GPL. 
-Any improvements, please email rob(at)widgetmonkey.com. 
-Keep software free. 
-And please leave this copyright notice. Thanks.
+</DIV>
 
-Major update 2007 by Olivier Chatelain, feel free to use and distribute under GPL. 
-Any improvements, please email chatelao(at)users.sourceforge.net. 
 
-Updated 2009 - Complete theme redesign by Leighton West. Any theme problems,
-please email retrorobot(at)users.sourceforge.net.
-
-Major contribution Mark James ("famfamfam"-icons)
-For more details see: http://www.famfamfam.com/lab/icons/silk/
--->
 
 </BODY>
 </HTML>
