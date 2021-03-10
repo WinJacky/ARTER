@@ -9,7 +9,7 @@ public enum AppEnum {
     //Password-Manager-9.0
     //Password-Manager-9.08
     //Password-Manager-9.09
-    PPMA("PPMA", "main.resources.PPMA", "http://localhost/PPMA/Password-Manager-5.13/"),
+    PPMA("PPMA", "main.resources.PPMA", "http://localhost/PPMA/Password-Manager-9.08/"),
 
     //addressbookv2.0
     //addressbookv3.0
@@ -17,7 +17,7 @@ public enum AppEnum {
     //addressbookv5.0
     //addressbookv6.0
     //addressbookv7.0
-    ADDR("ADDR","main.resources.ADDR","http://localhost/ADDR/addressbookv4.0/"),
+    ADDR("ADDR","main.resources.ADDR","http://localhost/ADDR/addressbookv2.0/"),
 
     //NucleusCMS-Nucleus-3-41/nucleus
     //NucleusCMS-Nucleus-3-50/nucleus

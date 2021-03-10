@@ -39,58 +39,147 @@
     </STYLE>
 
 </HEAD>
-<BODY style="color: rgb(102, 102, 102);">
+<BODY class="modal-open" style="color: rgb(102, 102, 102);">
+<STYLE type="text/css">
+@font-face {
+	font-family: 'passwordshow';
+	src:url('pw.ttf');
+}
+</STYLE>
+
+<SCRIPT src="setlocalstorage.js" type="text/javascript"></SCRIPT>
+<SCRIPT type="text/javascript">
+var secretkey;
+var default_timeout = 6-1;
+var timeout = default_timeout;
+var accountarray=new Array();
+function quitpwd()
+{
+    delpwdstore(); window.location.href="./logout.php";
+}
+function quitpwd_untrust()
+{
+    delpwdstore();
+    delpinstore();
+    deleteCookie('username');
+    window.location.href="./logout.php";
+}
+function countdown()
+{
+    timeout = timeout-1;
+    if(timeout<0) quitpwd();
+}
+setInterval(countdown, 60000);
+</SCRIPT>
 <SCRIPT src="aes.js" type="text/javascript"></SCRIPT>
 <SCRIPT src="sha512.js" type="text/javascript"></SCRIPT>
 <SCRIPT src="pbkdf2.js" type="text/javascript"></SCRIPT>
 <SCRIPT src="password.js" type="text/javascript"></SCRIPT>
-<SCRIPT src="setlocalstorage.js" type="text/javascript"></SCRIPT>
-<SCRIPT type="text/javascript">
-if(typeof(Storage) == "undefined") {
-        window.location.href="./sorry_for_old_browser_update_hint.html";
-    }
-</SCRIPT>
     
-<DIV class="container theme-showcase" style="margin-top:-30px;">
+
+<DIV class="container theme-showcase">
+    
+<DIV class="row">
         
+<DIV class="col-md-8">
+          
 <DIV class="page-header">
             
 <H1>Password Manager</H1>
+          
+</DIV>
         
 </DIV>
         
-<P>Please Sign in:<BR>
-</P>
-        
-<FORM>
+<DIV class="col-md-4">
             
-<P>User Name: <INPUT id="user" name="user" type="text">
+<DIV class="pull-right-sm" id="tagCloud" style="display:none;">
+<P class="lead" style="margin-bottom:0">Tag-Overview</P>
+<P class="visible-xs small" style="margin-bottom:0;">
+<A href="javascript:$('#tags').toggleClass('hidden-xs');$('.tagsShow').toggleClass('hidden');"><SPAN class="tagsShow">show</SPAN><SPAN class="tagsShow hidden">hide</SPAN> tags</A>
 </P>
-<BR>
-            
-<P>Password: <INPUT id="pwd" name="pwd" type="password">
+<SPAN class="hidden-xs" id="tags"></SPAN>
+<P class="small" id="resetFilter" style="display:none;">
+<A href="javascript:filterTags('');">reset filter</A>
 </P>
-<BR>
+</DIV>
         
-<INPUT class="btn btn-md btn-success" disabled id="chk" type="button" value="Wait">
+</DIV>
+    
+</DIV>
+    <!-- preload ttf -->
+    
+<SPAN style="display:none; font-family:passwordshow">RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-</SPAN>
+    
+<DIV id="waitsign" style="display: none;">PLEASE WAIT WHILE WE ARE DECRYPTING YOUR PASSWORD...</DIV>
+    
+<DIV id="pwdtable" style="">
+    
+<DIV class="row">
+        
+<DIV class="col-lg-10 col-md-8 col-sm-6 col-xs-6">
+            
+<FORM id="searchForm">
+              
+<DIV class="input-group">
+                
+<INPUT class="form-control" id="srch-term" name="srch-term" placeholder="Search" type="text">
+                
+<DIV class="input-group-btn">
+                    
+<BUTTON class="btn btn-default collapse" id="resetSearch" onclick="filterAccounts('')" title="reset search" type="button"><I class="glyphicon glyphicon-remove"></I></BUTTON>
+                    <BUTTON class="btn btn-default" title="search" type="submit"><I class="glyphicon glyphicon-search"></I></BUTTON>
+                
+</DIV>
+              
+</DIV>
+            
 </FORM>
         
-<SPAN class="errorhint" id="nouser" style="display:none; color:Red">We don't have this user on file<BR>
-</SPAN>
-        <SPAN class="errorhint" id="pwderr" style="display:none; color:Red">Wrong Password<BR>
-</SPAN>
-        <SPAN class="errorhint" id="othererror" style="display:none; color:Red">Oops, our server run into some problems. Please refresh this page and try again.<BR>
-</SPAN>
+</DIV>
         
-<HR>
+<DIV class="col-lg-1 col-md-2 col-sm-3 col-xs-3">
+            
+<A class="btn btn-info" href="" onclick="quitpwd();"><STRONG>Log Out</STRONG></A>
         
-<BUTTON class="btn btn-sm btn-default" onclick="window.location.href='signup.php';" type="button">Sign Up</BUTTON>&nbsp; <BUTTON class="btn btn-sm btn-warning" onclick="window.location.href='recovery.php';" type="button">Password Recovery</BUTTON>
+</DIV>
+        
+<DIV class="col-lg-1 col-md-2 col-sm-3 col-xs-3">
+            
+<A class="btn btn-danger" href="" onclick="quitpwd_untrust();"><STRONG>Untrust</STRONG></A>
+        
+</DIV>
     
-<HR>
+</DIV>
     
-<DIV>Version 8.0 (<A href="https://github.com/zeruniverse/Password-Manager/releases">DOWNLOAD</A>)</DIV>
+<BR>
     
-<DIV class="modal" id="usepin" role="dialog" tabindex="-1">
+<TABLE class="table" id="pwdlist">
+    
+<TBODY>
+<TR>
+<TH>Account</TH><TH>Password</TH>
+</TR>
+       
+</TBODY>
+</TABLE> 
+	
+<DIV class="page-header">
+            
+<H1>Settings</H1>
+    
+</DIV>
+        
+<A class="btn btn-primary" data-target="#add" data-toggle="modal" style="margin:3px;">Add Entry</A>
+        <A class="btn btn-success" data-target="#pin" data-toggle="modal" href="" style="margin:3px;">Set PIN</A> 
+        <A class="btn btn-default" data-target="#backuppw" data-toggle="modal" href="" style="margin:3px;">Back Up</A> 
+        <A class="btn btn-warning" data-target="#import" data-toggle="modal" href="" style="margin:3px;">Import</A> 
+        <A class="btn btn-warning" href="javascript: exportcsv();" style="margin:3px;">Export CSV</A> 
+        <A class="btn btn-warning" data-target="#changepwd" data-toggle="modal" href="" style="margin:3px;">Change Password</A> 
+        <A class="btn btn-warning" data-target="#changefields" data-toggle="modal" href="" style="margin:3px;">Customize Fields</A> 
+        <A class="btn btn-warning" href="./history.php" style="margin:3px;" target="_blank">Account Activity</A> 
+    
+<DIV class="modal" id="add" role="dialog" tabindex="-1">
         
 <DIV class="modal-dialog">
             
@@ -98,9 +187,304 @@ if(typeof(Storage) == "undefined") {
                 
 <DIV class="modal-header">
                     
-<BUTTON aria-label="Close" class="close" data-dismiss="modal" onclick="delpinstore()" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
                     
-<H4>Use PIN to login</H4>
+<H4>Add a new account</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                
+<FORM>
+                    
+<DIV class="form-group">
+                        
+<LABEL class="control-label" for="newiteminput">Account (Item):</LABEL>
+                        <INPUT class="form-control" id="newiteminput" type="text">
+                    
+</DIV>
+<DIV class="form-group">
+<LABEL class="control-label" for="newiteminputuser">Username:</LABEL><INPUT class="form-control" id="newiteminputuser" placeholder="" type="text">
+</DIV>
+                    
+<DIV class="form-group">
+                        
+<LABEL class="control-label" for="newiteminputpw">Password:</LABEL>
+                        <INPUT class="form-control" id="newiteminputpw" placeholder="Leave blank to generate one" type="text">
+                    
+</DIV>
+                
+<DIV class="form-group">
+<LABEL class="control-label" for="newiteminputurl">URL:</LABEL><INPUT class="form-control" id="newiteminputurl" placeholder="" type="text">
+</DIV>
+<DIV class="form-group">
+<LABEL class="control-label" for="newiteminputcomment">Comment:</LABEL><TEXTAREA class="form-control" id="newiteminputcomment" placeholder=""></TEXTAREA>
+</DIV>
+<DIV class="form-group">
+<LABEL class="control-label" for="newiteminputtags">Tags:</LABEL><INPUT class="form-control" id="newiteminputtags" placeholder="Comma separated values" type="text">
+</DIV>
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                    <BUTTON class="btn btn-primary" id="newbtn" type="button">Add</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+<DIV class="modal" id="backuppw" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Backup Passwords</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                
+<FORM>
+                    
+<P>You will need your CURRENT login password to unlock the backup file even if you change login password later. Write your CURRENT login password down or remember to generate a new backup file after each time you change the login password.</P>
+                    
+<P style="color:red">Generating backup file is time consuming...</P>
+                    
+<DIV class="progress">
+<DIV aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" id="backuppwdpb" role="progressbar" style="width:0%"></DIV>
+                
+                
+</DIV>
+</FORM>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                    <BUTTON class="btn btn-primary" id="backuppwdbtn" type="button">Start Backup</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+</DIV>
+    
+<DIV aria-hidden="false" class="modal in" id="changefields" role="dialog" style="display: block;" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Customize additional fields</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                
+<FORM>
+                
+<P>Please edit the fields parameter according to the default one shown below. It should be JSON format.</P>
+                    
+<TEXTAREA class="form-control" id="fieldsz" style="height:300px">{"url":{"colname":"URL","hint":"","cls":" hidden"},"user":{"colname":"Username","hint":"","cls":" hidden-xs","position":1},"comment":{"colname":"Comment","hint":"","cls":" hidden","type":"textarea"},"tags":{"colname":"Tags","hint":"Comma separated values","cls":" hidden-xs"}}</TEXTAREA>
+                
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                    <BUTTON class="btn btn-primary" id="changefieldsbtn" type="button">Change</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+<DIV class="modal" id="showdetails" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Detail Information</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                
+<FORM>
+                
+<TEXTAREA class="form-control" id="details" readonly style="height:190px"></TEXTAREA>
+                
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+<DIV class="modal" data-id="" id="edit" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Edit account information</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                
+<FORM>
+                    
+<DIV class="form-group">
+                        
+<LABEL class="control-label" for="edititeminput">Account (Item):</LABEL>
+                        <INPUT class="form-control" id="edititeminput" type="text">
+                    
+</DIV>
+<DIV class="form-group">
+<LABEL class="control-label" for="edititeminputuser">Username:</LABEL><INPUT class="form-control" id="edititeminputuser" placeholder="" type="text">
+</DIV>
+                    
+<DIV class="form-group">
+                        
+<LABEL class="control-label" for="edititeminputpw">Password:</LABEL>
+                        
+<DIV class="input-group">
+                            
+<INPUT class="form-control" id="edititeminputpw" placeholder="Leave blank to generate one" type="text">
+                            <SPAN class="input-group-btn">
+                                <BUTTON class="btn btn-warning" onclick="$('#edititeminputpw').val(getpwd('RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-',13)); $('#editAccountShowPassword').removeClass('collapse');" title="generate new password" type="button"><I class="glyphicon glyphicon-refresh"></I></BUTTON>
+                                <BUTTON class="btn btn-default" id="editAccountShowPassword" title="show current password" type="button"><I class="glyphicon glyphicon-eye-open"></I></BUTTON>
+                            </SPAN>
+                        
+</DIV>
+                    
+</DIV>
+                
+<DIV class="form-group">
+<LABEL class="control-label" for="edititeminputurl">URL:</LABEL><INPUT class="form-control" id="edititeminputurl" placeholder="" type="text">
+</DIV>
+<DIV class="form-group">
+<LABEL class="control-label" for="edititeminputcomment">Comment:</LABEL><TEXTAREA class="form-control" id="edititeminputcomment" placeholder=""></TEXTAREA>
+</DIV>
+<DIV class="form-group">
+<LABEL class="control-label" for="edititeminputtags">Tags:</LABEL><INPUT class="form-control" id="edititeminputtags" placeholder="Comma separated values" type="text">
+</DIV>
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-danger" id="delbtn" type="button">Delete</BUTTON>
+                    <BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                    <BUTTON class="btn btn-primary" id="editbtn" type="button">Save</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+<DIV class="modal" id="pin" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Set PIN to login</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                    
+<FORM id="pinloginform">
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="pinxx">PIN:</LABEL>
+                            <INPUT class="form-control" id="pinxx" type="password">
+                            <LABEL class="small" style="display:block; clear:both; color:red">Only set PIN in your trusted devices!</LABEL>
+                            <LABEL class="small" style="display:block; clear:both;">PIN can be set on your trusted devices to give you convenience while login. If you set PIN, you can use PIN instead of username and password to login next time. PIN is safe, you only have 3 chances to input a PIN before it's disabled automatically.</LABEL>
+                        
+</DIV>
+                
+</FORM>
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                    <BUTTON class="btn btn-danger" id="delpin" onclick="delpinstore();alert('PIN deleted, use username/password to login next time');$('#pin').modal('hide');" type="button">Delete PIN</BUTTON>
+                    <INPUT class="btn btn-primary" id="pinlogin" type="submit" value="Set/Reset">
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+<DIV class="modal" id="import" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Import accounts</H4>
                 
 </DIV>
                 
@@ -110,8 +494,9 @@ if(typeof(Storage) == "undefined") {
                         
 <DIV class="form-group">
                             
-<LABEL class="control-label" for="pin">PIN:</LABEL>
-                            <INPUT class="form-control" id="pin" type="password">
+<LABEL class="control-label" for="importc">You can import passwords from CSV file or raw backup file. Select a .csv file or .raw file to start.</LABEL>
+                            <INPUT accept=".csv,.raw" id="importc" type="file">
+                            <LABEL class="small" style="display:block; clear:both;">CSV file must contain a header line with columns called "name" and "password" - order is not important. You may edit your CSV with your password in Office so that the account field has a header called 'name' and the password field has a header called 'password'. Then you can save the CSV and open it again in plain text editor to copy contents.</LABEL>
                         
 </DIV>
                     
@@ -121,10 +506,8 @@ if(typeof(Storage) == "undefined") {
                 
 <DIV class="modal-footer">
                     
-<P id="pinerrorhint" style="display:none">PIN ERROR, try again.</P>
-                    
-<BUTTON class="btn btn-default" data-dismiss="modal" onclick="delpinstore()" type="button">Use username/password</BUTTON>
-                    <BUTTON class="btn btn-primary" id="pinlogin" type="button">Login</BUTTON>
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Close</BUTTON>
+                    <BUTTON class="btn btn-primary" id="importbtn" type="button">Submit</BUTTON>
                 
 </DIV>
             
@@ -134,76 +517,625 @@ if(typeof(Storage) == "undefined") {
     
 </DIV>
     
+<DIV class="modal" id="changepwd" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Change Password(Danger Area)</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                    
+<FORM>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="oldpassword">Old Password:</LABEL>
+                            <INPUT class="form-control" id="oldpassword" type="password">
+                        
+</DIV>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="pwd">New Password:</LABEL>
+                            <INPUT class="form-control" id="pwd" type="password">
+                        
+</DIV>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="pwd1">New Password Again:</LABEL>
+                            <INPUT class="form-control" id="pwd1" type="password">
+                        
+</DIV>
+                    
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Abort</BUTTON>
+                    <BUTTON class="btn btn-primary" id="changepw" type="button">Save changes</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+
+</DIV>
+
 </DIV>
 
 <SCRIPT type="text/javascript">
-var JSsalt='iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key';
-var PWSalt='ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]';
-$(function(){
-    if(getcookie('device')!="")
-    {
-        if(1==0) $("#usepin").modal("show");
-        else{
-            delpinstore();
+var fields=JSON.parse($('#fieldsz').val().replace(/\r\n/g,'').replace(/\n/g,''));
+var ALPHABET='RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-';
+var PWsalt='ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]';
+$("#pin").on('shown.bs.modal', function(){$("#pinxx").focus()});
+function sanitize_json(s){
+    var t=s;
+    t=t.replace(/\n/g,'')
+    return t.replace(/\r/g,'');
+}
+function decryptPassword(name, kss){
+    var thekey=decryptchar(kss,secretkey);
+    if (thekey==""){
+        return "";
+    }
+    return get_orig_pwd(getconfkey(PWsalt),PWsalt,String(CryptoJS.SHA512(name)),ALPHABET,thekey);
+}
+function encryptPassword(name, pass){
+    pass=gen_temp_pwd(getconfkey(PWsalt),PWsalt,String(CryptoJS.SHA512(name)),ALPHABET,pass);
+    return encryptchar(pass,secretkey);
+}
+function add_account(acc, pass, other, callback){
+    var sk=secretkey;
+    pass=encryptPassword(acc, pass);
+    other=encryptchar(other, sk);
+    acc=encryptchar(acc,sk);
+    $.post("insert.php",{name:acc,newpwd:pass,other:other},callback);
+}
+function import_raw(json){
+    json=JSON.parse(sanitize_json(json));
+    if(json.status!="RAW_OK") {
+        alert("INVALID RAW FILE");
+        return;
+    }
+    function add_acc(acc,pass,other){
+        if(acc==''||pass=='') {
+            alert("one of account or password empty! will continue to process other accounts, check back after this finished"); return;
+        }
+        add_account(acc, pass, other, function(msg) { if(msg!=1) alert("Fail to add "+acc+", please try again manually later."); });
+    }
+    function process(){
+        var aeskey=json.KEY;
+        var x;
+        timeout=100000;
+        for(x in json.data){
+            other = JSON.stringify({});
+            if (json.data[x].length > 2)
+                other = decryptchar(json.data[x][2], aeskey);
+            add_acc(decryptchar(json.data[x][0],aeskey),decryptchar(json.data[x][1],aeskey), other);
+        }
+        alert('IMPORT FINISHED!');
+        location.reload(true);
+    }
+    setTimeout(process,50);
+    
+}
+function import_csv(csv){
+    $.getScript( 'js/jquery.csv.js', function() {
+        var accarray = $.csv.toObjects(csv);
+        timeout=100000;
+        for (x in accarray) {
+            var acc = accarray[x]["name"];
+            var pass = accarray[x]["password"];
+            if(acc==''||pass=='') {
+                alert("one of account or password empty! will continue to process other accounts, check back after this finished"); continue;
+            }
+            var other = {};
+            for (key in accarray[x]){
+                if (key in fields){
+                    other[key]=accarray[x][key];
+                }
+            }
+            add_account(acc, pass, JSON.stringify(other), function(msg) { if(msg!=1) alert("Fail to add "+acc+", please try again manually later."); });
+        }
+        alert('IMPORT FINISHED!');
+        location.reload(true);
+    });
+}
+
+function filterTags(tag){
+    timeout=default_timeout;
+    $("#pwdlist").find("tr").show();
+    if (tag == ""){
+        $("#resetFilter").hide();
+        return;
+    }
+    var jo = $("#pwdlist").find("tr");
+    jo.filter(function (i, v) {
+        if ($(this).has("th").length > 0)
+            return false;
+        var $t = $(this).find(".accounttags");
+        if ($t.is(":contains('" +tag + "')")) {
+            return false;
+        }
+        return true;
+    })
+    .hide();
+    $("#resetFilter").show();
+}
+$(document).ready(function(){
+    for (x in fields) {
+        fields[x]["count"] = 0;
+        var header = '<th class="'+x+'cell'+fields[x]["cls"]+'">'+fields[x]["colname"]+'</th>';
+        var cell = '<td class="'+x+'cell'+fields[x]["cls"]+'"><span class="account'+x+'"></td>';
+        var input = "";
+        var inputtype = "text";
+        if ("type" in fields[x])
+            inputtype = fields[x]["type"];
+        if (inputtype == "textarea")
+            input = '<textarea class="form-control" id="%NAME%iteminput'+x+'" placeholder="'+fields[x]["hint"]+'"></textarea>';
+        else
+            input = '<input class="form-control" id="%NAME%iteminput'+x+'" type="'+inputtype+'" placeholder="'+fields[x]["hint"]+'"/>';
+        var form = '<div class="form-group"><label for="%NAME%iteminput'+x+'" class="control-label">'+fields[x]["colname"]+':</label>'+input+'</div>';
+        if (("position" in fields[x]) && (fields[x]["position"] != 0)) {
+            $('#pwdlist > tbody > tr:first > th:nth-child('+fields[x]["position"]+')').after(header)
+            $('#pwdlist > tbody > tr > td:nth-child('+fields[x]["position"]+')').after(cell);
+            $("#add").find('form > .form-group:nth-child('+fields[x]["position"]+')').after(form.replace(/%NAME%/g,"new"));
+            $("#edit").find('form > .form-group:nth-child('+fields[x]["position"]+')').after(form.replace(/%NAME%/g,"edit"));
+        }
+        else {
+            $("#pwdlist > tbody > tr:first").append(header);
+            $("#pwdlist > tbody > tr").slice(1).each(function(){$(this).append(cell) });
+            $("#add").find("form").append(form.replace(/%NAME%/g,"new"));
+            $("#edit").find("form").append(form.replace(/%NAME%/g,"edit"));
         }
     }
-    $("#pinlogin").click(function(){
-        var pin;
-        $("#pinerrorhint").hide();
-        $("#pinlogin").attr("disabled", true);
-		$("#pinlogin").html("Wait");
-        pin=$("#pin").val();
-        $.post("getpinpk.php",{user:getcookie('username'),device:getcookie('device'),sig:String(CryptoJS.SHA512(pin+localStorage.pinsalt))},function(msg){
-            if(msg == '0') {$("#usepin").modal("hide");delpinstore();return;}
-            if(msg == '1') {$("#pin").val('');$("#pinerrorhint").show();$("#pinlogin").attr("disabled", false);$("#pinlogin").html("Login"); return;}
-            pwdsk=decryptchar(localStorage.en_login_sec,pin+msg);
-            confkey=decryptchar(localStorage.en_login_conf,pin+msg)
-            $.post("check.php",{pwd:String(CryptoJS.SHA512(pbkdf2_enc(pwdsk,JSsalt,500)+"2021012201163397880")),  user: getcookie('username')},function(msg){
-                if(msg!=9) {$("#usepin").modal("hide");delpinstore();return;}
-                setpwdstore(pwdsk,confkey,'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]');                
-                window.location.href="./password.php";
-            });
+    function getskey(callback)
+    {
+        var secretkey0=getpwdstore('ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]');
+        callback(secretkey0);
+    }
+    
+    function gatherDistinctTags()
+    {
+        var tags = new Array();
+        for (x in accountarray) {
+            if (!("tags" in accountarray[x]["other"]))
+                continue;
+            if (accountarray[x]["other"]["tags"].length>0)
+                tags = tags.concat(accountarray[x]["other"]["tags"].split(',').map(function (str){return str.trim();}));
+        }
+        var unique = [];
+        for(var i = 0; i < tags.length; i++) {
+            if($.inArray(tags[i], unique) < 0) {
+                unique.push(tags[i]);
+            }
+        }
+        return unique.sort(function (a, b) { return a.toLowerCase().localeCompare(b.toLowerCase()); });
+    }
+    
+    function showtable(secretkey0)
+    {
+        secretkey=String(CryptoJS.SHA512(secretkey0+'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]'));
+        if (secretkey0=="") quitpwd();
+        else
+        {
+            var tempchar;
+            function DecryptCell(element, allowEmpty){
+                var tempchar=decryptchar(element.html(),secretkey);
+                if ((tempchar=="") && (!allowEmpty)) tempchar="Oops, there's some errors!"
+                element.html(tempchar)
+                element.addClass("namedone");
+                return tempchar;
+            };
+            $(".datarow").each( function() { 
+                    accountarray[parseInt($(this).attr('dataid'))] = { other: {} };
+                    if ($(this).data("additional") == "")
+                        return;
+                    //decrypt
+                    var tempchar = decryptchar($(this).data("additional"), secretkey);
+                    //extract json
+                    var data = $.parseJSON(tempchar);
+                    accountarray[parseInt($(this).attr('dataid'))]["other"] = data;
+                    //set values
+                    for (x in data) {
+                        var col = $(this).find('.account'+x);
+                        col.html(data[x]);
+                        col.addClass("namedone");
+                        if ((data[x].trim() != "") && (x in fields)) {
+                            fields[x]["count"] += 1;
+                        }
+                    }
+                } );
+            $(".accountname").each(function() { accountarray[parseInt($(this).attr('dataid'))]["name"] = DecryptCell($(this),false); });
+            $("#waitsign").hide();
+            $("#pwdtable").show();
+            var tags = gatherDistinctTags();
+            for (x in tags){
+                $("#tags").append("<a href=\"javascript:filterTags('"+tags[x]+"');\">" + tags[x] + "</a> ");
+            }
+            if (tags.length>0) {
+                $("#tagCloud").show();
+            }
+            for (x in fields) {
+                if (fields[x]["count"] == 0) {
+                    $("."+x+"cell").remove();
+                }
+            }
+        }
+    }
+    getskey(showtable);
+$("#pinloginform").on('submit',function(e){
+    e.preventDefault();
+    var pin=$("#pinxx").val();
+    var device=getcookie('device');
+    var salt=getpwd('abcdefghijklmnopqrstuvwxyz1234567890',500);
+    timeout=default_timeout;
+    function process()
+    {
+        $.post("setpin.php",{user:getcookie('username'),device:device,sig:String(CryptoJS.SHA512(pin+salt))},function(msg){
+            if(msg=='0'){
+                alert('ERROR set PIN, try again later!');
+                $('#pin').modal('hide');
+            }else{
+                setPINstore(device,salt,encryptchar(getpwdstore(PWsalt),pin+msg),encryptchar(getconfkey(PWsalt),pin+msg));
+                alert('PIN set, use PIN to login next time');
+                $('#pin').modal('hide');
+            }
         });
-    });
-    $("#chk").click(function(){ 
-        $("#chk").attr("disabled", true);
-		$("#chk").attr("value", "Wait");
-        function process(){
-        var user = $("#user").val(); 
-		var pwd = $("#pwd").val();
+    }
+    if(pin.length<4) {alert('For security reason, PIN should be at least of length 4.'); return;}
+    if(device=="")
+    {
+        function rand_device()
+        {
+            var status=1;
+            device=getpwd('abcdefghijklmnopqrstuvwxyz1234567890',9)
+            setCookie('device',device);
+            $.post("getpinpk.php",{user:getcookie('username'),device:device,sig:'1'},function(msg){
+                status=parseInt(msg);
+                if(status == 0) process();
+                else rand_device();
+            });
+        }
+        rand_device();
+    } else process();  
+});
+$("#changefieldsbtn").click(function(){
+    var a=$('#fieldsz').val();
+    var p=a.replace(/\r\n/g,'');
+    p=p.replace(/\n/g,'');
+    function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+    }
+    if(!isJson(p)) {alert('illegal format!');return;}
+    $.post("changefields.php",{fields:a},function(msg){ 
+            if(msg==1) {alert('SUCCESS!'); location.reload(true);}
+            else {alert("Oops, there's some error. Try again!");}
+        });
+});
+$("#newbtn").click(function(){ 
+	var newpwd;
+	if($("#newiteminput").val()=="") {alert("Account entry can't be empty!"); return;}
+	$("#newbtn").attr("disabled",true);
+	$("#newiteminput").attr("readonly",true);
+	$("#newiteminputpw").attr("readonly",true);
+    for (x in fields)
+        $("#newiteminput"+x).attr("readonly",true);
+    function process(){
+        if($("#newiteminputpw").val()=='') newpwd=getpwd('RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-',13); else newpwd=$("#newiteminputpw").val();
+        var other = {};
+        for (x in fields){
+            other[x] = $("#newiteminput"+x).val().trim();
+        }
+        other = JSON.stringify(other);
+        var name = $("#newiteminput").val();
+        add_account(name, newpwd, other, function(msg){ 
+            if(msg==1) {alert("Add "+name+" successfully!");location.reload(true);} else alert("Fail to add "+name+", please try again.");
+            $("#newiteminput").attr("readonly",false);
+            $("#newbtn").attr("disabled",false);
+            $("#newiteminputpw").attr("readonly",false);
+            for (x in fields)
+                $("#newiteminput"+x).attr("readonly",false);
+        });
+    }
+    setTimeout(process,50);
+});
+$("#editbtn").click(function(){ 
+	var newpwd;
+	if($("#edititeminput").val()=="") {alert("Account entry can't be empty!"); return;}
+	$("#editbtn").attr("disabled",true);
+	$("#edititeminput").attr("readonly",true);
+	$("#edititeminputpw").attr("readonly",true);
+    for (x in fields)
+        $("#edititeminput"+x).attr("readonly",true);
+    function process(){
+        var id = $("#edit").data('id');
+        var oldname=accountarray[id]["name"];
+        if($("#edititeminputpw").val()=='')
+            newpwd=decryptPassword(oldname, $("#edititeminputpw").data('enpassword'));
+        else
+            newpwd=$("#edititeminputpw").val();
+        var other = {};
+        for (x in fields){
+            other[x] = $("#edititeminput"+x).val().trim();
+        }
+        other = JSON.stringify(other);
+        var name = $("#edititeminput").val();
+        newpwd=encryptPassword(name, newpwd);
+        other=encryptchar(other, secretkey);
+        var enname=encryptchar(name,secretkey);
+        $.post("change.php",{name:enname,newpwd:newpwd,index:id,other:other},function(msg){ 
+            if(msg==1) {alert("Data for "+name+" updated!");location.reload(true)} else alert("Fail to update data for "+name+", please try again.");
+            $("#edititeminput").attr("readonly",false);
+            $("#editbtn").attr("disabled",false);
+            $("#edititeminputpw").attr("readonly",false);
+            for (x in fields)
+                $("#edititeminput"+x).attr("readonly",false);
+        });
+    }
+    setTimeout(process,50);
+}); 
+$("#backuppwdbtn").click(function(){
+    $("#backuppwdbtn").attr('disabled',true);
+    $("#backuppwdpb").attr('aria-valuenow',0);
+    $("#backuppwdpb").attr('style','width:0%');
+    $.post("backup.php",{a:'a'},function(msg){
+        var a,i,count,p;
+        function progressbarchange(x)
+        {
+            $("#backuppwdpb").attr('aria-valuenow',x);
+            $("#backuppwdpb").attr('style','width:'+x+'%');
+        }
+        function cback()
+        {
+            if(count<30) pbkdf2_enc_1(cback); else process();
+        }
+        function pbkdf2_enc_1(callback)
+        {
+            progressbarchange(6+count*3);
+            a=pbkdf2_enc(a,PWsalt,500);
+            count=count+1;
+            setTimeout(callback,1);
+        }
+        function process()
+        {
+            p.data=encryptchar(JSON.stringify(p.data),pbkdf2_enc(a,PWsalt,500));
+            $("#backuppwdpb").attr('aria-valuenow',99);
+            $("#backuppwdpb").attr('style','width:99%');
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(p)));
+            element.setAttribute('download', 'backup.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            $("#backuppwdpb").attr('aria-valuenow',100);
+            $("#backuppwdpb").attr('style','width:100%');
+            element.click();
+            document.body.removeChild(element);
+            $("#backuppwdbtn").attr('disabled',false);
+            timeout=default_timeout;
+        }
+        function first(callback)
+        {
+            timeout=100000;
+            a=pbkdf2_enc(secretkey,PWsalt,500);
+            callback(cback);
+        }
+        count=0;
+        try {
+            p=JSON.parse(msg);
+            if(p.status!="OK") {
+                alert("FAIL TO GENERATE BACKUP FILE, TRY AGAIN");
+                $("#backuppwdbtn").attr('disabled',false);
+                return;
+            }
+        } catch (e) {
+            alert("FAIL TO GENERATE BACKUP FILE, TRY AGAIN");
+            $("#backuppwdbtn").attr('disabled',false);
+            return;
+        }
+        first(pbkdf2_enc_1);
         
-        var secretkey='';
-        var confkey='';
-		var login_sig=String(pbkdf2_enc(reducedinfo(pwd,'RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-'),JSsalt,500));
-        secretkey=login_sig;
-        login_sig=pbkdf2_enc(login_sig,JSsalt,500);
-        $.post("check.php",{pwd:String(CryptoJS.SHA512(login_sig+"2021012201163397880")),  user: user},function(msg){ 
-        $(".errorhint").hide();
-		if(msg==0){
-			 	$("#nouser").show();
-				$("#chk").attr("value", "Login");
-				$("#chk").attr("disabled", false);
-		}else
-		if(msg==1){
-			 	$("#pwderr").show();
-				$("#chk").attr("value", "Login");
-				$("#chk").attr("disabled", false);
-		}else
-		if(msg==4){
-			 	$("#othererror").show();
-				$("#chk").attr("value", "Login");
-				$("#chk").attr("disabled", false);
-		}else{
-                confkey=pbkdf2_enc(String(CryptoJS.SHA512(pwd+secretkey)),JSsalt,500);
-                setCookie("username",user);
-                setpwdstore(secretkey,confkey,'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]');                
-                window.location.href="./password.php";
-		}
+    });
+});
+$("#editAccountShowPassword").click(function(){
+    var id = parseInt($("#edit").data('id'));
+    var thekey=decryptPassword(accountarray[id]["name"], $("#edititeminputpw").data('enpassword'));
+    if (thekey==""){
+        $("#edititeminputpw").val("Oops, some error occurs!");
+        return;
+    }
+    $("#edititeminputpw").val(thekey);
+    $("#editAccountShowPassword").addClass("collapse");
+});
+$("#delbtn").click(function(){
+    delepw($("#edit").data('id'));
+});
+$("#changepw").click(function(){ 
+    if(confirm("Your request will be processed on your browser, so it takes some time (up to #of_your_accounts * 10seconds). Do not close your window or some error might happen.\nPlease note we won't have neither your old password nor your new password. \nClick OK to confirm password change request."))
+    {
+        if ($("#pwd").val()!=$("#pwd1").val() || $("#pwd").val().length<7){alert("The second password you input doesn't match the first one. Or your password is too weak (length should be at least 7)"); return;}
+        $("#changepw").attr("disabled",true);
+        $("#changepw").attr("value", "Processing...");
+        function process(){
+        var login_sig=String(pbkdf2_enc(reducedinfo($("#oldpassword").val(),'RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-'),'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500));
+        if(secretkey!=String(CryptoJS.SHA512(login_sig+'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]'))) {alert("Incorrect Old Password!"); location.reload(); return;}
+        var newpass=$("#pwd").val();
+        login_sig=String(pbkdf2_enc(reducedinfo(newpass,'RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-'),'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500));
+        var newsecretkey=String(CryptoJS.SHA512(login_sig+'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]'));
+        var postnewpass=pbkdf2_enc(login_sig,'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500);
+        //NOTE: login_sig here is the secret_key generated when login.
+        var newconfkey=pbkdf2_enc(String(CryptoJS.SHA512(newpass+login_sig)),'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500); 
+        var x,raw_pass;
+        var temps;
+        var passarray=new Array();
+        var accarray=new Array();
+        for (x in accountarray)
+        {
+            accarray[x]={"name": encryptchar(accountarray[x]["name"],newsecretkey), "other": encryptchar(JSON.stringify(accountarray[x]["other"]),newsecretkey)};
+            raw_pass=decryptPassword(accountarray[x]["name"],$("[passid="+x+"]").attr("enpassword"));
+            if (raw_pass=="") {
+                alert("FATAL ERROR WHEN TRYING TO DECRYPT ALL PASSWORDS");
+                return;
+            }
+            raw_pass=gen_temp_pwd(newconfkey,PWsalt,String(CryptoJS.SHA512(accountarray[x]["name"])),ALPHABET,raw_pass);
+            passarray[x]=encryptchar(raw_pass,newsecretkey);
+        }
+        $.post("changeuserpw.php",{newpass:String(CryptoJS.SHA512(postnewpass+"admin123")), passarray:JSON.stringify(passarray), accarray:JSON.stringify(accarray)},function(msg){ 
+            if(msg==1) {alert("Change Password Successfully! Please login with your new password again.");quitpwd();} else {alert("Fail to change your password, please try again."); location.reload();}
         });
         }
         setTimeout(process,50);
-    }); 
-}); 
+	}
+});
+$("#importbtn").click(function(){ 
+    $("#importbtn").attr("disabled",true);
+    $("#importbtn").attr("value", "Processing...");
+    $("#importc").attr("disabled",true);
+    if (window.FileReader) {
+		// FileReader are supported.
+        var reader = new FileReader();
+        var a=$("#importc")[0].files;
+        var t = 0;
+        if (a && a[0]){
+            reader.onload = function (e) {
+                var txt = e.target.result;
+                try{
+                    if(t==0) import_raw(txt); else import_csv(txt);
+                }catch (error) { alert('Some error occurs!'); location.reload(true);}
+            }
+            reader.onerror = function (e) {
+                alert('Error reading file!');
+            }
+            var extension = a[0].name.split('.').pop().toLowerCase();
+            if(extension=='csv') t=1;
+            reader.readAsText(a[0]);          
+        } else alert('NO FILE SELECTED'); 
+	} else {
+		alert('FileReader are not supported in this browser.');
+	}
+    $("#importbtn").attr("disabled",false);
+    $("#importbtn").attr("value", "Submit");
+    $("#importc").attr("disabled",false);
+});
+$('#add').on('shown.bs.modal', function () { $('#newiteminput').focus(); });
+$('#edit').on('shown.bs.modal', function () {
+    var id = $("#edit").data('id');
+    $("#editAccountShowPassword").removeClass("collapse");
+    $("#edititeminput").val(accountarray[id]['name']);//name
+    $("#edititeminputpw").attr('placeholder',"Hidden");
+    $("#edititeminputpw").val('');
+    $("#edititeminputpw").data('enpassword', $("[passid="+id+"]").attr("enpassword"));
+    for (x in fields){
+        $("#edititeminput"+x).val(accountarray[id]['other'][x]);
+    }
+    $('#edititeminput').focus(); 
+});
+$('#import').on('shown.bs.modal', function () { $('#importc').focus(); });
+$('#changepwd').on('shown.bs.modal', function () { $('#oldpassword').focus(); });
+$('#searchForm').submit(function () {
+    filterAccounts($('#srch-term').val())
+    return false;
+    });
+});
+function edit(row){
+    var id = row; //row.find("")
+    $("#edit").data("id", id);
+    $("#edit").modal("show");
+}
+function clicktoshow(kss,id){ 
+    timeout=default_timeout;
+    if(kss=="") return;
+    var thekey = decryptPassword(accountarray[parseInt(id)]["name"],kss);
+    if (thekey==""){
+        $("#"+id).html("Oops, some error occurs!");
+        return;
+    }
+    $("#"+id).html('<span style="font-family:passwordshow"">'+thekey+'</span><a title="Hide" class="cellOptionButton" href="javascript: clicktohide(\''+kss+'\',\''+id+'\')"><span class="glyphicon glyphicon-eye-close"></span></a>');
+} 
+function clicktohide(kss,id){
+    timeout=default_timeout;
+    $("#"+id).html('<a href="javascript: clicktoshow(\''+kss+'\',\''+id+'\')">Click to see</a>'); 
+}
+function delepw(index)
+{   
+    var name=accountarray[parseInt(index)]["name"];
+	if(confirm("Are you sure you want to delete password for "+name+"? (ATTENTION: this is irreversible)"))
+	{
+		$.post("delete.php",{index:index},function(msg){ 
+         if(msg==1) {alert("delete "+name+" successfully");location.reload(true);} else alert("Fail to delete "+name+", please try again.");
+	 }); 
+	 }
+}
+function filterAccounts(text) {
+    $("tr.datarow").show();
+    if (text==""){
+        $("#resetSearch").hide();
+        $("#srch-term").val('');
+        return;
+    }
+    $("#resetSearch").show();
+    text = text.toLowerCase();
+    $("tr.datarow").filter(function() {
+        return $(this).find("td > span.namedone").filter(function(){
+            return $(this).text().toLowerCase().indexOf(text) > -1; })
+        .length == 0;
+    }).hide();
+}
+function exportcsv()
+{
+    var obj=new Array();
+    timeout=100000;
+    alert('CSV file contains all your information in plain text format. It\'s dangerous to keep it as a backup. Only use it for transferring your data. Delete it immediately after you\'ve done.');
+    var t,x,i;
+    for (x in accountarray){
+        tmp={};
+        tmp['name']=accountarray[x]["name"];
+        t=accountarray[x]["other"];
+        for (i in t){
+            tmp[i] = t[i];
+        }
+        tmp['password']=decryptPassword(accountarray[x]["name"],$("[passid="+x+"]").attr("enpassword"));
+        obj.push(tmp);
+    }
+    $.getScript( 'js/jquery.csv.js', function() {
+        var csv = $.csv.fromObjects(obj);
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csv));
+        element.setAttribute('download', 'export.csv');
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    });
+    timeout=default_timeout;
+}
+function showdetail(index){
+    var i=parseInt(index);
+    var x,s;
+    s='account: '+accountarray[i]["name"]+'\n';
+    for (x in accountarray[i]["other"]) s=s+x+': '+accountarray[i]["other"][x]+'\n';
+    $('#details').html(s);
+    $("#showdetails").modal("show");
+}
 </SCRIPT>
 
 <FOOTER class="footer ">
@@ -214,5 +1146,6 @@ $(function(){
 </FOOTER>
 
 
+<DIV class="modal-backdrop  in"></DIV>
 </BODY>
 </HTML>

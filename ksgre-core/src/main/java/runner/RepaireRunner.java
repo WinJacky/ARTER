@@ -9,7 +9,10 @@ import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.core.configuration.ThreadConfiguration;
 import com.crawljax.core.oraclecomparator.comparators.PlainStructureComparator;
 import com.crawljax.core.plugin.ScreenShotPlugin;
-import com.crawljax.core.state.*;
+import com.crawljax.core.state.Eventable;
+import com.crawljax.core.state.StateFlowGraph;
+import com.crawljax.core.state.StateMachine;
+import com.crawljax.core.state.StateVertix;
 import com.crawljax.dataType.PlainElement;
 import com.crawljax.forms.FormInput;
 import com.crawljax.forms.InputValue;
@@ -25,8 +28,10 @@ import main.java.nlp.word2vec.domain.WordEntry;
 import main.java.util.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -37,7 +42,6 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class RepaireRunner {
     private static Logger log = Logger.getLogger(RepaireRunner.class);
@@ -114,11 +118,11 @@ public class RepaireRunner {
     public static void main(String[] args) throws IOException {
         RepaireRunner repaireRunner = new RepaireRunner();
         // 待测用例的类名
-        String testcaseName = "TC2";
+        String testcaseName = "TC6";
         repairedStatNum = 0;
 
         // 1. 获取app配置
-        appEnum = AppEnum.ADDR;
+        appEnum = AppEnum.PPMA;
         appConfig = AppConfigFactory.getInstance(appEnum);
         // 2. 配置app默认配置
         CrawljaxConfiguration configuration = getCrawljaxConfiguration(appEnum);
@@ -177,19 +181,17 @@ public class RepaireRunner {
     }
 
     public void run(String testcaseName) {
-        startTime = System.currentTimeMillis();
         try {
             startRepair(testcaseName);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        stopTime = System.currentTimeMillis();
-        elapsedTime = stopTime - startTime;
-        System.out.format("%.3f s", elapsedTime / 1000.0f);
     }
 
     private void startRepair(String testcaseName) throws IOException {
+        // 修复开始计时
+        startTime = System.currentTimeMillis();
+
         String pathToTestBroken = UtilsFileGetters.getTestFile(testcaseName, ("ksgre-core.src." + appEnum.getTestSuite()).replaceAll("\\.", "\\\\"));
 
         log.info("Verifying test " + appEnum.getTestSuite() + " " + testcaseName);
@@ -262,6 +264,8 @@ public class RepaireRunner {
                 if ("get".equals(statement.getAction())) {
                     initSFG(browser, statement);
                     previousStatement = statement;
+                    String currentUrl = crawljaxController.getConfigurationReader().getCrawlSpecificationReader().getSiteUrl();
+                    repairedStatement.setValue(currentUrl);
                     repairedTest.put(statementNumber, repairedStatement);
                     continue;
                 }
@@ -362,6 +366,8 @@ public class RepaireRunner {
 
             if (noSuchelementException) {
                 log.info("this test cannot be repaired");
+                repairedTest.put(statementNumber, null);
+                deletedSteps.add(statementNumber);
             } else {
                 // 执行事件
                 // 状态转换
@@ -401,10 +407,29 @@ public class RepaireRunner {
             }
             previousStatement = statement;
         }
-        testCorrect = getNewTest(testBroken, repairedTest, repairedPathList);
-        testCorrect.setName(testBroken.getName());
-        UtilsRepaire.saveTest(appEnum.getAppName() + ".", testcaseName, testCorrect);
+
+        // 浏览器退出
         shutDown();
+        // 修复时间结算
+        stopTime = System.currentTimeMillis();
+        elapsedTime = stopTime - startTime;
+        System.out.format("%.3f s\n", elapsedTime / 1000.0f);
+
+        // 是否保存修复结果
+        boolean saveResult;
+        // 元素修复
+        if (deletedSteps.size()==0 && repairedPathList.size()==0){
+            saveResult = true;
+        }else {
+            // 涉及路径修复
+            // 将修复结果呈现给测试人员，并获取参考意见以生成修复过后的新测试用例
+            saveResult = presentRepairResult(testBroken, repairedTest, deletedSteps, repairedPathList);
+        }
+        if (saveResult) {
+            testCorrect = getNewTest(testBroken, repairedTest, repairedPathList);
+            testCorrect.setName(testBroken.getName());
+            UtilsRepaire.saveTest(appEnum.getAppName() + ".", testcaseName, testCorrect);
+        }
     }
 
     private boolean identicalWithLastStatement(Statement statement, Statement previousStatement) {
@@ -454,6 +479,7 @@ public class RepaireRunner {
     }
 
     private EnhancedTestCase getNewTest(EnhancedTestCase testBroken, Map<Integer, Statement> repairedTest, Map<Integer, List<Eventable>> repairedPathList) {
+        // 打印失效测试用例
         UtilsRepaire.printTestCaseWithLineNumbers(testBroken);
 
 //        EnhancedTestCase temp = (EnhancedTestCase) UtilsRepaire.deepClone(testBroken);
@@ -498,6 +524,7 @@ public class RepaireRunner {
 
         System.out.println("\n after repairing....");
 
+        // 打印修复后测试用例
         UtilsRepaire.printTestCaseWithLineNumbers(temp);
         return temp;
     }
@@ -553,7 +580,7 @@ public class RepaireRunner {
                 log.info("target element has moved...");
             }
         } catch (CrawljaxException e) {
-            log.error("\nan occurred when execute the method guidedCawlForTagetElement of Crawler");
+            log.error("\nAn error occurred when execute the method guidedCrawlForTargetElement of Crawler");
             e.printStackTrace();
         }
         return element;
@@ -570,10 +597,10 @@ public class RepaireRunner {
         log.info("已成功退出.................");
 
         // 输出统计信息
-        log.info("\n修复的语句个数：" + repairedStatNum);
-        log.info("触发事件数：" + crawlSession.fireEventNum);
-        log.info("探测的状态数：" + crawlSession.crawlStateNum);
-        log.info("总状态数：" + sfg.getAllStates().size());
+//        log.info("\n修复的语句个数：" + repairedStatNum);
+//        log.info("触发事件数：" + crawlSession.fireEventNum);
+//        log.info("探测的状态数：" + crawlSession.crawlStateNum);
+//        log.info("总状态数：" + sfg.getAllStates().size());
     }
 
     private void initSFG(EmbeddedBrowser browser, Statement statement) {
@@ -602,5 +629,75 @@ public class RepaireRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 向测试人员展示修复的结果，涉及到路径修复则询问意见并生成最终的测试用例
+     * @param testBroken       待修复的原测试用例
+     * @param repairedTest     修复的行号及对应的语句
+     * @param deletedSteps     在原测试用例的基础上，删除的语句其对应行号（路径删除）
+     * @param repairedPathList 在原测试用例的基础上，相应的行号前面需要加上的步骤（路径增加）
+     * @return true or false   是否保存修复结果
+     */
+    private boolean presentRepairResult(EnhancedTestCase testBroken, Map<Integer, Statement> repairedTest, List<Integer> deletedSteps, Map<Integer, List<Eventable>> repairedPathList){
+        log.info("修复后的测试用例有如下变化：");
+
+        // 测试人员同意删除的步骤
+        Integer[] agreeDelete = new Integer[testBroken.getStatements().size()];
+        // 测试人员同意增加的步骤
+        List<Integer> agreeAdd = new ArrayList<>();
+
+        // 有需要删除的步骤
+        if(deletedSteps.size() != 0){
+            log.info("需要删除的语句有：");
+            for(Integer i : deletedSteps){
+                log.info(i + ": " + testBroken.getStatements().get(i));
+            }
+            log.info("请输入需要被删除的语句所在行数(终止输入end)：");
+            Scanner deleteScanner = new Scanner(System.in);
+            for (int i=0; deleteScanner.hasNextInt(); i++) {
+                agreeDelete[i] = deleteScanner.nextInt();
+            }
+        }
+
+        // 有需要增加的路径
+        if (repairedPathList.size() != 0 ) {
+            log.info("需要增加的路径有：");
+            for (Integer i : repairedPathList.keySet()) {
+                log.info("======================================");
+                log.info("语句 " + i + ": " + testBroken.getStatements().get(i) + " 前需要增加以下步骤：");
+                for (Eventable event : repairedPathList.get(i)) {
+                    log.info(event.toString());
+                }
+                log.info("======================================");
+            }
+            log.info("请输入需要在其之前增加路径的语句所在行数(终止输入end)：");
+            Scanner addScanner = new Scanner(System.in);
+            while (addScanner.hasNextInt()) {
+                agreeAdd.add(addScanner.nextInt());
+            }
+            addScanner.close();
+        }
+
+        // 测试人员不认可修复结果，在这种情况下不会生成修复后的测试用例
+        if (agreeDelete[0] == null && agreeAdd.size() == 0) {
+            log.info("修复失败，将不会生成测试用例");
+            return false;
+        }
+        // 对于测试人员认可的删除步骤
+        for (int i=0; i<agreeDelete.length && agreeDelete[i]!=null; i++){
+            // 如果该语句被删除了则已体现在了repairedTest中，对于剩余不被认可的删除语句，需要重新加回到repairedTest中
+            deletedSteps.remove(agreeDelete[i]);
+        }
+        for (Integer i : deletedSteps) {
+            repairedTest.put(i, testBroken.getStatements().get(i));
+        }
+        // 对于测试人员认可的增加步骤
+        for (Integer i : repairedPathList.keySet()) {
+            if (!agreeAdd.contains(i)) {
+                repairedPathList.remove(i);
+            }
+        }
+        return true;
     }
 }

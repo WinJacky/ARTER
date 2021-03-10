@@ -1,373 +1,508 @@
-<HTML>
+<HTML lang="en">
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<META charset="utf-8">
+    
+<TITLE>Password Manager</TITLE>
+    
+<META content="width=device-width, initial-scale=1.0" name="viewport">
+    
+<META content="Password Manager" name="description">
+    
+<META content="Jeffery" name="author">
+	
+<LINK href="css/bootstrap.min.css" rel="stylesheet">
+	
+<LINK href="css/style.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Fav and touch icons -->
+    
+<LINK href="favicon.ico" rel="shortcut icon">
+    
+<SCRIPT src="js/jquery.min.js" type="text/javascript"></SCRIPT>
+	<SCRIPT src="js/bootstrap.min.js" type="text/javascript"></SCRIPT>
+    
+<STYLE>
+    .footer {
+        color: #777;
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 70px;
+        border-top: 1px solid #e5e5e5;
+        background-color: #f5f5f5;
+        }
+    </STYLE>
 
-<TITLE>South East University</TITLE>
-
-<META content="text/javascript" http-equiv="Content-Script-Type">
-
-<META content="text/css" http-equiv="Content-Style-Type">
-
-<META content="text/HTML; charset=iso-8859-1" http-equiv="Content-Type">
-
-<META content="Claroline 1.11.0 - http://claroline.net" name="generator">
-
-<LINK href="/claroline110/web/css/classic/main.css?1337668864" media="screen, projection, tv" rel="stylesheet" type="text/css">
-<LINK href="/claroline110/web/css/print.css?1301589033" media="print" rel="stylesheet" type="text/css">
-<LINK href="/index.php" rel="top" title="">
-
-<LINK href="http://www.claroline.net/documentation.htm" rel="Help">
-
-<LINK href="/claroline110/CREDITS.txt" rel="Author">
-
-<LINK href="http://www.claroline.net" rel="Copyright">
-
-<LINK href="/claroline110/claroline/../favicon.ico" rel="shortcut icon">
-
-<SCRIPT type="text/javascript">
-    document.cookie="javascriptEnabled=true; path=/claroline110";
-    </SCRIPT>
-<SCRIPT src="/claroline110/web/js/jquery.js?1311781341" type="text/javascript"></SCRIPT>
-<SCRIPT src="/claroline110/web/js/jquery.qtip.js?1329310394" type="text/javascript"></SCRIPT>
-<SCRIPT src="/claroline110/web/js/jquery.cookie.js?1309158222" type="text/javascript"></SCRIPT>
-<SCRIPT src="/claroline110/web/js/claroline.js?1341234352" type="text/javascript"></SCRIPT>
-<SCRIPT src="/claroline110/web/js/claroline.ui.js?1329309931" type="text/javascript"></SCRIPT>
 </HEAD>
-<BODY dir="ltr">
-<!-- $Id: banner.tpl.php 13151 2011-05-11 12:09:47Z abourguignon $ -->
+<BODY style="color: rgb(102, 102, 102);">
+<STYLE type="text/css">
+@font-face {
+	font-family: 'passwordshow';
+	src:url('pw.ttf');
+}
+</STYLE>
 
-<!-- claroPage -->
+<SCRIPT src="setlocalstorage.js" type="text/javascript"></SCRIPT>
+<SCRIPT type="text/javascript">
+var secretkey;
+var accountarray=new Array();
+function quitpwd()
+{
+    delpwdstore(); window.location.href="./logout.php";
+}
+</SCRIPT>
+<SCRIPT src="aes.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="sha512.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="pbkdf2.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="password.js" type="text/javascript"></SCRIPT>
 
-<DIV id="claroPage">
-
-<!-- Banner -->
-
-<DIV id="topBanner">
-
-<!-- Platform Banner -->
-
-<DIV id="platformBanner">
-    
-<DIV id="campusBannerLeft">
+<NAV class="navbar navbar-inverse navbar-fixed-top">
+      
+<DIV class="container">
         
-<SPAN id="siteName">
-            <A href="/claroline110/index.php" target="_top">
-                        South East University                        </A>
-        </SPAN>
+<DIV class="navbar-header">
+          
+<BUTTON aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+            <SPAN class="sr-only">Toggle navigation</SPAN>
+            <SPAN class="icon-bar"></SPAN>
+            <SPAN class="icon-bar"></SPAN>
+            <SPAN class="icon-bar"></SPAN>
+          </BUTTON>
+          <A class="navbar-brand" href="#">Password-Manager</A>
         
-        
-<!-- campusBannerLeft -->
-
-<!-- End of campusBannerLeft -->
-    
 </DIV>
-    
-<DIV id="campusBannerRight">
         
-<SPAN id="institution">
-                        <A href="http://www.seu.com/" target="_top">
-                        
-                        SEU                        
-                        </A>
-                    </SPAN>
-        
-        
-<!-- campusBannerRight -->
-
-<!-- End of campusBannerRight -->
-    
-</DIV>
-    
-<DIV class="spacer"></DIV>
-
-</DIV>
-<!-- End of Platform Banner -->
-
-
-<DIV id="userBanner">
-    
-<DIV id="userBannerRight">
-        
-<UL class="menu">
+<DIV class="collapse navbar-collapse" id="navbar">
+          
+<UL class="nav navbar-nav" id="nav_links">
             
+<LI class="active" id="nav-passwords">
+<A href="#pw">Passwords</A>
+</LI>
+            
+<LI id="nav-add">
+<A data-target="#add" data-toggle="modal" href="">Add Entry</A>
+</LI>
+            
+<LI class="dropdown">
+            
+<A aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Profile<SPAN class="caret"></SPAN></A>
+            
+<UL class="dropdown-menu">
+              
 <LI>
-<SPAN><A href="/claroline110/claroline/auth/login.php?sourceUrl=aHR0cDovL2xvY2FsaG9zdC9jbGFyb2xpbmUxMTAvaW5kZXgucGhw" target="_top">Login</A></SPAN>
+<A href="javascript: alert('You will need your CURRENT login password and PIN to unlock the backup file even if you change login password or PIN later. Write your CURRENT login password and PIN down or remember to generate a new backup file after each time you change the login password or PIN.');window.location.href='backup.php'">Back Up</A>
 </LI>
-        
+              
+<LI>
+<A data-target="#import" data-toggle="modal" href="">Import</A>
+</LI>
+              
+<LI>
+<A data-target="#changepwd" data-toggle="modal" href="">Change Password</A>
+</LI>
+            
 </UL>
-    
+            
+</LI>
+          
+</UL>
+          
+<DIV class="navbar-right">
+            
+<P class="navbar-btn">
+<A class="btn btn-info" href="" onclick="quitpwd();"><STRONG>Log Out</STRONG></A>
+</P>
+          
+</DIV>
+        
+</DIV>
+<!--/.nav-collapse -->
+      
 </DIV>
     
+</NAV>
     
-<DIV class="spacer"></DIV>
 
+<DIV class="container theme-showcase">
+      
+<DIV class="page-header" id="pw">
+        
+<H1>Password Manager</H1>
+	  
 </DIV>
-<!-- End of User Banner -->
-
-<!-- BreadcrumbLine  -->
-
-<DIV id="breadcrumbLine">
+    <!-- preload ttf -->
+    
+<SPAN style="display:none; font-family:passwordshow">RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-</SPAN>
     
 <HR>
     
-<DIV class="breadcrumbTrails">
+<DIV id="waitsign" style="display: none;">PLEASE WAIT WHILE WE ARE DECRYPTING YOUR PASSWORD...</DIV>
+    
+<DIV id="pwdtable" style="">
+    
+<TABLE class="table">
+    
+<TBODY>
+<TR>
+<TH>Account</TH><TH>Password</TH><TH class="hidden-xs">Generate New Password</TH><TH class="hidden-xs">Delete this Password</TH>
+</TR>
+    
+<TR>
+<TD><SPAN class="namedone" dataid="1">Google</SPAN></TD><TD><SPAN enpassword="ghBVcymgufYXRpk2Xq5LXw==-050bfe80f389a60721abce94ff0391ae-1968ebf50f77c3fd-" id="1" passid="1"><A href="javascript: clicktoshow('ghBVcymgufYXRpk2Xq5LXw==-050bfe80f389a60721abce94ff0391ae-1968ebf50f77c3fd-','1')">Click to see</A></SPAN></TD><TD class="hidden-xs"><A href="javascript: refreshpw('1')">Click to change</A></TD><TD class="hidden-xs"><A href="javascript: delepw('1')">Click to delete</A></TD>
+</TR>
+<TR>
+<TD><SPAN class="namedone" dataid="2">GoogleGoogle</SPAN></TD><TD><SPAN enpassword="2tDEYyDh9OJTOygDOMXSFhOY0JeFLLUIAmxCF9WGYqc=-09bc3cbaef2f78a28c13952ddf7aa159-bcb18aa81414df49-" id="2" passid="2"><A href="javascript: clicktoshow('2tDEYyDh9OJTOygDOMXSFhOY0JeFLLUIAmxCF9WGYqc=-09bc3cbaef2f78a28c13952ddf7aa159-bcb18aa81414df49-','2')">Click to see</A></SPAN></TD><TD class="hidden-xs"><A href="javascript: refreshpw('2')">Click to change</A></TD><TD class="hidden-xs"><A href="javascript: delepw('2')">Click to delete</A></TD>
+</TR>
+<TR>
+<TD><SPAN class="namedone" dataid="3">GoogleGoogle</SPAN></TD><TD><SPAN enpassword="8OQYfIA3+qa4aG1gI4WYo1jMHA0DcL/8oX4WMqTswVc=-fb46df6e7d5a6f3678a2b65c31238a9c-468ce0fda18fcadf-" id="3" passid="3"><A href="javascript: clicktoshow('8OQYfIA3+qa4aG1gI4WYo1jMHA0DcL/8oX4WMqTswVc=-fb46df6e7d5a6f3678a2b65c31238a9c-468ce0fda18fcadf-','3')">Click to see</A></SPAN></TD><TD class="hidden-xs"><A href="javascript: refreshpw('3')">Click to change</A></TD><TD class="hidden-xs"><A href="javascript: delepw('3')">Click to delete</A></TD>
+</TR>   
+</TBODY>
+</TABLE> 
+	
+<HR>
+    
+<DIV class="modal" id="add" role="dialog" tabindex="-1">
         
-<UL class="breadCrumbs">
-
-<LI class="breadCrumbsNode lastBreadCrumbsNode">
-<A href="/claroline110/index.php" target="_top"><IMG alt="home" src="/claroline110/web/img/home.png?1232379976">&nbsp;South East University</A>
-</LI>
-
-</UL>
-    
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Add a new account</H4>
+                
 </DIV>
-    
-    
-<DIV id="toolViewOption">
+                
+<DIV class="modal-body">
+                
+<FORM>
+                    
+<DIV class="form-group">
+                        
+<LABEL class="control-label" for="newiteminput">Account (Item):</LABEL>
+                        <INPUT class="form-control" id="newiteminput" type="text">
+                    
+</DIV>
+                    
+<DIV class="form-group">
+                        
+<LABEL class="control-label" for="newiteminputpw">Password:</LABEL>
+                        <INPUT class="form-control" id="newiteminputpw" placeholder="Leave blank to generate one" type="text">
+                    
+</DIV>
+                
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Dismiss</BUTTON>
+                    <BUTTON class="btn btn-primary" id="newbtn" type="button">Add</BUTTON>
+                
+</DIV>
             
 </DIV>
-    
-    
-<DIV class="spacer"></DIV>
-    
-<HR>
-
+        
 </DIV>
-<!-- End of BreadcrumbLine  -->
-
-
+    
 </DIV>
-<!-- End of topBanner -->
-<!-- $Id: body.tpl.php 13540 2011-09-06 14:06:26Z zefredz $ -->
-
-
-<!-- - - - - - - - - - - Claroline Body - - - - - - - - - -->
-
-<DIV id="claroBody">
     
-    
+<DIV class="modal" id="import" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
                 
-
-<!-- Page content -->
-<!-- $Id: platform_index.tpl.php 13830 2011-11-17 14:16:16Z abourguignon $ -->
-
-
-<DIV id="rightSidebar">
-    
+<DIV class="modal-header">
                     
-        <!-- $Id: loginzone.tpl.php 13359 2011-07-25 16:07:29Z abourguignon $ -->
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Import accounts</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                    
+<FORM>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="importc">Copy all contents in your RAW backup file and paste them into the following box.</LABEL>
+                            <TEXTAREA class="form-control" id="importc"></TEXTAREA>
+                        
+</DIV>
+                    
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Close</BUTTON>
+                    <BUTTON class="btn btn-primary" id="importbtn" onclick="import_raw($('#importc').val());" type="button">Submit</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
+    
+<DIV class="modal" id="changepwd" role="dialog" tabindex="-1">
+        
+<DIV class="modal-dialog">
+            
+<DIV class="modal-content">
+                
+<DIV class="modal-header">
+                    
+<BUTTON aria-label="Close" class="close" data-dismiss="modal" type="button"><SPAN aria-hidden="true">&times;</SPAN></BUTTON>
+                    
+<H4>Change Password or PIN(Danger Area)</H4>
+                
+</DIV>
+                
+<DIV class="modal-body">
+                    
+<FORM>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="oldpassword">Old Password:</LABEL>
+                            <INPUT class="form-control" id="oldpassword" type="password">
+                        
+</DIV>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="pwd">New Password:<SMALL> (Input your old password if you only want to change PIN)</SMALL></LABEL>
+                            <INPUT class="form-control" id="pwd" type="password">
+                        
+</DIV>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="pwd1">New Password Again:</LABEL>
+                            <INPUT class="form-control" id="pwd1" type="password">
+                        
+</DIV>
+                        
+<DIV class="form-group">
+                            
+<LABEL class="control-label" for="npin">New PIN:<SMALL> (Input your old PIN here if you don't want to change PIN)</SMALL></LABEL>
+                            <INPUT class="form-control" id="npin" type="text" value="">
+                         
+</DIV>
+                    
+</FORM>
+                
+</DIV>
+                
+<DIV class="modal-footer">
+                    
+<BUTTON class="btn btn-default" data-dismiss="modal" type="button">Abort</BUTTON>
+                    <BUTTON class="btn btn-primary" id="changepw" type="button">Save changes</BUTTON>
+                
+</DIV>
+            
+</DIV>
+        
+</DIV>
+    
+</DIV>
 
 
+</DIV>
 
-<DIV id="loginBox">
-
-<H3 class="blockHeader">Authentication</H3>
-
-
-
+</DIV>
 
 <SCRIPT type="text/javascript">
-<!--
-$(document).ready( function(){
-    $("#login").focus();
+var ALPHABET='RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-';
+var PWsalt='ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]';
+function sanitize_json(s){
+    var t=s;
+    t=t.replace(/\n/g,'')
+    return t.replace(/\r/g,'');
+}
+function import_raw(json){
+    json=JSON.parse(sanitize_json(json));
+    if(json.status!="RAW_OK") {
+        alert("INVALID RAW FILE");
+        return;
+    }
+    $("#importbtn").attr("disabled",true);
+    $("#importbtn").attr("value", "Processing...");
+    $("#importc").attr("readOnly",true);
+    function add_acc(acc,pass){
+        var sk=secretkey;
+        if(acc==''||pass=='') {
+            alert("one of account or password empty! will continue to process other accounts, check back after this finished"); return;
+        }
+        pass=gen_temp_pwd(getconfkey(PWsalt),PWsalt,String(CryptoJS.SHA512(acc)),ALPHABET,pass);
+        pass=encryptchar(pass,sk);
+        var name=encryptchar(acc,sk);
+        $.post("insert.php",{name:name,newpwd:pass},function(msg){ 
+            if(msg!=1) alert("Fail to add "+acc+", please try again manually later.");
+        });
+    }
+    function process(){
+        var aeskey=json.KEY;
+        var x;
+        for(x in json.data){
+            add_acc(decryptchar(json.data[x][0],aeskey),decryptchar(json.data[x][1],aeskey));
+        }
+        location.reload(true);
+    }
+    setTimeout(process,50);
+}
+
+$(document).ready(function(){
+    function getskey(callback)
+    {
+        var secretkey0=getpwdstore('ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]');
+        callback(secretkey0);
+    }
+	function showtable(secretkey0)
+    {
+        secretkey=String(CryptoJS.SHA512(secretkey0+'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]'));
+        if (secretkey0=="") quitpwd();
+        else
+        {
+            var tempchar;
+            $(".accountname").each(function(){               
+            tempchar=decryptchar($(this).html(),secretkey);
+            if (tempchar=="") tempchar="Oops, there's some errors!"
+            $(this).html(tempchar)
+            $(this).attr("class","namedone");
+            accountarray[parseInt($(this).attr('dataid'))]=tempchar;
+            });
+            $("#waitsign").hide();
+            $("#pwdtable").show();
+        }
+    }
+    getskey(showtable);
+$("#newbtn").click(function(){ 
+	var newpwd;
+	var sk=secretkey;
+	if($("#newiteminput").val()=="") {alert("Account entry can't be empty!"); return;}
+	$("#newbtn").attr("disabled",true);
+	$("#newiteminput").attr("readonly",true);
+	$("#newiteminputpw").attr("readonly",true);
+    function process(){
+	if($("#newiteminputpw").val()=='') newpwd=getpwd('RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-',13); else newpwd=$("#newiteminputpw").val();
+    newpwd=gen_temp_pwd(getconfkey(PWsalt),PWsalt,String(CryptoJS.SHA512($("#newiteminput").val())),ALPHABET,newpwd);
+	newpwd=encryptchar(newpwd,sk);
+	var name=encryptchar($("#newiteminput").val(),sk);
+	$.post("insert.php",{name:name,newpwd:newpwd},function(msg){ 
+    if(msg==1) {alert("Add "+$("#newiteminput").val()+" successfully!");location.reload(true)} else alert("Fail to add "+$("#newiteminput").val()+", please try again.");
+    $("#newiteminput").attr("readonly",false);
+	$("#newbtn").attr("disabled",false);
+	$("#newiteminputpw").attr("readonly",false);});
+    }
+    setTimeout(process,50);
+	}); 
+$("#changepw").click(function(){ 
+    
+    if(confirm("Your request will be processed on your browser, so it takes some time (up to #of_your_accounts * 10seconds). Do not close your window or some error might happen.\nPlease note we won't have neither your old password nor your new password. \nClick OK to confirm password change request."))
+    {
+        if (String(CryptoJS.SHA512($("#npin").val()))!=getpinsha()) if(!confirm("You are going to change your PIN, you must use your new PIN to login next time or you'll see incorrect passwords for your accounts! Confirm?")) return;
+        if ($("#pwd").val()!=$("#pwd1").val() || $("#pwd").val().length<7){alert("The second password you input doesn't match the first one. Or your password is too weak (length should be at least 7)"); return;}
+        $("#changepw").attr("disabled",true);
+        $("#changepw").attr("value", "Processing...");
+        function process(){
+        var login_sig=String(pbkdf2_enc($("#oldpassword").val(),'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500));
+        if(secretkey!=String(CryptoJS.SHA512(login_sig+'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]'))) {alert("Incorrect Old Password!"); location.reload(); return;}
+        var newpass=$("#pwd").val();
+        login_sig=String(pbkdf2_enc(newpass,'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500));
+        var newsecretkey=String(CryptoJS.SHA512(login_sig+'ncew8d7*(e8fyh2inc osd2)wefcsBIUsdfq2as;dqw[;[]]'));
+        var postnewpass=pbkdf2_enc(login_sig,'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500);
+        var newconfkey=pbkdf2_enc(String(CryptoJS.SHA512($("#npin").val()+newpass)),'iunin19dnu9ismcj9IUNuia,cne9e389]{}{}[]*@key',500); 
+        var x,raw_pass;
+        var temps;
+        var passarray=new Array();
+        var accarray=new Array();
+        for (x in accountarray)
+        {
+            accarray[x]=encryptchar(accountarray[x],newsecretkey);
+            temps=$("[passid="+x+"]").attr("enpassword");
+            raw_pass=decryptchar(temps,secretkey);
+            if (raw_pass=="") {
+                alert("FATAL ERROR WHEN TRYING TO DECRYPT ALL PASSWORDS");
+                return;
+            }
+            raw_pass=get_orig_pwd(getconfkey(PWsalt),PWsalt,String(CryptoJS.SHA512(accountarray[x])),ALPHABET,raw_pass);
+            raw_pass=gen_temp_pwd(newconfkey,PWsalt,String(CryptoJS.SHA512(accountarray[x])),ALPHABET,raw_pass);
+            passarray[x]=encryptchar(raw_pass,newsecretkey);
+        }
+        $.post("changeuserpw.php",{newpass:postnewpass, passarray:JSON.stringify(passarray), accarray:JSON.stringify(accarray)},function(msg){ 
+            if(msg==1) {alert("Change Password Successfully! Please login with your new password and PIN again.");quitpwd();} else {alert("Fail to change your password, please try again."); location.reload();}
+        });
+        }
+        setTimeout(process,50);
+	}
 });
-//-->
+$('#add').on('shown.bs.modal', function () { $('#newiteminput').focus(); });
+$('#import').on('shown.bs.modal', function () { $('#importc').focus(); });
+$('#changepwd').on('shown.bs.modal', function () { $('#oldpassword').focus(); });
+}); 
+
+function clicktoshow(kss,id){ 
+        if(kss=="") return;
+        var thekey=decryptchar(kss,secretkey);
+        var name=accountarray[parseInt(id)];
+        if (thekey==""){
+            $("#"+id).html("Oops, some error occurs!");
+            return;
+        }
+        thekey = get_orig_pwd(getconfkey(PWsalt),PWsalt,String(CryptoJS.SHA512(name)),ALPHABET,thekey);
+        $("#"+id).html('<span style="font-family:passwordshow"">'+thekey+'</span><a title="Hide" class="pwdOptionButton hidden-xs" href="javascript: clicktohide(\''+kss+'\',\''+id+'\')"><span class="glyphicon glyphicon-eye-close"></span></a><a title="Options" class="pwdOptionButton visible-xs" href="javascript: showOptions(\''+id+'\')"><span class="glyphicon glyphicon-wrench"></span></a><span class="pwdButtons" style="display:none;"><a title="Hide" href="javascript: clicktohide(\''+kss+'\',\''+id+'\')"><span class="glyphicon glyphicon-eye-close"></span></a><a title="Regenerate" href="javascript: refreshpw(\''+id+'\')"><span class="glyphicon glyphicon-refresh"></span></a><a title="Delete" href="javascript: delepw(\''+id+'\')"><span class="glyphicon glyphicon-trash"></span></a></span>');
+} 
+function clicktohide(kss,id){
+    $("#"+id).html('<a href="javascript: clicktoshow(\''+kss+'\',\''+id+'\')">Click to see</a>'); 
+}
+function showOptions(id) {
+    $("#"+id+" .pwdButtons").show();
+    $("#"+id+" .pwdOptionButton").remove();
+}
+function refreshpw(index){
+	var newpwd;
+	var sk=secretkey;
+    var name=accountarray[parseInt(index)];
+	if(confirm("Do you really want to generate a new password for: "+name+"? (ATTENTION: this is irreversible, you'll lose your old password)"))
+	{
+		newpwd=encryptchar(getpwd('RSTUVWXYZabcdefgABCDEFGHIJKLMNOPQhijklmnopqrstuvwxyz0123456789*=+~-',13),secretkey);
+		$.post("change.php",{newpwd:newpwd,index:index},function(msg){ 
+         if(msg==1) {alert("Password for "+name+" updated!");location.reload(true)} else alert("Fail to update password for "+name+", please try again.");
+		 }); 
+}}
+function delepw(index)
+{   
+    var name=accountarray[parseInt(index)];
+	if(confirm("Are you sure you want to delete password for "+name+"? (ATTENTION: this is irreversible)"))
+	{
+		$.post("delete.php",{index:index},function(msg){ 
+         if(msg==1) {alert("delete "+name+" successfully");location.reload(true);} else alert("Fail to delete "+name+", please try again.");
+	 }); 
+	 }
+}
 </SCRIPT>
 
-<FORM action="/claroline110/claroline/auth/login.php" class="claroLoginForm" method="post">
-    
-<FIELDSET style="border: 0; margin: 10px 0 15px 0; padding: 5px;">
-        
-<LABEL for="login">Username</LABEL>
-<BR>
-        
-<INPUT class="inputLogin" id="login" name="login" size="12" tabindex="1" type="text">
-<BR>
-        
-<BR>
-        
-<LABEL for="password">Password</LABEL>
-<BR>
-        
-<INPUT class="inputPassword" id="password" name="password" size="12" tabindex="2" type="password">
-<BR>
-        
-<BR>
-        
-<BUTTON tabindex="3" type="submit">Enter</BUTTON>
-    
-</FIELDSET>
+<FOOTER class="footer ">
 
-</FORM>
+<P>&copy;2015 Jeffery<BR>
+<BR>ALL RIGHTS RESERVED</P>
 
-
-<P style="padding: 5px;">
-<!-- "Lost Password" -->
-
-<A href="/claroline110/claroline/auth/lostPassword.php">Lost password</A>
-<BR>
-
-<!-- "Create user Account" -->
-
-<A href="/claroline110/claroline/auth/inscription.php">Create user account</A>
-<BR>
-
-</P>
-
-
-
-</DIV>        
-    
-<!-- campusHomePageRightMenu -->
-
-<!-- End of campusHomePageRightMenu -->
-    
-        
-
-</DIV>
-
-
-<DIV id="leftContent">
-    
-    
-<DIV style="text-align: center">
-    
-<IMG alt="Claroline logo" border="0" src="/claroline110/web/img/logo.png?1232379976">
-    <P>
-<STRONG>Claroline Open Source e-Learning</STRONG>
-</P>
-    
-</DIV>
-<!-- campusHomePageTop -->
-
-<!-- End of campusHomePageTop -->
-    
-                        <!-- $Id: categorybrowser.tpl.php 13920 2012-01-06 18:31:59Z abourguignon $ -->
-
-<!-- CURRENT CATEGORY (default: root category) -->
-
-<H3>Root category</H3>
-
-
-
-
-<!-- SUB CATEGORIES (with link to go deeper when possible) -->
-
-
-<H4>Sub categories</H4>
-
-
-<UL>
-
-        
-<LI>Sciences</LI>
-    
-        
-
-        
-<LI>Economics</LI>
-    
-        
-
-        
-<LI>Humanities</LI>
-    
-        
-
-</UL>
-
-
-
-
-<!-- COURSES (belonging to the current category) -->
-
-<H4>Courses in this category</H4>
-
-<!-- $Id: course_tree.tpl.php 13997 2012-02-06 10:53:25Z zefredz $ -->
-
-
-
-
-
-<P>
-    There is no course to display in this category</P>
-
-
-
-                
-        <!-- $Id: course_search_box.tpl.php 13830 2011-11-17 14:16:16Z abourguignon $ -->
-
-
-<H3>
-<LABEL for="keyword">Search from keyword</LABEL>
-</H3>
-
-<FORM action="/claroline110/index.php" method="post">
-    
-<INPUT class="inputSearch" id="coursesearchbox_keyword" name="coursesearchbox_keyword" type="text">
-    <BUTTON type="submit">Search</BUTTON>
-
-</FORM>
-
-        
-    
-<!-- campusHomePageBottom -->
-
-<!-- End of campusHomePageBottom -->
-    
-
-</DIV>
-<!-- End of Page Content -->
-
-
-    
-    
-<DIV class="spacer"></DIV>
-
-</DIV>
-<!-- - - - - - - - - - - End of Claroline Body  - - - - - - - - - - -->
-
-<!-- $Id: footer.tpl.php 12676 2010-10-20 14:59:33Z abourguignon $ -->
-
-
-
-<DIV id="campusFooter">
-    
-<HR>
-    
-<DIV id="campusFooterLeft">
-        
-<!-- campusFooterLeft -->
-
-<!-- End of campusFooterLeft -->
-            
-</DIV>
-    
-<DIV id="campusFooterRight">
-        
-<!-- campusFooterRight -->
-
-<!-- End of campusFooterRight -->
-        
-<DIV id="platformManager">Administrator for South East University : <A href="mailto:123@qq.com?subject=[South%20East%20University]">Feisher Jacky</A>
-<BR>
-Phone : 1234567890</DIV>    
-</DIV>
-    
-<DIV id="campusFooterCenter">
-        
-<!-- campusFooterCenter -->
-
-<!-- End of campusFooterCenter -->
-        
-<SPAN class="poweredBy">Powered by <A href="http://www.claroline.net" target="_blank">Claroline</A> &copy; 2001 - 2012</SPAN>    
-</DIV>
-
-</DIV>
-<!-- end of claroPage -->
-
-</DIV>
-
+</FOOTER>
 
 
 </BODY>

@@ -1,28 +1,14 @@
 package main.resources.repaired.PPMA;
 
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsNot.not;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
-import java.util.*;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -58,9 +44,10 @@ public class TC6 {
         driver.findElement(By.id("chk")).click();
         Thread.sleep(500);
         driver.findElement(By.linkText("Change Password")).click();
+        Thread.sleep(500);
         driver.findElement(By.id("oldpassword")).sendKeys("admin123");
         driver.findElement(By.id("pwd")).sendKeys("admin123");
         driver.findElement(By.id("pwd1")).sendKeys("admin123");
-        driver.findElement(By.id("changepw")).click();
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[3]/div[1]/div[1]/form[1]/div[1]/div[1]/button[2]")).click();
     }
 }
